@@ -1,0 +1,28 @@
+---
+layout: page
+---
+<article class="character">
+  <div class="character__card">
+    {% if page.image %}
+    <a class="character__portrait" href="{{ page.image | relative_url }}">
+      <img src="{{ page.image | relative_url }}" alt="Character art of {{ page.title }}">
+    </a>
+    {% endif %}
+    <dl class="facts">
+      {% if page.type %}<div class="facts__row"><dt>Character type</dt><dd>{{ page.type }}</dd></div>{% endif %}
+      {% if page.status %}<div class="facts__row"><dt>Status</dt><dd>{{ page.status }}</dd></div>{% endif %}
+      {% if page.known_for %}<div class="facts__row"><dt>Known for</dt><dd>{{ page.known_for }}</dd></div>{% endif %}
+      {% if page.affiliation %}<div class="facts__row"><dt>Affiliations</dt><dd>{{ page.affiliation }}</dd></div>{% endif %}
+      {% if page.race %}<div class="facts__row"><dt>Race</dt><dd>{{ page.race }}</dd></div>{% endif %}
+      {% if page.whereabouts %}<div class="facts__row"><dt>Current whereabouts</dt><dd>{{ page.whereabouts }}</dd></div>{% endif %}
+      {% if page.player %}<div class="facts__row"><dt>Played by</dt><dd>{{ page.player }}</dd></div>{% endif %}
+      {% if page.art_credit %}<div class="facts__row"><dt>Art by</dt><dd>{{ page.art_credit }}</dd></div>{% endif %}
+    </dl>
+  </div>
+  {% assign body = content | strip %}
+  {% if body == "" %}
+  <p class="unwritten">This character’s story is still being written.</p>
+  {% else %}
+  {{ content }}
+  {% endif %}
+</article>

@@ -1,0 +1,13 @@
+# TIMELINE — public historical events, shown on the Timeline page.
+# Oldest at the TOP, newest at the BOTTOM. Each event starts with "- date:".
+#   date:    in-world date or era (required)
+#   event:   the name of the event (required)
+#   summary: what happened, in a sentence or two (optional)
+#   link:    a wiki page with more detail, e.g. "/lore/the-sun-church/" (optional)
+#
+# Example — copy this block, remove the # marks, and fill it in:
+#
+# - date: "Year 12, Harvest"
+#   event: "The Fall of the Eastern Gate"
+#   summary: "Raiders broke the eastern wall during the harvest festival."
+#   link: "/locations-and-landmarks/"

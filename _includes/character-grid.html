@@ -1,0 +1,10 @@
+<ul class="char-grid">
+{%- for c in include.characters %}
+<li><a class="char-card" href="{{ c.url | relative_url }}">
+<span class="char-card__art{% unless c.image %} char-card__art--blank{% endunless %}">{% if c.image %}<img src="{{ c.image | relative_url }}" alt="" loading="lazy">{% else %}<img src="{{ '/assets/img/emblem.png' | relative_url }}" alt="">{% endif %}</span>
+<span class="char-card__name">{{ c.title }}</span>
+<span class="char-card__meta">{{ c.type | default: "Character" }}{% if c.status %}, {{ c.status | downcase }}{% endif %}</span>
+{%- if c.affiliation %}<span class="char-card__aff">{{ c.affiliation }}</span>{% endif %}
+</a></li>
+{%- endfor %}
+</ul>

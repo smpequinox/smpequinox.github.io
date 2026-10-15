@@ -1,0 +1,35 @@
+---
+layout: default
+---
+{% assign crumb_title = nil %}{% assign crumb_url = nil %}{% assign nav_current = page.url %}
+{% if page.collection == "lore" and page.category %}
+  {% assign cat = site.data.categories[page.category] %}
+  {% assign crumb_title = cat.title %}{% assign crumb_url = cat.url %}{% assign nav_current = cat.url %}
+{% elsif page.collection == "characters" %}
+  {% assign crumb_title = "Character Gallery" %}{% assign crumb_url = "/character-gallery/" %}{% assign nav_current = "/character-gallery/" %}
+{% else %}
+  {% for group in site.data.navigation %}{% for link in group.links %}{% if link.url == page.url %}{% assign crumb_title = group.section %}{% endif %}{% endfor %}{% endfor %}
+{% endif %}
+<div class="page-head">
+  <div class="page-head__inner">
+    <p class="crumbs">
+      <a href="{{ '/' | relative_url }}">{{ site.title }}</a>
+      {% if crumb_title %}<span aria-hidden="true">/</span>
+        {% if crumb_url %}<a href="{{ crumb_url | relative_url }}">{{ crumb_title }}</a>{% else %}<span>{{ crumb_title }}</span>{% endif %}
+      {% endif %}
+    </p>
+    <h1 class="page-head__title">{{ page.title }}</h1>
+    {% if page.description %}<p class="page-head__lede">{{ page.description }}</p>{% endif %}
+  </div>
+</div>
+
+<div class="doc">
+  {% include sidebar.html current=nav_current %}
+  <main class="doc__main prose" id="main">
+    {{ content }}
+  </main>
+  <aside class="doc__toc" aria-label="On this page">
+    <p class="doc__toc-heading">On this page</p>
+    <ol class="toc" data-toc></ol>
+  </aside>
+</div>

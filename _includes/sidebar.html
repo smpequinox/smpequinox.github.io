@@ -1,0 +1,18 @@
+{% assign current = include.current | default: page.url %}
+<nav class="wiki-nav" id="wiki-nav" aria-label="Wiki">
+  <a class="wiki-nav__home" href="{{ '/' | relative_url }}">Home</a>
+  {% for group in site.data.navigation %}
+  <div class="wiki-nav__group">
+    <p class="wiki-nav__heading">{{ group.section }}</p>
+    <ul>
+      {% for link in group.links %}
+      <li><a href="{{ link.url | relative_url }}"{% if current == link.url %} aria-current="page"{% endif %}>{{ link.title }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endfor %}
+  <div class="wiki-nav__group wiki-nav__group--links">
+    <a href="{{ site.discord_url }}" rel="noopener">Join the Discord</a>
+    <a href="{{ site.application_url }}" rel="noopener">Apply to join</a>
+  </div>
+</nav>

@@ -1,0 +1,19 @@
+---
+layout: page
+---
+<article class="entry">
+  {% if page.facts or page.status %}
+  <dl class="facts">
+    {% if page.status %}<div class="facts__row"><dt>Canon status</dt><dd><span class="status status--{{ page.status | downcase }}">{{ page.status }}</span></dd></div>{% endif %}
+    {% for fact in page.facts %}
+    <div class="facts__row"><dt>{{ fact[0] }}</dt><dd>{{ fact[1] }}</dd></div>
+    {% endfor %}
+  </dl>
+  {% endif %}
+  {% assign body = content | strip %}
+  {% if body == "" %}
+  <p class="unwritten">This entry is still being written. More will be recorded as the story reveals it.</p>
+  {% else %}
+  {{ content }}
+  {% endif %}
+</article>

@@ -1,0 +1,14 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+{% if page.title and page.layout != "home" %}{% assign doc_title = page.title | append: " — " | append: site.title %}{% else %}{% assign doc_title = site.title %}{% endif %}
+<title>{{ doc_title }}</title>
+<meta name="description" content="{{ page.description | default: page.summary | default: site.description | strip_html | strip_newlines | escape }}">
+<meta name="theme-color" content="#120c26">
+<meta property="og:title" content="{{ doc_title }}">
+<meta property="og:description" content="{{ page.description | default: page.summary | default: site.description | strip_html | strip_newlines | escape }}">
+<meta property="og:image" content="{{ '/assets/img/emblem.png' | absolute_url }}">
+<link rel="icon" type="image/png" href="{{ '/assets/img/favicon.png' | relative_url }}">
+<link rel="apple-touch-icon" href="{{ '/assets/img/apple-touch-icon.png' | relative_url }}">
+<link rel="preload" href="{{ '/assets/fonts/Marcellus-Regular.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{{ '/assets/fonts/Alegreya-var.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">

@@ -1,0 +1,29 @@
+# The menu shown on every wiki page.
+# To add a page to the menu, copy one "- title / url" pair and change it.
+# The url is the page's file name without ".md", wrapped in slashes.
+
+- section: "Play & participate"
+  links:
+    - title: "Rules"
+      url: "/rules/"
+    - title: "Character Creation"
+      url: "/character-creation/"
+    - title: "Character Gallery"
+      url: "/character-gallery/"
+    - title: "Player Guide & FAQ"
+      url: "/player-guide/"
+
+- section: "Discover the world"
+  links:
+    - title: "World Lore"
+      url: "/world-lore/"
+    - title: "Nations & Factions"
+      url: "/nations-and-factions/"
+    - title: "Deities & Mythology"
+      url: "/deities-and-mythology/"
+    - title: "Religions & Orders"
+      url: "/religions-and-orders/"
+    - title: "Locations & Landmarks"
+      url: "/locations-and-landmarks/"
+    - title: "Timeline"
+      url: "/timeline/"

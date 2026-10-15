@@ -1,0 +1,21 @@
+# RECENT EVENTS — shown in the rotating gallery on the home page.
+#
+# Newest event goes at the TOP. Each event starts with "- title:".
+#   title:   the name of the event (required)
+#   date:    when it happened, written however you like (optional)
+#   summary: one or two sentences (optional)
+#   image:   a screenshot uploaded to assets/img/events/ (optional)
+#   link:    a wiki page with the full story, e.g. "/timeline/" (optional)
+#
+# Example — copy this block, remove the # marks, and fill it in:
+#
+# - title: "The Fall of the Eastern Gate"
+#   date: "October 12, 2026"
+#   summary: "Raiders broke the eastern wall during the harvest festival."
+#   image: "/assets/img/events/eastern-gate.png"
+#   link: "/timeline/"
+
+- title: "Arc 2: Remember the Forgotten"
+  date: "Current arc"
+  summary: "The second chapter of the Equinox story is underway."
+  link: "/timeline/"

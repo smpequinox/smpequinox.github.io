@@ -1,0 +1,17 @@
+# Lore entry categories. Each file in _lore/ uses one of these
+# names on its "category:" line, which decides which page lists it.
+nations:
+  title: "Nations & Factions"
+  url: "/nations-and-factions/"
+deities:
+  title: "Deities & Mythology"
+  url: "/deities-and-mythology/"
+religions:
+  title: "Religions & Orders"
+  url: "/religions-and-orders/"
+locations:
+  title: "Locations & Landmarks"
+  url: "/locations-and-landmarks/"
+world:
+  title: "World Lore"
+  url: "/world-lore/"

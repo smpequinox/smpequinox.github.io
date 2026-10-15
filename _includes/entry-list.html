@@ -1,0 +1,10 @@
+{%- assign entries = site.lore | where: "category", include.category | sort: "title" -%}
+{%- if entries.size > 0 %}
+<ul class="entry-list">
+{%- for entry in entries %}
+<li><a class="entry-list__item" href="{{ entry.url | relative_url }}"><span class="entry-list__title">{{ entry.title }}</span>{% if entry.summary %}<span class="entry-list__summary">{{ entry.summary }}</span>{% endif %}{% if entry.status %}<span class="status status--{{ entry.status | downcase }}">{{ entry.status }}</span>{% endif %}</a></li>
+{%- endfor %}
+</ul>
+{%- else %}
+<div class="empty-state"><img src="{{ '/assets/img/emblem.png' | relative_url }}" alt="" width="44" height="44"><p>{{ include.message | default: "Nothing has been recorded here yet. New entries appear as the story reveals them." }}</p></div>
+{%- endif %}

@@ -1,0 +1,20 @@
+<header class="topbar{% if page.layout == 'home' %} topbar--over{% endif %}">
+  <div class="topbar__inner">
+    {% if page.layout != 'home' %}
+    <a class="brand" href="{{ '/' | relative_url }}">
+      <img class="brand__mark" src="{{ '/assets/img/emblem.png' | relative_url }}" alt="" width="34" height="34">
+      <span class="brand__name">{{ site.title }}</span>
+    </a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="wiki-nav">
+      <span class="menu-toggle__bars" aria-hidden="true"></span>
+      <span class="menu-toggle__label">Menu</span>
+    </button>
+    {% endif %}
+    <nav class="topbar__links" aria-label="Server links">
+      <a href="{{ '/rules/' | relative_url }}">Rules</a>
+      <a href="{{ '/world-lore/' | relative_url }}">World Lore</a>
+      <a href="{{ site.discord_url }}" rel="noopener">Discord</a>
+      <a class="topbar__cta" href="{{ site.application_url }}" rel="noopener">Apply to join</a>
+    </nav>
+  </div>
+</header>

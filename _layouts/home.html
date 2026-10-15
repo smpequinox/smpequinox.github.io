@@ -1,0 +1,146 @@
+---
+layout: default
+---
+<header class="hero">
+  <div class="hero__sky" aria-hidden="true"></div>
+  <div class="hero__inner">
+    <div class="hero__emblem-wrap">
+      <img class="hero__emblem" src="{{ '/assets/img/emblem.png' | relative_url }}" width="640" height="640"
+           alt="The Equinox SMP emblem: a crescent moon held inside a blazing sun">
+    </div>
+    <div class="hero__titles">
+      <h1 class="hero__title">{{ site.title }}</h1>
+      <p class="hero__tagline">{{ site.tagline }}</p>
+    </div>
+  </div>
+</header>
+
+<main class="home" id="main">
+  <section class="welcome" aria-labelledby="welcome-title">
+    <h2 class="welcome__title" id="welcome-title">Welcome, traveler</h2>
+    <div class="welcome__text">
+      {{ content }}
+    </div>
+
+    <div class="gateway">
+      <p class="gateway__heading">Step into the world</p>
+      <ul class="gateway__list">
+        <li>
+          {% if site.server_address != "" %}
+          <button class="gateway__item" type="button" data-copy="{{ site.server_address }}">
+            <svg class="gateway__icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3 28 9.5v13L16 29 4 22.5v-13z M4 9.5 16 16l12-6.5 M16 16v13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+            <span class="gateway__label">Minecraft server</span>
+            <span class="gateway__detail"><span data-copy-label>{{ site.server_address }}</span></span>
+            <span class="gateway__meta">Java Edition {{ site.minecraft_version }}. Click to copy the address.</span>
+          </button>
+          {% else %}
+          <a class="gateway__item" href="{{ site.discord_url }}" rel="noopener">
+            <svg class="gateway__icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3 28 9.5v13L16 29 4 22.5v-13z M4 9.5 16 16l12-6.5 M16 16v13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+            <span class="gateway__label">Minecraft server</span>
+            <span class="gateway__detail">Java Edition {{ site.minecraft_version }}</span>
+            <span class="gateway__meta">Get the server address in the Discord.</span>
+          </a>
+          {% endif %}
+        </li>
+        <li>
+          <a class="gateway__item" href="{{ site.application_url }}" rel="noopener">
+            <svg class="gateway__icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M25 4c-6 1-12 7-15 15l-2 6 6-2c8-3 14-9 15-15 0-2-2-4-4-4z M8 25l7-7 M11 18l3 3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg>
+            <span class="gateway__label">Server application</span>
+            <span class="gateway__detail">Apply to join</span>
+            <span class="gateway__meta">Tell us about yourself and your character.</span>
+          </a>
+        </li>
+        <li>
+          <a class="gateway__item" href="{{ site.discord_url }}" rel="noopener">
+            <svg class="gateway__icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M6 7h20a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H14l-6 5v-5H6a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2z M11 15h.01 M16 15h.01 M21 15h.01" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></svg>
+            <span class="gateway__label">Discord server</span>
+            <span class="gateway__detail">Join the community</span>
+            <span class="gateway__meta">News, scenes, and staff support.</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <aside class="start-here" aria-labelledby="start-title">
+    <h2 class="start-here__title" id="start-title">Start here</h2>
+    <ol class="steps">
+      <li><a href="{{ '/rules/' | relative_url }}"><span class="steps__title">Read the rules</span><span class="steps__hint">How we play fair and keep stories alive</span></a></li>
+      <li><a href="{{ '/world-lore/' | relative_url }}"><span class="steps__title">Explore the world lore</span><span class="steps__hint">Nations, gods, faiths, and places</span></a></li>
+      <li><a href="{{ '/character-creation/' | relative_url }}"><span class="steps__title">Create your character</span><span class="steps__hint">The character sheet and checklist</span></a></li>
+      <li><a href="{{ '/character-gallery/' | relative_url }}"><span class="steps__title">Browse the gallery</span><span class="steps__hint">Meet the people of this age</span></a></li>
+    </ol>
+  </aside>
+
+  {% assign events = site.data.events %}
+  {% if events and events.size > 0 %}
+  <section class="events" aria-labelledby="events-title">
+    <div class="events__head">
+      <h2 class="events__title" id="events-title">Recent events</h2>
+      {% if events.size > 1 %}
+      <div class="events__controls">
+        <button class="round-btn" type="button" data-carousel-prev aria-label="Previous event">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="round-btn" type="button" data-carousel-next aria-label="Next event">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="carousel" data-carousel data-interval="7000" aria-roledescription="carousel" aria-label="Recent events">
+      <ul class="carousel__track" data-carousel-track>
+        {% for event in events %}
+        <li class="slide" aria-roledescription="slide" aria-label="{{ forloop.index }} of {{ events.size }}">
+          <button class="slide__media{% unless event.image %} slide__media--blank{% endunless %}" type="button"
+                  data-event-open
+                  data-title="{{ event.title | escape }}"
+                  data-date="{{ event.date | escape }}"
+                  data-summary="{{ event.summary | escape }}"
+                  {% if event.image %}data-image="{{ event.image | relative_url }}"{% endif %}
+                  {% if event.link %}data-link="{{ event.link | relative_url }}"{% endif %}
+                  aria-label="Open {{ event.title | escape }}">
+            {% if event.image %}
+            <img src="{{ event.image | relative_url }}" alt="" loading="lazy">
+            {% else %}
+            <img class="slide__placeholder" src="{{ '/assets/img/emblem.png' | relative_url }}" alt="">
+            {% endif %}
+          </button>
+          <div class="slide__text">
+            {% if event.date %}<p class="slide__date">{{ event.date }}</p>{% endif %}
+            <h3 class="slide__title">{{ event.title }}</h3>
+            {% if event.summary %}<p class="slide__summary">{{ event.summary }}</p>{% endif %}
+            {% if event.link %}<a class="slide__link" href="{{ event.link | relative_url }}">Read the full account</a>{% endif %}
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+      {% if events.size > 1 %}
+      <div class="carousel__dots" data-carousel-dots>
+        {% for event in events %}
+        <button type="button" aria-label="Show event {{ forloop.index }}: {{ event.title | escape }}"></button>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+  </section>
+  {% endif %}
+</main>
+
+<dialog class="lightbox" data-lightbox-dialog aria-label="Event details">
+  <form method="dialog" class="lightbox__close-form">
+    <button class="round-btn lightbox__close" aria-label="Close">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </button>
+  </form>
+  <figure class="lightbox__figure">
+    <img class="lightbox__img" alt="" data-lb-img>
+    <figcaption class="lightbox__caption">
+      <p class="slide__date" data-lb-date></p>
+      <h3 class="lightbox__title" data-lb-title></h3>
+      <p data-lb-summary></p>
+      <a class="slide__link" data-lb-link href="#">Read the full account</a>
+    </figcaption>
+  </figure>
+</dialog>
