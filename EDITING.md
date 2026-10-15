@@ -1,0 +1,127 @@
+# How to edit the Equinox SMP wiki
+
+Everything is edited on **github.com**. No software to install. Every time you save ("commit") a change, the live site updates by itself in about a minute.
+
+> **Never put secrets here.** This repository is public. Anyone can read every file in it, even files that aren't linked from the site. Unrevealed lore, spoilers, and staff notes stay in the staff Notion or Discord.
+
+---
+
+## The basics: editing any page
+
+1. Open the repository on github.com and click the file you want (for example `rules.md`).
+2. Click the **pencil icon** (top right of the file).
+3. Make your changes.
+4. Click **Commit changes…**, write a short note like "Added rule 1.8", and click **Commit changes** again.
+5. Wait about a minute and refresh the site.
+
+If something looks broken afterwards, open the **Actions** tab on GitHub. A red ✕ means the last change had a mistake. Open that file again and check it against the examples below.
+
+### Formatting cheat sheet
+
+```
+## Big section heading
+### Smaller heading
+**bold**   *italic*
+- a bullet point
+1. a numbered step
+[link text](/rules/)              ← link to another wiki page
+[link text](https://example.com)   ← link to another website
+> A highlighted callout box
+```
+
+Tables:
+
+```
+| Column one | Column two |
+| --- | --- |
+| A cell | Another cell |
+```
+
+---
+
+## What lives where
+
+| To change… | Edit this file |
+| --- | --- |
+| Server address, Discord link, application link, Minecraft version, current arc, tagline | `_config.yml` |
+| The "Welcome, traveler" paragraph on the home page | `index.md` |
+| The "Recent events" gallery on the home page | `_data/events.yml` |
+| Timeline entries | `_data/timeline.yml` |
+| The side menu | `_data/navigation.yml` |
+| Rules, Character Creation, Player Guide, etc. | the matching `.md` file in the main folder |
+| Lore entries (faiths, gods, nations, places, world foundations) | files in `_lore/` |
+| Characters | files in `_characters/` |
+
+---
+
+## Adding a lore entry (a faith, god, nation, place…)
+
+These appear on their section page automatically. You don't need to touch the section page.
+
+1. Open the `templates` folder and copy everything in `lore-entry.md`.
+2. Go to the `_lore` folder, click **Add file → Create new file**.
+3. Name it in lowercase with dashes, ending in `.md`, e.g. `the-silver-coast.md`.
+4. Paste the template and fill it in. The `category:` line decides where it shows up:
+   - `world`: World Lore, under "Foundations of the world" (cosmology, creation myths, ages, magic)
+   - `nations`: Nations & Factions
+   - `deities`: Deities & Mythology
+   - `religions`: Religions & Orders
+   - `locations`: Locations & Landmarks
+5. Commit.
+
+**Keep the dashes and colons exactly as in the template.** The block between the two `---` lines is the entry's settings. Text values with special characters should stay inside "quotes".
+
+Want to write an entry without publishing it yet? Add the line `published: false` between the `---` lines. Remove it when it's ready. (Remember: the file is still publicly readable on GitHub, so drafts must not contain secrets.)
+
+## Adding a character
+
+1. Upload the character art: go to `assets/img/characters/`, click **Add file → Upload files**. Use a simple file name like `aster-vale.png`.
+2. Copy `templates/character.md` into a new file in `_characters/`, e.g. `_characters/aster-vale.md`.
+3. Set `image:` to `"/assets/img/characters/aster-vale.png"` and fill in the rest. Delete any lines you don't need.
+4. Set `featured: true` for staff and arc characters to show them under "Featured this arc".
+5. Commit. They appear in the Character Gallery automatically.
+
+## Adding a recent event to the home page gallery
+
+1. Upload the screenshot to `assets/img/events/`.
+2. Open `_data/events.yml` and add a new block **at the top** of the list (below the instructions):
+
+```yaml
+- title: "The Fall of the Eastern Gate"
+  date: "October 12, 2026"
+  summary: "Raiders broke the eastern wall during the harvest festival."
+  image: "/assets/img/events/eastern-gate.png"
+  link: "/timeline/"
+```
+
+Every line except `title` is optional. Indentation matters: two spaces before each line after the first. The gallery shows arrows and rotates once there are two or more events. Delete old events whenever you like.
+
+## Adding to the timeline
+
+Open `_data/timeline.yml` and add a block at the **bottom** (oldest events first):
+
+```yaml
+- date: "Year 12, Harvest"
+  event: "The Fall of the Eastern Gate"
+  summary: "Raiders broke the eastern wall during the festival."
+```
+
+## Adding a brand-new standalone page
+
+1. Copy `templates/new-page.md` into a new file in the **main folder**, e.g. `economy.md`. It will live at `/economy/`.
+2. Add it to the menu in `_data/navigation.yml`:
+
+```yaml
+    - title: "Economy"
+      url: "/economy/"
+```
+
+Match the spacing of the lines around it exactly.
+
+---
+
+## Common mistakes
+
+- **A red ✕ in the Actions tab** usually means a missing quote or wrong indentation in a `.yml` file or in the settings block of a page. Compare with the template.
+- **Image not showing:** the path must start with `/assets/img/` and match the file name exactly, including capital letters and `.png` vs `.jpg`.
+- **New page shows "Lost between the stars":** check the file ends in `.md` and the link uses the same name with dashes.

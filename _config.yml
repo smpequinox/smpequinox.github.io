@@ -1,0 +1,55 @@
+# ─────────────────────────────────────────────────────────────
+#  EQUINOX SMP — SITE SETTINGS
+#  Change the values on the right side of the colon.
+#  Keep the quotation marks. After saving, the site updates in ~1 minute.
+# ─────────────────────────────────────────────────────────────
+
+title: "Equinox SMP"
+tagline: "A Living Archive of the Equinox World"
+description: "The public wiki for Equinox SMP: rules, world lore, characters, and the unfolding story of a Minecraft roleplay server."
+
+# Server details shown in the purple box on the home page
+minecraft_version: "1.21.11"
+server_address: "equinoxsmp.kinetic.host"   # leave as "" to hide it
+application_url: "https://docs.google.com/forms/d/e/1FAIpQLSfwPFXMHKCIY7TYrILYH1gYLXKXWcwUL-7Ji-aFT25rrLyZXA/viewform"
+discord_url: "https://discord.gg/gAXSsrGtDv"
+
+# The story arc currently running
+current_arc: "Arc 2: Remember the Forgotten"
+
+# Leave these alone unless the site moves to a different address
+url: ""
+baseurl: ""
+
+# ─────────────────────────────────────────────────────────────
+#  Technical settings below — no need to touch these
+# ─────────────────────────────────────────────────────────────
+permalink: pretty
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+  auto_ids: true
+
+collections:
+  lore:
+    output: true
+    permalink: /lore/:name/
+  characters:
+    output: true
+    permalink: /characters/:name/
+
+defaults:
+  - scope: { path: "", type: pages }
+    values: { layout: page }
+  - scope: { path: "", type: lore }
+    values: { layout: lore-entry }
+  - scope: { path: "", type: characters }
+    values: { layout: character }
+
+exclude:
+  - EDITING.md
+  - README.md
+  - templates
+  - Gemfile
+  - Gemfile.lock
