@@ -5,8 +5,7 @@ title: "The Cycle"
 category: deities
 Domain: "One line a new player should understand."
 status: Public                  # Public / Revealed / Draft
-Other names:
-  Known to be: "Sun mother"
+ "Sun mother"
 ---
 
 Write the public account here. Use ## for section headings.
