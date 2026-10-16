@@ -3,10 +3,10 @@
 # "category" decides which page lists it: world, nations, deities, religions, or locations
 title: "The Cycle"
 category: deities
-summary: "One line a new player should understand."
+Domain: "One line a new player should understand."
 status: Public                  # Public / Revealed / Draft
-Domain:
-  Known to be: "Everyone / one region / select characters"
+Other names:
+  Known to be: "Sun mother"
 ---
 
 Write the public account here. Use ## for section headings.
