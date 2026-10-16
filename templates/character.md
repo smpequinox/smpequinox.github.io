@@ -16,11 +16,11 @@ featured: false                 # true = shown under "Featured this arc"
 
 Write the character's public background here. Only public knowledge, never staff spoilers.
 
-## Allies and rivals
+## Bonds
 
 - Ally name
 - Rival name
 
-## Featured in
+## Introduced in
 
 - Story arc or event
