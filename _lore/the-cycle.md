@@ -5,9 +5,8 @@ title: "The Cycle"
 category: deities
 summary: "One line a new player should understand."
 status: Public                  # Public / Revealed / Draft
-facts:
-  Region: "Where it is"
-  Known to: "Everyone / one region / select characters"
+Domain:
+  Known to be: "Everyone / one region / select characters"
 ---
 
 Write the public account here. Use ## for section headings.
@@ -16,4 +15,4 @@ Write the public account here. Use ## for section headings.
 
 ## Story hooks
 
-- A way players can get involved
+- The Sun Church
