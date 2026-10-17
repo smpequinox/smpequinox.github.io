@@ -107,7 +107,8 @@ Uploading a new map with the same file name keeps all the pins. Re-check them if
 2. Copy `templates/character.md` into a new file in `_characters/`, e.g. `_characters/aster-vale.md`.
 3. Set `image:` to `"/assets/img/characters/aster-vale.png"` and fill in the rest. Delete any lines you don't need.
 4. Set `featured: true` for staff and arc characters to show them under "Featured this arc".
-5. Commit. They appear in the Character Gallery automatically.
+5. `type: "Staff Character"` also lists them under "Staff characters". Changing `status:` to `"Dead"` moves them from "All characters" to "Dead characters".
+6. Commit. They appear in the Character Gallery automatically.
 
 ## Adding a recent event to the home page gallery
 
