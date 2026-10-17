@@ -61,6 +61,7 @@ These appear on their section page automatically. You don't need to touch the se
 1. Open the `templates` folder and copy everything in `lore-entry.md`. Use the matching template instead for:
    - **a god:** `deity.md` (Titles, Domain, Worshipped by)
    - **a spirit:** `spirit.md` (Titles, Resonance, Found in, Connected god, Tier: Ancient, Greater or Lesser, Classification, e.g. Warrior)
+   - **a myth or legend:** `myth.md` (Figures involved, Told by, Era)
    - **a religion or order:** `religion.md` (Deity or principle, Followed by)
 2. Go to the `_lore` folder, click **Add file → Create new file**.
 3. Name it in lowercase with dashes, ending in `.md`, e.g. `the-silver-coast.md`.
@@ -69,6 +70,7 @@ These appear on their section page automatically. You don't need to touch the se
    - `nations`: Nations & Factions
    - `deities`: Deities & Mythology, under "The pantheon"
    - `spirits`: Deities & Mythology, under "Spirits"
+   - `myths`: Deities & Mythology, under "Myths & legends"
    - `religions`: Religions & Orders
    - `locations`: Locations & Landmarks
 5. Commit.
