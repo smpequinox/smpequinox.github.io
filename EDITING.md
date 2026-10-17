@@ -58,7 +58,7 @@ Tables:
 
 These appear on their section page automatically. You don't need to touch the section page.
 
-1. Open the `templates` folder and copy everything in `lore-entry.md`.
+1. Open the `templates` folder and copy everything in `lore-entry.md`. **For a god, copy `deity.md` instead.** It already has Titles, Domain and Worshipped by filled in as examples.
 2. Go to the `_lore` folder, click **Add file → Create new file**.
 3. Name it in lowercase with dashes, ending in `.md`, e.g. `the-silver-coast.md`.
 4. Paste the template and fill it in. The `category:` line decides where it shows up:

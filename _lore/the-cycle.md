@@ -4,13 +4,16 @@ category: deities
 summary: "One line a new player should understand."
 status: Public
 facts:
-  Also called: "Sun Mother"
+  Titles: "The Sun Mother"
+  Domain: "Not yet recorded"
   Worshipped by: "The Sun Church"
 ---
 
-Write the public account here. Use ## for section headings.
+Write what followers believe about this god here. Use ## for section headings.
 
-## History
+## Mythology
+
+## Worship
 
 ## Story hooks
 
