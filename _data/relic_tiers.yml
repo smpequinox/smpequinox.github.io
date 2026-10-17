@@ -1,11 +1,12 @@
 # Relic rarity tiers, lowest first. A relic's "rarity:" line must match one of these names.
 # "wielded: true" tiers show who currently wields the relic.
-- name: "Uncommon"
-- name: "Rare"
-- name: "Epic"
-- name: "Legendary"
+- name: "Awakened Class"
+- name: "Tempered Class"
+- name: "Ruler Class"
+- name: "Sovereign Class"
+- name: "Paragon Class"
   wielded: true
-- name: "Mythic"
+- name: "Primordial Class"
   wielded: true
-- name: "World Class"
+- name: "Cataclysm Class"
   wielded: true
