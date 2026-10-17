@@ -15,18 +15,10 @@ map_image: "/assets/img/world-map.webp"
 
 ## By region
 
-### North
+{% assign directions = "North,Northeast,East,Southeast,South,Southwest,West,Northwest" | split: "," %}
+{% for d in directions %}
+### {{ d }}
 
-{% include entry-list.html category="locations" direction="North" message="No northern locations have been recorded yet." %}
-
-### South
-
-{% include entry-list.html category="locations" direction="South" message="No southern locations have been recorded yet." %}
-
-### East
-
-{% include entry-list.html category="locations" direction="East" message="No eastern locations have been recorded yet." %}
-
-### West
-
-{% include entry-list.html category="locations" direction="West" message="No western locations have been recorded yet." %}
+{% capture empty_msg %}No {{ d | downcase }}ern locations have been recorded yet.{% endcapture %}
+{% include entry-list.html category="locations" direction=d message=empty_msg %}
+{% endfor %}
