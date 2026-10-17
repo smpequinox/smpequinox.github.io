@@ -5,6 +5,7 @@
 title: "Relic Name"
 category: relics
 rarity: Legendary               # Uncommon / Rare / Epic / Legendary / Mythic / World Class
+nature: Blessed                 # Cursed / Blessed: a sub tag beside the rarity. Delete this line for neither
 wielder: "Character name, or None"   # only shown for Legendary, Mythic and World Class relics
 summary: "One line a new player should understand."
 status: Public                  # Public / Revealed / Draft

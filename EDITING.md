@@ -67,7 +67,7 @@ These appear on their section page automatically. You don't need to touch the se
    - **a spirit:** `spirit.md` (Titles, Resonance, Found in, Connected god, Tier: Ancient, Greater or Lesser, Classification, e.g. Warrior)
    - **a myth or legend:** `myth.md` (Figures involved, Told by, Era)
    - **an unknown:** `unknown.md` (Also called, First noticed, Seen at, Possibly linked to)
-   - **a relic:** `relic.md` (rarity, wielder, Origin, Type, Powers)
+   - **a relic:** `relic.md` (rarity, nature: Cursed or Blessed, wielder, Origin, Type, Powers)
    - **a player theory:** `theory.md` (verdict, theorist, About, Evidence)
    - **a religion or order:** `religion.md` (Deity or principle, Followed by)
 2. Go to the `_lore` folder, click **Add file → Create new file**.
@@ -81,7 +81,7 @@ These appear on their section page automatically. You don't need to touch the se
    - `spirits`: Deities & Mythology, under "Spirits"
    - `myths`: Deities & Mythology, under "Myths & legends"
    - `unknowns`: Deities & Mythology, under "Unknowns"
-   - `relics`: the Relics page, under the heading of its `rarity:` (Uncommon, Rare, Epic, Legendary, Mythic or World Class). Legendary and up also show `wielder:`.
+   - `relics`: the Relics page, under the heading of its `rarity:` (Uncommon, Rare, Epic, Legendary, Mythic or World Class). Legendary and up also show `wielder:`. Add `nature: Cursed` or `nature: Blessed` for a sub tag beside the rarity.
    - `theories`: the Theory Gallery. Set `verdict:` to Unconfirmed, Confirmed or Debunked to choose its list.
    - `religions`: Religions & Orders
    - `locations`: Locations & Landmarks. Set `direction:` to North, South, East or West to list it under "By region", and `map_x:` / `map_y:` to pin it on the world map.
