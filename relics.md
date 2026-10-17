@@ -8,6 +8,7 @@ Relics are ranked by rarity, from **Awakened Class** up to **Cataclysm Class**. 
 {% assign tiers = site.data.relic_tiers | reverse %}
 {% for tier in tiers %}
 ## {{ tier.name }}
+{: .tier .tier--{{ tier.name | slugify }}}
 
 {% include relic-list.html tier=tier %}
 {% endfor %}

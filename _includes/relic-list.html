@@ -3,7 +3,7 @@
 {%- if rl_relics.size > 0 %}
 <ul class="entry-list">
 {%- for r in rl_relics %}
-<li><a class="entry-list__item" href="{{ r.url | relative_url }}"><span class="entry-list__title">{{ r.title }}</span>{% if r.summary %}<span class="entry-list__summary">{{ r.summary }}</span>{% endif %}{% if r.facts.Origin %}<span class="entry-list__summary">Origin: {{ r.facts.Origin }}</span>{% endif %}{% if include.tier.wielded %}<span class="entry-list__summary">Wielded by {{ r.wielder | default: "no one" }}</span>{% endif %}<span class="entry-list__tags"><span class="status status--{{ r.rarity | slugify }}">{{ r.rarity }}</span>{% if r.nature %}<span class="status status--sub status--{{ r.nature | slugify }}">{{ r.nature }}</span>{% endif %}</span></a></li>
+<li><a class="entry-list__item" href="{{ r.url | relative_url }}"><span class="entry-list__title">{{ r.title }}</span>{% if r.summary %}<span class="entry-list__summary">{{ r.summary }}</span>{% endif %}{% if r.facts.Origin %}<span class="entry-list__summary">Origin: {{ r.facts.Origin }}</span>{% endif %}{% if include.tier.wielded %}<span class="entry-list__summary">Wielded by {{ r.wielder | default: "no one" }}</span>{% endif %}<span class="entry-list__tags"><span class="status tier tier--{{ r.rarity | slugify }}">{{ r.rarity }}</span>{% if r.nature %}<span class="status status--sub status--{{ r.nature | slugify }}">{{ r.nature }}</span>{% endif %}</span></a></li>
 {%- endfor %}
 </ul>
 {%- else %}
