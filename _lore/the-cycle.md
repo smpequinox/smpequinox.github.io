@@ -5,7 +5,7 @@ summary: "Presumed by the player base to hold the domain of life and nature."
 status: Public
 facts:
   Titles: "The Sun Mother"
-  Domain: "Life and Nature (presumed by the player base)"
+  Domain: "Life and Nature "
   Worshipped by: "The Sun Church"
 ---
 
