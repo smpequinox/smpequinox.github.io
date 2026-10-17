@@ -514,11 +514,17 @@ button { font: inherit; color: inherit; }
 
 /* interactive world map */
 .world-map { margin: 0 0 1.75rem; }
-.world-map__canvas { position: relative; border: 1px solid var(--line-soft); border-radius: 12px; overflow: hidden; background: var(--night-2); }
-.world-map__img { display: block; width: 100%; height: auto; cursor: crosshair; }
+.world-map__canvas { position: relative; border: 1px solid var(--line-soft); border-radius: 12px; overflow: hidden; background: var(--night-2); --z: 1; }
+.world-map__canvas.is-zoomed { touch-action: none; cursor: grab; }
+.world-map__canvas.is-dragging { cursor: grabbing; }
+.world-map__stage { position: relative; transform-origin: 0 0; }
+.world-map__canvas.is-animating .world-map__stage { transition: transform .2s ease-out; }
+.world-map__img { display: block; width: 100%; height: auto; cursor: crosshair; user-select: none; -webkit-user-drag: none; }
+.world-map__canvas.is-zoomed .world-map__img { cursor: inherit; }
 .prose .world-map__pin {
   position: absolute; display: flex; align-items: center; gap: .35rem;
-  transform: translate(-7px, -50%); text-decoration: none; color: var(--ink); z-index: 1;
+  transform: translate(-7px, -50%) scale(calc(1 / var(--z))); transform-origin: 7px 50%;
+  text-decoration: none; color: var(--ink); z-index: 1;
 }
 .world-map__dot {
   width: 14px; height: 14px; flex: none; border-radius: 50%;
@@ -530,7 +536,7 @@ button { font: inherit; color: inherit; }
   padding: .15rem .45rem; border-radius: 6px; background: rgba(15, 10, 32, 0.82); border: 1px solid var(--line-soft);
   transition: color .2s, border-color .2s;
 }
-.prose .world-map__pin--left { flex-direction: row-reverse; transform: translate(calc(-100% + 7px), -50%); }
+.prose .world-map__pin--left { flex-direction: row-reverse; transform: translate(calc(-100% + 7px), -50%) scale(calc(1 / var(--z))); transform-origin: calc(100% - 7px) 50%; }
 .prose .world-map__pin:hover, .prose .world-map__pin:focus-visible { z-index: 2; }
 .world-map__pin:hover .world-map__dot, .world-map__pin:focus-visible .world-map__dot { transform: scale(1.25); }
 .world-map__pin:hover .world-map__label, .world-map__pin:focus-visible .world-map__label { color: var(--gilt); border-color: rgba(239, 205, 151, 0.45); }
@@ -538,6 +544,14 @@ button { font: inherit; color: inherit; }
   position: absolute; left: .6rem; bottom: .6rem; margin: 0; padding: .3rem .6rem; border-radius: 6px;
   font-size: .9rem; color: var(--ink); background: rgba(15, 10, 32, 0.9); border: 1px solid var(--line); pointer-events: none; z-index: 3;
 }
+.world-map__zoom { position: absolute; top: .6rem; right: .6rem; display: flex; flex-direction: column; gap: .3rem; z-index: 3; }
+.world-map__zoom button {
+  width: 2.2rem; height: 2.2rem; padding: 0; font: 1.25rem/1 var(--text); color: var(--ink); cursor: pointer;
+  background: rgba(15, 10, 32, 0.85); border: 1px solid var(--line); border-radius: 8px;
+  transition: color .2s, border-color .2s;
+}
+.world-map__zoom button:hover, .world-map__zoom button:focus-visible { color: var(--gilt); border-color: rgba(239, 205, 151, 0.45); }
+.world-map__zoom button:disabled { opacity: .4; cursor: default; }
 .world-map figcaption { margin-top: .5rem; color: var(--ink-3); font-size: .95rem; }
 
 .status {

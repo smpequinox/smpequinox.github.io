@@ -150,18 +150,115 @@
     start();
   }
 
-  /* ---------- World map: click a blank spot to see its map_x / map_y ---------- */
+  /* ---------- World map: zoom, pan, and click a blank spot to see its map_x / map_y ---------- */
   var mapCanvas = document.querySelector("[data-world-map]");
   if (mapCanvas) {
+    var mapStage = mapCanvas.querySelector("[data-world-map-stage]");
     var mapCoords = mapCanvas.querySelector("[data-world-map-coords]");
-    mapCanvas.addEventListener("click", function (e) {
-      if (e.target.closest("a")) return;
+    var zoomBox = mapCanvas.querySelector("[data-world-map-zoom]");
+    var zoomIn = zoomBox.querySelector('[data-zoom="in"]');
+    var zoomOut = zoomBox.querySelector('[data-zoom="out"]');
+    var MAX_ZOOM = 6;
+    var view = { z: 1, x: 0, y: 0 };
+    var pointers = {};
+    var gesture = null;
+    var dragged = false;
+
+    var applyView = function (animate) {
+      var w = mapCanvas.clientWidth, h = mapCanvas.clientHeight;
+      view.z = Math.min(MAX_ZOOM, Math.max(1, view.z));
+      // keep the map filling the frame
+      view.x = Math.min(0, Math.max(w - w * view.z, view.x));
+      view.y = Math.min(0, Math.max(h - h * view.z, view.y));
+      mapCanvas.classList.toggle("is-animating", !!animate && !reduceMotion);
+      mapCanvas.classList.toggle("is-zoomed", view.z > 1);
+      mapCanvas.style.setProperty("--z", view.z);
+      mapStage.style.transform = "translate(" + view.x + "px, " + view.y + "px) scale(" + view.z + ")";
+      zoomIn.disabled = view.z >= MAX_ZOOM;
+      zoomOut.disabled = view.z <= 1;
+    };
+    // zoom by a factor, keeping the point (px, py) inside the frame still
+    var zoomAt = function (factor, px, py, animate) {
+      var z = Math.min(MAX_ZOOM, Math.max(1, view.z * factor));
+      view.x = px - (px - view.x) * (z / view.z);
+      view.y = py - (py - view.y) * (z / view.z);
+      view.z = z;
+      applyView(animate);
+    };
+    var localPoint = function (e) {
       var box = mapCanvas.getBoundingClientRect();
+      return { x: e.clientX - box.left, y: e.clientY - box.top };
+    };
+
+    zoomBox.hidden = false;
+    applyView();
+    zoomBox.addEventListener("click", function (e) {
+      var btn = e.target.closest("button");
+      if (!btn) return;
+      var cx = mapCanvas.clientWidth / 2, cy = mapCanvas.clientHeight / 2;
+      if (btn.dataset.zoom === "in") zoomAt(1.6, cx, cy, true);
+      else if (btn.dataset.zoom === "out") zoomAt(1 / 1.6, cx, cy, true);
+      else { view = { z: 1, x: 0, y: 0 }; applyView(true); }
+    });
+    mapCanvas.addEventListener("wheel", function (e) {
+      if (e.target.closest("[data-world-map-zoom]")) return;
+      if (view.z <= 1 && e.deltaY > 0) return; // fully zoomed out: let the page scroll
+      e.preventDefault();
+      var p = localPoint(e);
+      zoomAt(Math.exp(-e.deltaY * 0.0015), p.x, p.y, false);
+    }, { passive: false });
+
+    mapCanvas.addEventListener("pointerdown", function (e) {
+      if (e.target.closest("[data-world-map-zoom]")) return;
+      pointers[e.pointerId] = localPoint(e);
+      var ids = Object.keys(pointers);
+      if (ids.length === 1) {
+        dragged = false;
+        gesture = { type: "pan", start: pointers[e.pointerId], x: view.x, y: view.y };
+      } else if (ids.length === 2) {
+        var a = pointers[ids[0]], b = pointers[ids[1]];
+        gesture = { type: "pinch", dist: Math.hypot(a.x - b.x, a.y - b.y) };
+        dragged = true;
+      }
+    });
+    mapCanvas.addEventListener("pointermove", function (e) {
+      if (!(e.pointerId in pointers) || !gesture) return;
+      var p = pointers[e.pointerId] = localPoint(e);
+      if (gesture.type === "pan") {
+        var dx = p.x - gesture.start.x, dy = p.y - gesture.start.y;
+        if (!dragged && Math.hypot(dx, dy) < 5) return;
+        if (!dragged) {
+          dragged = true;
+          if (view.z > 1) { mapCanvas.setPointerCapture(e.pointerId); mapCanvas.classList.add("is-dragging"); }
+        }
+        if (view.z > 1) { view.x = gesture.x + dx; view.y = gesture.y + dy; applyView(false); }
+      } else {
+        var ids = Object.keys(pointers), a = pointers[ids[0]], b = pointers[ids[1]];
+        var dist = Math.hypot(a.x - b.x, a.y - b.y);
+        if (gesture.dist > 0) zoomAt(dist / gesture.dist, (a.x + b.x) / 2, (a.y + b.y) / 2, false);
+        gesture.dist = dist;
+      }
+    });
+    var endPointer = function (e) {
+      delete pointers[e.pointerId];
+      mapCanvas.classList.remove("is-dragging");
+      var ids = Object.keys(pointers);
+      gesture = ids.length === 1 ? { type: "pan", start: pointers[ids[0]], x: view.x, y: view.y } : null;
+    };
+    mapCanvas.addEventListener("pointerup", endPointer);
+    mapCanvas.addEventListener("pointercancel", endPointer);
+
+    mapCanvas.addEventListener("click", function (e) {
+      // a drag or pinch is not a click on a pin or on the map
+      if (dragged) { e.preventDefault(); dragged = false; return; }
+      if (e.target.closest("a, [data-world-map-zoom]")) return;
+      var box = mapStage.getBoundingClientRect();
       var x = ((e.clientX - box.left) / box.width * 100).toFixed(1);
       var y = ((e.clientY - box.top) / box.height * 100).toFixed(1);
       mapCoords.textContent = "map_x: " + x + "   map_y: " + y;
       mapCoords.hidden = false;
-    });
+    }, true);
+    window.addEventListener("resize", function () { applyView(false); });
   }
 
   /* ---------- Event viewer (lightbox) ---------- */

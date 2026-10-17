@@ -7,13 +7,20 @@
 {%- assign wm_places = site.lore | where: "category", "locations" | sort: "title" %}
 <figure class="world-map">
   <div class="world-map__canvas" data-world-map>
-    <img class="world-map__img" src="{{ include.image | relative_url }}" alt="Map of the world">
+    <div class="world-map__stage" data-world-map-stage>
+    <img class="world-map__img" src="{{ include.image | relative_url }}" alt="Map of the world" draggable="false">
     {%- for place in wm_places %}{% if place.map_x and place.map_y %}
     {% assign wm_x = place.map_x | plus: 0 %}<a class="world-map__pin{% if wm_x > 65 %} world-map__pin--left{% endif %}" href="{{ place.url | relative_url }}" style="left: {{ place.map_x }}%; top: {{ place.map_y }}%;"><span class="world-map__dot" aria-hidden="true"></span><span class="world-map__label">{{ place.title }}</span></a>
     {%- endif %}{% endfor %}
+    </div>
+    <div class="world-map__zoom" data-world-map-zoom hidden>
+      <button type="button" data-zoom="in" aria-label="Zoom in">+</button>
+      <button type="button" data-zoom="out" aria-label="Zoom out">&minus;</button>
+      <button type="button" data-zoom="reset" aria-label="Reset zoom">&#8634;</button>
+    </div>
     <p class="world-map__coords" data-world-map-coords hidden></p>
   </div>
-  <figcaption>Click a name to open its page. Click anywhere else on the map to see that spot's map coordinates.</figcaption>
+  <figcaption>Click a name to open its page. Zoom with the buttons, the mouse wheel or a pinch, and drag to move around. Click anywhere else on the map to see that spot's map coordinates.</figcaption>
 </figure>
 {%- else %}
 <div class="empty-state"><img src="{{ '/assets/img/emblem.png' | relative_url }}" alt="" width="44" height="44"><p>The world map is still being drawn.</p></div>
