@@ -6,6 +6,12 @@ nations:
 deities:
   title: "Deities & Mythology"
   url: "/deities-and-mythology/"
+spirits:
+  title: "Deities & Mythology"
+  url: "/deities-and-mythology/"
+myths:
+  title: "Deities & Mythology"
+  url: "/deities-and-mythology/"
 religions:
   title: "Religions & Orders"
   url: "/religions-and-orders/"

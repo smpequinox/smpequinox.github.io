@@ -7,8 +7,16 @@ description: "Gods, spirits, saints, cosmic forces, legendary ancestors, and the
 
 {% include entry-list.html category="deities" message="This chapter is still being written. Entries appear here as the story reveals them." %}
 
+## Spirits
+
+{% include entry-list.html category="spirits" message="No spirits have been recorded yet. Entries appear here as the story reveals them." %}
+
+## Myths & legends
+
+{% include entry-list.html category="myths" message="No myths have been recorded yet. Entries appear here as the story reveals them." %}
+
 ## Belief and fact
 
-A deity’s page shows what followers claim, what scholars suspect, and what the story has actually confirmed. Your character may believe any of them. Only the last is certain.
+A deity’s, spirit’s or myth’s page shows what followers claim, what scholars suspect, and what the story has actually confirmed. Your character may believe any of them. Only the last is certain.
 
 For the faiths that worship these powers, see [Religions & Orders]({{ '/religions-and-orders/' | relative_url }}).

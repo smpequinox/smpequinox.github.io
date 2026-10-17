@@ -58,20 +58,28 @@ Tables:
 
 These appear on their section page automatically. You don't need to touch the section page.
 
-1. Open the `templates` folder and copy everything in `lore-entry.md`.
+1. Open the `templates` folder and copy everything in `lore-entry.md`. Use the matching template instead for:
+   - **a god:** `deity.md` (Titles, Domain, Worshipped by)
+   - **a spirit:** `spirit.md` (Titles, Resonance, Found in, Connected god, Tier: Ancient, Greater or Lesser, Classification, e.g. Warrior)
+   - **a myth or legend:** `myth.md` (Figures involved, Told by, Era)
+   - **a religion or order:** `religion.md` (Deity or principle, Followed by)
 2. Go to the `_lore` folder, click **Add file → Create new file**.
 3. Name it in lowercase with dashes, ending in `.md`, e.g. `the-silver-coast.md`.
 4. Paste the template and fill it in. The `category:` line decides where it shows up:
    - `world`: World Lore, under "Foundations of the world" (cosmology, creation myths, ages, magic)
    - `nations`: Nations & Factions
-   - `deities`: Deities & Mythology
+   - `deities`: Deities & Mythology, under "The pantheon"
+   - `spirits`: Deities & Mythology, under "Spirits"
+   - `myths`: Deities & Mythology, under "Myths & legends"
    - `religions`: Religions & Orders
    - `locations`: Locations & Landmarks
 5. Commit.
 
 **Keep the dashes and colons exactly as in the template.** The block between the two `---` lines is the entry's settings. Text values with special characters should stay inside "quotes".
 
-**Every line between the `---` lines must be `name: value`.** A line with only a value (like `"Sun mother"` on its own) breaks the settings, and the entry silently won't appear anywhere. Extra details go under `facts:`, indented two spaces, e.g. `  Also called: "Sun Mother"`.
+**Every line between the `---` lines must be `name: value`.** A line with only a value (like `"Sun mother"` on its own) breaks the settings, and the entry silently won't appear anywhere. Extra details go under `facts:`, indented two spaces, e.g. `  Titles: "The Sun Mother"`.
+
+**Facts link themselves.** If a fact names another entry exactly as its title is spelled (e.g. `Worshipped by: "The Sun Church"`), it becomes a link to that page. List several names separated by a comma and a space.
 
 **Need a folder that doesn't exist yet?** GitHub can't hold empty folders. In **Add file → Create new file**, type the folder name and a slash into the file name box (e.g. `_characters/` then `aster-vale.md`) and GitHub creates the folder for you.
 

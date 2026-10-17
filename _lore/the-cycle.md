@@ -1,16 +1,13 @@
 ---
 title: "The Cycle"
 category: deities
-summary: "One line a new player should understand."
+summary: "Presumed by the player base to hold the domain of life and nature."
 status: Public
 facts:
-  Also called: "Sun Mother"
+  Titles: "The Sun Mother"
+  Domain: "Life and Nature (presumed by the player base)"
   Worshipped by: "The Sun Church"
 ---
-
-Write the public account here. Use ## for section headings.
-
-## History
 
 ## Story hooks
 
