@@ -1,0 +1,11 @@
+# Relic rarity tiers, lowest first. A relic's "rarity:" line must match one of these names.
+# "wielded: true" tiers show who currently wields the relic.
+- name: "Uncommon"
+- name: "Rare"
+- name: "Epic"
+- name: "Legendary"
+  wielded: true
+- name: "Mythic"
+  wielded: true
+- name: "World Class"
+  wielded: true

@@ -1,0 +1,11 @@
+{%- comment -%} Lists the relics of one rarity tier (include.tier), showing the wielder for tiers that track one. {%- endcomment -%}
+{%- assign rl_relics = site.lore | where: "category", "relics" | where: "rarity", include.tier.name | sort: "title" -%}
+{%- if rl_relics.size > 0 %}
+<ul class="entry-list">
+{%- for r in rl_relics %}
+<li><a class="entry-list__item" href="{{ r.url | relative_url }}"><span class="entry-list__title">{{ r.title }}</span>{% if r.summary %}<span class="entry-list__summary">{{ r.summary }}</span>{% endif %}{% if r.facts.Origin %}<span class="entry-list__summary">Origin: {{ r.facts.Origin }}</span>{% endif %}{% if include.tier.wielded %}<span class="entry-list__summary">Wielded by {{ r.wielder | default: "no one" }}</span>{% endif %}<span class="status status--{{ r.rarity | slugify }}">{{ r.rarity }}</span></a></li>
+{%- endfor %}
+</ul>
+{%- else %}
+<div class="empty-state"><img src="{{ '/assets/img/emblem.png' | relative_url }}" alt="" width="44" height="44"><p>No {{ include.tier.name }} relics have been recorded yet.</p></div>
+{%- endif %}

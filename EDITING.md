@@ -67,6 +67,7 @@ These appear on their section page automatically. You don't need to touch the se
    - **a spirit:** `spirit.md` (Titles, Resonance, Found in, Connected god, Tier: Ancient, Greater or Lesser, Classification, e.g. Warrior)
    - **a myth or legend:** `myth.md` (Figures involved, Told by, Era)
    - **an unknown:** `unknown.md` (Also called, First noticed, Seen at, Possibly linked to)
+   - **a relic:** `relic.md` (rarity, wielder, Origin, Type, Powers)
    - **a player theory:** `theory.md` (verdict, theorist, About, Evidence)
    - **a religion or order:** `religion.md` (Deity or principle, Followed by)
 2. Go to the `_lore` folder, click **Add file → Create new file**.
@@ -80,6 +81,7 @@ These appear on their section page automatically. You don't need to touch the se
    - `spirits`: Deities & Mythology, under "Spirits"
    - `myths`: Deities & Mythology, under "Myths & legends"
    - `unknowns`: Deities & Mythology, under "Unknowns"
+   - `relics`: the Relics page, under the heading of its `rarity:` (Uncommon, Rare, Epic, Legendary, Mythic or World Class). Legendary and up also show `wielder:`.
    - `theories`: the Theory Gallery. Set `verdict:` to Unconfirmed, Confirmed or Debunked to choose its list.
    - `religions`: Religions & Orders
    - `locations`: Locations & Landmarks. Set `direction:` to North, South, East or West to list it under "By region", and `map_x:` / `map_y:` to pin it on the world map.
@@ -89,7 +91,7 @@ These appear on their section page automatically. You don't need to touch the se
 
 **Every line between the `---` lines must be `name: value`.** A line with only a value (like `"Sun mother"` on its own) breaks the settings, and the entry silently won't appear anywhere. Extra details go under `facts:`, indented two spaces, e.g. `  Titles: "The Sun Mother"`.
 
-**Facts link themselves.** If a fact names another entry exactly as its title is spelled (e.g. `Worshipped by: "The Sun Church"`), it becomes a link to that page. List several names separated by a comma and a space. This also works for a character's `affiliation:` and `whereabouts:`.
+**Facts link themselves.** If a fact names another entry exactly as its title is spelled (e.g. `Worshipped by: "The Sun Church"`), it becomes a link to that page. List several names separated by a comma and a space. This also works for a character's `affiliation:` and `whereabouts:`, and character names link to their gallery page.
 
 **Need a folder that doesn't exist yet?** GitHub can't hold empty folders. In **Add file → Create new file**, type the folder name and a slash into the file name box (e.g. `_characters/` then `aster-vale.md`) and GitHub creates the folder for you.
 
