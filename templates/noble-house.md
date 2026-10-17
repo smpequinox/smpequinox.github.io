@@ -1,0 +1,29 @@
+---
+# COPY THIS FILE into the _lore folder and rename it, e.g. _lore/house-vale.md
+# Use this template for noble houses. Delete any fact line you don't need.
+# "standing" decides whether it is listed under Ruling houses or Fallen houses.
+# Names that match another wiki entry's title link to it automatically.
+title: "House Name"
+category: houses
+standing: Ruling                # Ruling / Fallen
+summary: "One line a new player should understand."
+status: Public                  # Public / Revealed / Draft
+facts:
+  Head of house: "Current head, or last head if fallen"
+  Seat: "Where the house is based"
+  Sworn to: "The nation it serves"
+  Words: "The house motto"
+  Faith: "The Sun Church"
+  Allies: "Houses, nations or factions, separated by commas"
+  Rivals: "Houses, nations or factions, separated by commas"
+---
+
+Write the public account of this house here. Use ## for section headings.
+
+## History
+
+## Notable members
+
+## Story hooks
+
+- A way players can get involved

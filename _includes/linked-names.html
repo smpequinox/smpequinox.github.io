@@ -1,0 +1,10 @@
+{%- comment -%}
+  Prints include.text, turning any name that matches a lore entry's title into a link to it.
+  Separate several names with a comma and a space.
+{%- endcomment -%}
+{%- assign ln_names = include.text | append: "" | split: ", " -%}
+{%- for ln_name in ln_names -%}
+{%- assign ln_target = site.lore | where: "title", ln_name | first -%}
+{%- if ln_target and ln_target.url != page.url -%}<a href="{{ ln_target.url | relative_url }}">{{ ln_name }}</a>{%- else -%}{{ ln_name }}{%- endif -%}
+{%- unless forloop.last %}, {% endunless -%}
+{%- endfor -%}
