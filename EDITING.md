@@ -71,6 +71,10 @@ These appear on their section page automatically. You don't need to touch the se
 
 **Keep the dashes and colons exactly as in the template.** The block between the two `---` lines is the entry's settings. Text values with special characters should stay inside "quotes".
 
+**Every line between the `---` lines must be `name: value`.** A line with only a value (like `"Sun mother"` on its own) breaks the settings, and the entry silently won't appear anywhere. Extra details go under `facts:`, indented two spaces, e.g. `  Also called: "Sun Mother"`.
+
+**Need a folder that doesn't exist yet?** GitHub can't hold empty folders. In **Add file → Create new file**, type the folder name and a slash into the file name box (e.g. `_characters/` then `aster-vale.md`) and GitHub creates the folder for you.
+
 Want to write an entry without publishing it yet? Add the line `published: false` between the `---` lines. Remove it when it's ready. (Remember: the file is still publicly readable on GitHub, so drafts must not contain secrets.)
 
 ## Adding a character
