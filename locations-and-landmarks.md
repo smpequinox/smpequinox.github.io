@@ -2,7 +2,7 @@
 title: "Locations & Landmarks"
 description: "Settlements, ruins, dungeons, natural wonders, roads, borders, and the places where stories happen."
 # The world map image. Upload it to assets/img/ with this exact name.
-map_image: "/assets/img/world-map.png"
+map_image: "/assets/img/world-map.webp"
 ---
 
 ## World map

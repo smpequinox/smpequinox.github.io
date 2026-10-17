@@ -93,9 +93,9 @@ Want to write an entry without publishing it yet? Add the line `published: false
 
 ## Updating the world map
 
-The map on Locations & Landmarks appears once the image is uploaded.
+The map on Locations & Landmarks is `assets/img/world-map.webp`.
 
-1. Go to `assets/img/`, click **Add file → Upload files**, and upload the map named exactly `world-map.png`. To use another name or a `.jpg`, change the `map_image:` line at the top of `locations-and-landmarks.md` to match.
+1. To replace it, go to `assets/img/`, click **Add file → Upload files**, and upload the new map named exactly `world-map.webp`. To use a `.png` or `.jpg` instead, change the `map_image:` line at the top of `locations-and-landmarks.md` to match its name.
 2. To pin a location, open the Locations & Landmarks page and click its spot on the map. The bottom corner shows `map_x` and `map_y` for that spot.
 3. Put those two numbers in the location's file (`map_x: 42.5` and `map_y: 18.3`) and commit. Its name now appears on the map and links to its page.
 
