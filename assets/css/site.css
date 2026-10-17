@@ -564,6 +564,12 @@ button { font: inherit; color: inherit; }
 .status--draft { border-style: dashed; border-color: var(--ink-3); color: var(--ink-3); }
 .status--confirmed { border-color: var(--ember); color: var(--ember); }
 .status--debunked { border-color: var(--ink-3); color: var(--ink-3); text-decoration: line-through; }
+.status--uncommon { border-color: #8fc49a; color: #8fc49a; }
+.status--rare { border-color: #7fb2e5; color: #7fb2e5; }
+.status--epic { border-color: #b996f2; color: #b996f2; }
+.status--legendary { border-color: var(--gilt); color: var(--gilt); }
+.status--mythic { border-color: var(--ember); color: var(--ember); }
+.status--world-class { border-color: #ff8fb1; color: #ffd6e2; background: rgba(255, 143, 177, 0.14); }
 .status--fallen { border-color: var(--ink-3); color: var(--ink-3); }
 
 .empty-state {

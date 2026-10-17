@@ -24,6 +24,9 @@ unknowns:
 theories:
   title: "Theory Gallery"
   url: "/theory-gallery/"
+relics:
+  title: "Relics"
+  url: "/relics/"
 religions:
   title: "Religions & Orders"
   url: "/religions-and-orders/"

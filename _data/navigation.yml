@@ -25,6 +25,8 @@
       url: "/religions-and-orders/"
     - title: "Locations & Landmarks"
       url: "/locations-and-landmarks/"
+    - title: "Relics"
+      url: "/relics/"
     - title: "Timeline"
       url: "/timeline/"
     - title: "Theory Gallery"
