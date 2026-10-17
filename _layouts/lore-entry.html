@@ -2,13 +2,12 @@
 layout: page
 ---
 <article class="entry">
-  {% if page.facts or page.status %}
+  {% if page.facts or page.status or page.standing %}
   <dl class="facts">
     {% if page.status %}<div class="facts__row"><dt>Canon status</dt><dd><span class="status status--{{ page.status | downcase }}">{{ page.status }}</span></dd></div>{% endif %}
+    {% if page.standing %}<div class="facts__row"><dt>Standing</dt><dd><span class="status status--{{ page.standing | downcase }}">{{ page.standing }}</span></dd></div>{% endif %}
     {% for fact in page.facts %}
-    {%- comment -%} Any name matching another lore entry's title becomes a link to it. Separate several names with commas. {%- endcomment %}
-    {%- assign names = fact[1] | append: "" | split: ", " %}
-    <div class="facts__row"><dt>{{ fact[0] }}</dt><dd>{% for name in names %}{% assign target = site.lore | where: "title", name | first %}{% if target and target.url != page.url %}<a href="{{ target.url | relative_url }}">{{ name }}</a>{% else %}{{ name }}{% endif %}{% unless forloop.last %}, {% endunless %}{% endfor %}</dd></div>
+    <div class="facts__row"><dt>{{ fact[0] }}</dt><dd>{% assign fact_value = fact[1] %}{% include linked-names.html text=fact_value %}</dd></div>
     {% endfor %}
   </dl>
   {% endif %}

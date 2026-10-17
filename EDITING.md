@@ -59,6 +59,9 @@ Tables:
 These appear on their section page automatically. You don't need to touch the section page.
 
 1. Open the `templates` folder and copy everything in `lore-entry.md`. Use the matching template instead for:
+   - **a nation:** `nation.md` (Ruler, Government, Capital, Ruling house, Faith, Allies, Rivals)
+   - **a faction:** `faction.md` (Type, Leader, Based in, Allegiance, Goals, Allies, Rivals)
+   - **a noble house:** `noble-house.md` (Standing: Ruling or Fallen, Head of house, Seat, Sworn to, Words, Faith, Allies, Rivals)
    - **a god:** `deity.md` (Titles, Domain, Worshipped by)
    - **a spirit:** `spirit.md` (Titles, Resonance, Found in, Connected god, Tier: Ancient, Greater or Lesser, Classification, e.g. Warrior)
    - **a myth or legend:** `myth.md` (Figures involved, Told by, Era)
@@ -67,7 +70,9 @@ These appear on their section page automatically. You don't need to touch the se
 3. Name it in lowercase with dashes, ending in `.md`, e.g. `the-silver-coast.md`.
 4. Paste the template and fill it in. The `category:` line decides where it shows up:
    - `world`: World Lore, under "Foundations of the world" (cosmology, creation myths, ages, magic)
-   - `nations`: Nations & Factions
+   - `nations`: Nations & Factions, under "Nations"
+   - `factions`: Nations & Factions, under "Factions"
+   - `houses`: Nations & Factions, under "Noble houses". Set `standing: Ruling` or `standing: Fallen` to choose the list.
    - `deities`: Deities & Mythology, under "The pantheon"
    - `spirits`: Deities & Mythology, under "Spirits"
    - `myths`: Deities & Mythology, under "Myths & legends"
@@ -79,7 +84,7 @@ These appear on their section page automatically. You don't need to touch the se
 
 **Every line between the `---` lines must be `name: value`.** A line with only a value (like `"Sun mother"` on its own) breaks the settings, and the entry silently won't appear anywhere. Extra details go under `facts:`, indented two spaces, e.g. `  Titles: "The Sun Mother"`.
 
-**Facts link themselves.** If a fact names another entry exactly as its title is spelled (e.g. `Worshipped by: "The Sun Church"`), it becomes a link to that page. List several names separated by a comma and a space.
+**Facts link themselves.** If a fact names another entry exactly as its title is spelled (e.g. `Worshipped by: "The Sun Church"`), it becomes a link to that page. List several names separated by a comma and a space. This also works for a character's `affiliation:` and `whereabouts:`.
 
 **Need a folder that doesn't exist yet?** GitHub can't hold empty folders. In **Add file → Create new file**, type the folder name and a slash into the file name box (e.g. `_characters/` then `aster-vale.md`) and GitHub creates the folder for you.
 

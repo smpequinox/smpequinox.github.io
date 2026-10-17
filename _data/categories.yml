@@ -3,6 +3,12 @@
 nations:
   title: "Nations & Factions"
   url: "/nations-and-factions/"
+factions:
+  title: "Nations & Factions"
+  url: "/nations-and-factions/"
+houses:
+  title: "Nations & Factions"
+  url: "/nations-and-factions/"
 deities:
   title: "Deities & Mythology"
   url: "/deities-and-mythology/"

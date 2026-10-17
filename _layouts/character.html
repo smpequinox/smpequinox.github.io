@@ -12,9 +12,9 @@ layout: page
       {% if page.type %}<div class="facts__row"><dt>Character type</dt><dd>{{ page.type }}</dd></div>{% endif %}
       {% if page.status %}<div class="facts__row"><dt>Status</dt><dd>{{ page.status }}</dd></div>{% endif %}
       {% if page.known_for %}<div class="facts__row"><dt>Known for</dt><dd>{{ page.known_for }}</dd></div>{% endif %}
-      {% if page.affiliation %}<div class="facts__row"><dt>Affiliations</dt><dd>{{ page.affiliation }}</dd></div>{% endif %}
+      {% if page.affiliation %}<div class="facts__row"><dt>Affiliations</dt><dd>{% include linked-names.html text=page.affiliation %}</dd></div>{% endif %}
       {% if page.race %}<div class="facts__row"><dt>Race</dt><dd>{{ page.race }}</dd></div>{% endif %}
-      {% if page.whereabouts %}<div class="facts__row"><dt>Current whereabouts</dt><dd>{{ page.whereabouts }}</dd></div>{% endif %}
+      {% if page.whereabouts %}<div class="facts__row"><dt>Current whereabouts</dt><dd>{% include linked-names.html text=page.whereabouts %}</dd></div>{% endif %}
       {% if page.player %}<div class="facts__row"><dt>Played by</dt><dd>{{ page.player }}</dd></div>{% endif %}
       {% if page.art_credit %}<div class="facts__row"><dt>Art by</dt><dd>{{ page.art_credit }}</dd></div>{% endif %}
     </dl>
