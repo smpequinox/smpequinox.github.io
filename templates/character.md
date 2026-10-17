@@ -3,8 +3,8 @@
 # (lowercase, dashes instead of spaces). Delete any line you don't need.
 title: "Character Name"
 image: "/assets/img/characters/character-name.png"   # upload art to assets/img/characters/
-type: "Player Character"        # Player Character / Staff Character / Important NPC
-status: "Alive"                 # Alive / Dead / Retired / Unknown
+type: "Player Character"        # Player Character / Staff Character / Important NPC ("Staff Character" = shown under Staff characters)
+status: "Alive"                 # Alive / Dead / Retired / Unknown ("Dead" = moved to Dead characters)
 known_for: "Public reputation in one sentence"
 affiliation: "Nations, factions, faiths, occupations"
 race: "Race or ancestry"
