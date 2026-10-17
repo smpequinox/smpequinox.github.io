@@ -18,6 +18,12 @@ spirits:
 myths:
   title: "Deities & Mythology"
   url: "/deities-and-mythology/"
+unknowns:
+  title: "Deities & Mythology"
+  url: "/deities-and-mythology/"
+theories:
+  title: "Theory Gallery"
+  url: "/theory-gallery/"
 religions:
   title: "Religions & Orders"
   url: "/religions-and-orders/"

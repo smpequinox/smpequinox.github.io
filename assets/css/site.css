@@ -511,6 +511,8 @@ button { font: inherit; color: inherit; }
 .prose .atlas a:hover { border-color: rgba(239, 205, 151, 0.45); background: var(--night-3); }
 .atlas__title { font-family: var(--display); font-size: 1.2rem; color: var(--gilt); }
 .atlas__hint { color: var(--ink-2); font-size: 1rem; line-height: 1.45; }
+.theory-grid__meta { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin-top: auto; padding-top: .5rem; }
+.theory-grid__by { color: var(--ink-3); font-size: .95rem; }
 
 /* interactive world map */
 .world-map { margin: 0 0 1.75rem; }
@@ -560,6 +562,8 @@ button { font: inherit; color: inherit; }
 }
 .status--revealed { border-color: var(--ember); color: var(--ember); }
 .status--draft { border-style: dashed; border-color: var(--ink-3); color: var(--ink-3); }
+.status--confirmed { border-color: var(--ember); color: var(--ember); }
+.status--debunked { border-color: var(--ink-3); color: var(--ink-3); text-decoration: line-through; }
 .status--fallen { border-color: var(--ink-3); color: var(--ink-3); }
 
 .empty-state {
