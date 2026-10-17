@@ -1,6 +1,6 @@
 ---
 # COPY THIS FILE into the _lore folder and rename it, e.g. _lore/the-silver-coast.md
-# "category" decides which page lists it: world, nations, deities, religions, or locations
+# "category" decides which page lists it: world, nations, deities, spirits, religions, or locations
 title: "Entry Name"
 category: religions
 summary: "One line a new player should understand."
