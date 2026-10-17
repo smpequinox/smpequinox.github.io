@@ -12,6 +12,7 @@ facts:
   Found in: "Where in the world it can be found"
   Connected god: "The Cycle, or None"
   Tier: "Lesser"                 # Ancient / Greater / Lesser
+  Classification: "Warrior"       # e.g. Warrior (more classifications to come)
 ---
 
 Write what is known about this spirit here. Use ## for section headings.
