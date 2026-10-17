@@ -11,7 +11,7 @@ facts:
   Resonance: "What the spirit resonates with"
   Found in: "Where in the world it can be found"
   Connected god: "The Cycle, or None"
-  Tier: "The spirit's tier"
+  Tier: "Lesser"                 # Ancient / Greater / Lesser
 ---
 
 Write what is known about this spirit here. Use ## for section headings.
