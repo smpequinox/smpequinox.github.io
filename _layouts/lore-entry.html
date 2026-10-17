@@ -7,7 +7,7 @@ layout: page
     {% if page.status %}<div class="facts__row"><dt>Canon status</dt><dd><span class="status status--{{ page.status | downcase }}">{{ page.status }}</span></dd></div>{% endif %}
     {% if page.verdict %}<div class="facts__row"><dt>Verdict</dt><dd><span class="status status--{{ page.verdict | downcase }}">{{ page.verdict }}</span></dd></div>{% endif %}
     {% if page.theorist %}<div class="facts__row"><dt>Theory by</dt><dd>{{ page.theorist }}</dd></div>{% endif %}
-    {% if page.rarity %}<div class="facts__row"><dt>Rarity</dt><dd><span class="status status--{{ page.rarity | slugify }}">{{ page.rarity }}</span></dd></div>
+    {% if page.rarity %}<div class="facts__row"><dt>Rarity</dt><dd><span class="status status--{{ page.rarity | slugify }}">{{ page.rarity }}</span>{% if page.nature %} <span class="status status--sub status--{{ page.nature | slugify }}">{{ page.nature }}</span>{% endif %}</dd></div>
     {% assign relic_tier = site.data.relic_tiers | where: "name", page.rarity | first %}
     {% if relic_tier.wielded %}<div class="facts__row"><dt>Wielded by</dt><dd>{% assign wielder = page.wielder | default: "No one" %}{% include linked-names.html text=wielder %}</dd></div>{% endif %}
     {% endif %}
