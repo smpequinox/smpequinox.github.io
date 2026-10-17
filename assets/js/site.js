@@ -150,6 +150,20 @@
     start();
   }
 
+  /* ---------- World map: click a blank spot to see its map_x / map_y ---------- */
+  var mapCanvas = document.querySelector("[data-world-map]");
+  if (mapCanvas) {
+    var mapCoords = mapCanvas.querySelector("[data-world-map-coords]");
+    mapCanvas.addEventListener("click", function (e) {
+      if (e.target.closest("a")) return;
+      var box = mapCanvas.getBoundingClientRect();
+      var x = ((e.clientX - box.left) / box.width * 100).toFixed(1);
+      var y = ((e.clientY - box.top) / box.height * 100).toFixed(1);
+      mapCoords.textContent = "map_x: " + x + "   map_y: " + y;
+      mapCoords.hidden = false;
+    });
+  }
+
   /* ---------- Event viewer (lightbox) ---------- */
   var dialog = document.querySelector("[data-lightbox-dialog]");
   if (dialog && typeof dialog.showModal === "function") {

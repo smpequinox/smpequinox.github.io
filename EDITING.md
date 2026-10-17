@@ -59,6 +59,7 @@ Tables:
 These appear on their section page automatically. You don't need to touch the section page.
 
 1. Open the `templates` folder and copy everything in `lore-entry.md`. Use the matching template instead for:
+   - **a location:** `location.md` (direction, map position, Type, Controlled by, Known for)
    - **a nation:** `nation.md` (Ruler, Government, Capital, Ruling house, Faith, Allies, Rivals)
    - **a faction:** `faction.md` (Type, Leader, Based in, Allegiance, Goals, Allies, Rivals)
    - **a noble house:** `noble-house.md` (Standing: Ruling or Fallen, Head of house, Seat, Sworn to, Words, Faith, Allies, Rivals)
@@ -77,7 +78,7 @@ These appear on their section page automatically. You don't need to touch the se
    - `spirits`: Deities & Mythology, under "Spirits"
    - `myths`: Deities & Mythology, under "Myths & legends"
    - `religions`: Religions & Orders
-   - `locations`: Locations & Landmarks
+   - `locations`: Locations & Landmarks. Set `direction:` to North, South, East or West to list it under "By region", and `map_x:` / `map_y:` to pin it on the world map.
 5. Commit.
 
 **Keep the dashes and colons exactly as in the template.** The block between the two `---` lines is the entry's settings. Text values with special characters should stay inside "quotes".
@@ -89,6 +90,16 @@ These appear on their section page automatically. You don't need to touch the se
 **Need a folder that doesn't exist yet?** GitHub can't hold empty folders. In **Add file → Create new file**, type the folder name and a slash into the file name box (e.g. `_characters/` then `aster-vale.md`) and GitHub creates the folder for you.
 
 Want to write an entry without publishing it yet? Add the line `published: false` between the `---` lines. Remove it when it's ready. (Remember: the file is still publicly readable on GitHub, so drafts must not contain secrets.)
+
+## Updating the world map
+
+The map on Locations & Landmarks appears once the image is uploaded.
+
+1. Go to `assets/img/`, click **Add file → Upload files**, and upload the map named exactly `world-map.png`. To use another name or a `.jpg`, change the `map_image:` line at the top of `locations-and-landmarks.md` to match.
+2. To pin a location, open the Locations & Landmarks page and click its spot on the map. The bottom corner shows `map_x` and `map_y` for that spot.
+3. Put those two numbers in the location's file (`map_x: 42.5` and `map_y: 18.3`) and commit. Its name now appears on the map and links to its page.
+
+Uploading a new map with the same file name keeps all the pins. Re-check them if the new map's shape or borders changed.
 
 ## Adding a character
 

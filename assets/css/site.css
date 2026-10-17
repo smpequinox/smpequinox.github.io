@@ -512,6 +512,34 @@ button { font: inherit; color: inherit; }
 .atlas__title { font-family: var(--display); font-size: 1.2rem; color: var(--gilt); }
 .atlas__hint { color: var(--ink-2); font-size: 1rem; line-height: 1.45; }
 
+/* interactive world map */
+.world-map { margin: 0 0 1.75rem; }
+.world-map__canvas { position: relative; border: 1px solid var(--line-soft); border-radius: 12px; overflow: hidden; background: var(--night-2); }
+.world-map__img { display: block; width: 100%; height: auto; cursor: crosshair; }
+.prose .world-map__pin {
+  position: absolute; display: flex; align-items: center; gap: .35rem;
+  transform: translate(-7px, -50%); text-decoration: none; color: var(--ink); z-index: 1;
+}
+.world-map__dot {
+  width: 14px; height: 14px; flex: none; border-radius: 50%;
+  background: var(--gilt); border: 2px solid var(--night); box-shadow: 0 0 0 2px rgba(239, 205, 151, 0.35);
+  transition: transform .2s;
+}
+.world-map__label {
+  font-family: var(--display); font-size: .95rem; line-height: 1.2; white-space: nowrap;
+  padding: .15rem .45rem; border-radius: 6px; background: rgba(15, 10, 32, 0.82); border: 1px solid var(--line-soft);
+  transition: color .2s, border-color .2s;
+}
+.prose .world-map__pin--left { flex-direction: row-reverse; transform: translate(calc(-100% + 7px), -50%); }
+.prose .world-map__pin:hover, .prose .world-map__pin:focus-visible { z-index: 2; }
+.world-map__pin:hover .world-map__dot, .world-map__pin:focus-visible .world-map__dot { transform: scale(1.25); }
+.world-map__pin:hover .world-map__label, .world-map__pin:focus-visible .world-map__label { color: var(--gilt); border-color: rgba(239, 205, 151, 0.45); }
+.world-map__coords {
+  position: absolute; left: .6rem; bottom: .6rem; margin: 0; padding: .3rem .6rem; border-radius: 6px;
+  font-size: .9rem; color: var(--ink); background: rgba(15, 10, 32, 0.9); border: 1px solid var(--line); pointer-events: none; z-index: 3;
+}
+.world-map figcaption { margin-top: .5rem; color: var(--ink-3); font-size: .95rem; }
+
 .status {
   display: inline-block; font-size: .85rem; line-height: 1; padding: .35rem .6rem; border-radius: 999px;
   border: 1px solid var(--gilt-dim); color: var(--gilt); white-space: nowrap;
@@ -640,6 +668,7 @@ button { font: inherit; color: inherit; }
 }
 
 @media (max-width: 520px) {
+  .world-map__label { font-size: .8rem; padding: .1rem .35rem; }
   .brand__name { white-space: nowrap; font-size: 1.05rem; }
   body:not(.layout-home) .topbar__links { display: none; }
 }
