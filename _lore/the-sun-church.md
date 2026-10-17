@@ -5,5 +5,5 @@ summary: "A faith devoted to the Cycle."
 status: Public
 facts:
   Deity or principle: "The Cycle"
-  Followed by: "Not yet recorded"
+  Followed by: "Solari"
 ---
