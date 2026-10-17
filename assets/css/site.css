@@ -565,12 +565,22 @@ button { font: inherit; color: inherit; }
 .status--draft { border-style: dashed; border-color: var(--ink-3); color: var(--ink-3); }
 .status--confirmed { border-color: var(--ember); color: var(--ember); }
 .status--debunked { border-color: var(--ink-3); color: var(--ink-3); text-decoration: line-through; }
-.status--uncommon { border-color: #8fc49a; color: #8fc49a; }
-.status--rare { border-color: #7fb2e5; color: #7fb2e5; }
-.status--epic { border-color: #b996f2; color: #b996f2; }
-.status--legendary { border-color: var(--gilt); color: var(--gilt); }
-.status--mythic { border-color: var(--ember); color: var(--ember); }
-.status--world-class { border-color: #ff8fb1; color: #ffd6e2; background: rgba(255, 143, 177, 0.14); }
+/* relic classes: each has its own gradient (--tier), used on tags and tier headings */
+.tier--awakened-class   { --tier: linear-gradient(90deg, #8d93a3, #e3e6ec); --tier-text: #e3e6ec; --tier-tint: rgba(141, 147, 163, 0.16); }
+.tier--tempered-class   { --tier: linear-gradient(90deg, #4fa36d, #cdeaa3); --tier-text: #cdeaa3; --tier-tint: rgba(79, 163, 109, 0.16); }
+.tier--ruler-class      { --tier: linear-gradient(90deg, #4a86e0, #8fdcf7); --tier-text: #a9e3f8; --tier-tint: rgba(74, 134, 224, 0.18); }
+.tier--sovereign-class  { --tier: linear-gradient(90deg, #8456ef, #ea8ff0); --tier-text: #eeb2f3; --tier-tint: rgba(132, 86, 239, 0.18); }
+.tier--paragon-class    { --tier: linear-gradient(90deg, #e2a63f, #fff0b5); --tier-text: #fff0b5; --tier-tint: rgba(226, 166, 63, 0.16); }
+.tier--primordial-class { --tier: linear-gradient(90deg, #e0502f, #f8b665); --tier-text: #fbc98b; --tier-tint: rgba(224, 80, 47, 0.18); }
+.tier--cataclysm-class  { --tier: linear-gradient(90deg, #ff3f7f, #a35cf2, #ffb36b); --tier-text: #ffd1e1; --tier-tint: rgba(255, 63, 127, 0.18); }
+.status.tier {
+  border-color: transparent; color: var(--tier-text);
+  background: linear-gradient(var(--tier-tint), var(--tier-tint)) padding-box, linear-gradient(var(--night-2), var(--night-2)) padding-box, var(--tier) border-box;
+}
+.prose h2.tier, .prose h3.tier {
+  width: fit-content; color: var(--tier-text);
+  background: var(--tier); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
 .status--sub { font-size: .75rem; padding: .25rem .5rem; }
 .status--cursed { border-color: #c45a6e; color: #f0a3b1; background: rgba(196, 90, 110, 0.14); }
 .status--blessed { border-color: #f3e3a8; color: #fff4cc; background: rgba(243, 227, 168, 0.12); }

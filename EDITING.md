@@ -81,7 +81,7 @@ These appear on their section page automatically. You don't need to touch the se
    - `spirits`: Deities & Mythology, under "Spirits"
    - `myths`: Deities & Mythology, under "Myths & legends"
    - `unknowns`: Deities & Mythology, under "Unknowns"
-   - `relics`: the Relics page, under the heading of its `rarity:` (Uncommon, Rare, Epic, Legendary, Mythic or World Class). Legendary and up also show `wielder:`. Add `nature: Cursed` or `nature: Blessed` for a sub tag beside the rarity.
+   - `relics`: the Relics page, under the heading of its `rarity:` (Awakened, Tempered, Ruler, Sovereign, Paragon, Primordial or Cataclysm Class, always ending in "Class"). Paragon Class and up also show `wielder:`. Add `nature: Cursed` or `nature: Blessed` for a sub tag beside the rarity.
    - `theories`: the Theory Gallery. Set `verdict:` to Unconfirmed, Confirmed or Debunked to choose its list.
    - `religions`: Religions & Orders
    - `locations`: Locations & Landmarks. Set `direction:` to North, South, East or West to list it under "By region", and `map_x:` / `map_y:` to pin it on the world map.
