@@ -15,8 +15,14 @@ description: "Gods, spirits, saints, cosmic forces, legendary ancestors, and the
 
 {% include entry-list.html category="myths" message="No myths have been recorded yet. Entries appear here as the story reveals them." %}
 
+## Unknowns
+
+Beings, forces and mysteries no one has been able to name or explain. Yet.
+
+{% include entry-list.html category="unknowns" message="Nothing unexplained has been recorded yet." %}
+
 ## Belief and fact
 
 A deity’s, spirit’s or myth’s page shows what followers claim, what scholars suspect, and what the story has actually confirmed. Your character may believe any of them. Only the last is certain.
 
-For the faiths that worship these powers, see [Religions & Orders]({{ '/religions-and-orders/' | relative_url }}).
+For what players *suspect* about all of this, see the [Theory Gallery]({{ '/theory-gallery/' | relative_url }}). For the faiths that worship these powers, see [Religions & Orders]({{ '/religions-and-orders/' | relative_url }}).

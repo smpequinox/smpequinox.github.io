@@ -1,7 +1,7 @@
 ---
-title: "???"
+title: "The Tide"
 category: deities
-summary: "A nameless god of the open sea and discovery."
+summary: "God of the open sea and discovery."
 status: Public
 facts:
   Titles: "Not yet recorded"

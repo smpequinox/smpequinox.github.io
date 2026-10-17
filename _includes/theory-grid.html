@@ -1,0 +1,11 @@
+{%- assign tg_theories = site.lore | where: "category", "theories" | sort: "title" -%}
+{%- if include.verdict %}{% assign tg_theories = tg_theories | where: "verdict", include.verdict %}{% endif -%}
+{%- if tg_theories.size > 0 %}
+<ul class="atlas theory-grid">
+{%- for t in tg_theories %}
+<li><a href="{{ t.url | relative_url }}"><span class="atlas__title">{{ t.title }}</span>{% if t.summary %}<span class="atlas__hint">{{ t.summary }}</span>{% endif %}<span class="theory-grid__meta">{% if t.verdict %}<span class="status status--{{ t.verdict | downcase }}">{{ t.verdict }}</span>{% endif %}{% if t.theorist %}<span class="theory-grid__by">by {{ t.theorist }}</span>{% endif %}</span></a></li>
+{%- endfor %}
+</ul>
+{%- else %}
+<div class="empty-state"><img src="{{ '/assets/img/emblem.png' | relative_url }}" alt="" width="44" height="44"><p>{{ include.message | default: "No theories have been recorded yet." }}</p></div>
+{%- endif %}

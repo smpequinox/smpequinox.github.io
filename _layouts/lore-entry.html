@@ -2,9 +2,11 @@
 layout: page
 ---
 <article class="entry">
-  {% if page.facts or page.status or page.standing %}
+  {% if page.facts or page.status or page.standing or page.verdict %}
   <dl class="facts">
     {% if page.status %}<div class="facts__row"><dt>Canon status</dt><dd><span class="status status--{{ page.status | downcase }}">{{ page.status }}</span></dd></div>{% endif %}
+    {% if page.verdict %}<div class="facts__row"><dt>Verdict</dt><dd><span class="status status--{{ page.verdict | downcase }}">{{ page.verdict }}</span></dd></div>{% endif %}
+    {% if page.theorist %}<div class="facts__row"><dt>Theory by</dt><dd>{{ page.theorist }}</dd></div>{% endif %}
     {% if page.standing %}<div class="facts__row"><dt>Standing</dt><dd><span class="status status--{{ page.standing | downcase }}">{{ page.standing }}</span></dd></div>{% endif %}
     {% for fact in page.facts %}
     <div class="facts__row"><dt>{{ fact[0] }}</dt><dd>{% assign fact_value = fact[1] %}{% include linked-names.html text=fact_value %}</dd></div>

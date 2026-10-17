@@ -66,6 +66,8 @@ These appear on their section page automatically. You don't need to touch the se
    - **a god:** `deity.md` (Titles, Domain, Worshipped by)
    - **a spirit:** `spirit.md` (Titles, Resonance, Found in, Connected god, Tier: Ancient, Greater or Lesser, Classification, e.g. Warrior)
    - **a myth or legend:** `myth.md` (Figures involved, Told by, Era)
+   - **an unknown:** `unknown.md` (Also called, First noticed, Seen at, Possibly linked to)
+   - **a player theory:** `theory.md` (verdict, theorist, About, Evidence)
    - **a religion or order:** `religion.md` (Deity or principle, Followed by)
 2. Go to the `_lore` folder, click **Add file → Create new file**.
 3. Name it in lowercase with dashes, ending in `.md`, e.g. `the-silver-coast.md`.
@@ -77,6 +79,8 @@ These appear on their section page automatically. You don't need to touch the se
    - `deities`: Deities & Mythology, under "The pantheon"
    - `spirits`: Deities & Mythology, under "Spirits"
    - `myths`: Deities & Mythology, under "Myths & legends"
+   - `unknowns`: Deities & Mythology, under "Unknowns"
+   - `theories`: the Theory Gallery. Set `verdict:` to Unconfirmed, Confirmed or Debunked to choose its list.
    - `religions`: Religions & Orders
    - `locations`: Locations & Landmarks. Set `direction:` to North, South, East or West to list it under "By region", and `map_x:` / `map_y:` to pin it on the world map.
 5. Commit.
