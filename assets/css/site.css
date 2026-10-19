@@ -834,3 +834,34 @@ button { font: inherit; color: inherit; }
   .prose .bond-tree .bond-group::before { left: 2rem; }
   .bond-tree > .bond-tree__level > li > .bond-tree__level::before { left: 2rem; height: 100%; }
 }
+
+/* hierarchy (ranks) on nation, faction, house and religion pages */
+.prose .rank-tree { list-style: none; margin: 0 0 2rem; padding: 0; display: flex; flex-direction: column; align-items: center; }
+.prose .rank-tree > li::before { content: none; }
+.prose .rank-tree__level {
+  position: relative; display: flex; flex-direction: column; align-items: center; gap: .55rem;
+  width: 100%; max-width: 40rem; margin: 0; padding: 0 0 2.2rem;
+}
+.prose .rank-tree__level:last-child { padding-bottom: 0; }
+/* the line down to the next rank */
+.prose .rank-tree__level:not(:last-child)::after {
+  content: ""; position: absolute; left: 50%; bottom: .3rem; height: 1.6rem; border-left: 2px solid var(--line);
+}
+.rank-tree__rank {
+  font-family: var(--display); font-size: 1.05rem; color: var(--gilt); padding: .3rem 1rem; border-radius: 999px;
+  border: 1px solid var(--gilt-dim); background: var(--night);
+}
+.rank-tree__level:first-child .rank-tree__rank { font-size: 1.25rem; padding: .4rem 1.3rem; border-width: 2px; }
+.prose .rank-tree__holders { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: .45rem; }
+.prose .rank-tree__holders > li { margin: 0; padding: .35rem .8rem; border-radius: 10px; background: var(--night-2); border: 1px solid var(--line-soft); }
+.prose .rank-tree__holders > li::before { content: none; }
+.rank-tree__vacant { color: var(--ink-3); font-style: italic; font-size: .95rem; }
+
+/* the "Within <nation>" chart reuses the bond tree; colours by kind of member */
+.realm-group--places { --bond-color: var(--gilt-dim); }
+.realm-group--capital { --bond-color: var(--gilt); }
+.realm-group--capital .bond-group__label { font-size: 1.1rem; border-width: 2px; }
+.realm-group--factions { --bond-color: #7fb2e5; }
+.realm-group--houses { --bond-color: #b996f2; }
+.realm-group--faiths { --bond-color: #8fc49a; }
+.realm-group--people { --bond-color: #f0a3b1; }

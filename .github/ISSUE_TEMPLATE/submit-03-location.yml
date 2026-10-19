@@ -11,6 +11,13 @@ body:
         **Everything here is public.** Only share what any player is allowed to know: no secrets or staff spoilers.
         Staff review every submission. Once approved, it is added to the wiki and this issue is closed.
   - type: input
+    id: update
+    attributes:
+      label: "Updating an existing page?"
+      description: "Leave this empty for a new page. To replace a page with this submission, paste its address (e.g. https://smpequinox.github.io/characters/swobble/) or its exact name."
+    validations:
+      required: false
+  - type: input
     id: f0
     attributes:
       label: "Location name"
@@ -18,6 +25,22 @@ body:
       required: true
   - type: dropdown
     id: f1
+    attributes:
+      label: "Kind of place"
+      options:
+        - "Capital"
+        - "City"
+        - "Town"
+        - "Village"
+        - "Fort"
+        - "Port"
+        - "Landmark"
+        - "Ruin"
+        - "Other"
+    validations:
+      required: false
+  - type: dropdown
+    id: f2
     attributes:
       label: "Region"
       options:
@@ -33,34 +56,34 @@ body:
     validations:
       required: false
   - type: input
-    id: f2
+    id: f3
     attributes:
       label: "Summary"
       description: "One line a new player should understand"
     validations:
       required: true
   - type: input
-    id: f3
-    attributes:
-      label: "Type of place"
-      description: "City, ruin, dungeon, landmark..."
-    validations:
-      required: false
-  - type: input
     id: f4
     attributes:
-      label: "Controlled by"
-      description: "Nation, faction or house"
+      label: "Type of place"
+      description: "A short description, e.g. walled port city, mountain fortress"
     validations:
       required: false
   - type: input
     id: f5
     attributes:
+      label: "Controlled by"
+      description: "Nation, faction or house. Naming a nation lists this place in its chart."
+    validations:
+      required: false
+  - type: input
+    id: f6
+    attributes:
       label: "Known for"
     validations:
       required: false
   - type: textarea
-    id: f6
+    id: f7
     attributes:
       label: "Description"
       description: "History, points of interest, anything public"

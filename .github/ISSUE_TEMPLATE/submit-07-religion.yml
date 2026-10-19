@@ -11,6 +11,13 @@ body:
         **Everything here is public.** Only share what any player is allowed to know: no secrets or staff spoilers.
         Staff review every submission. Once approved, it is added to the wiki and this issue is closed.
   - type: input
+    id: update
+    attributes:
+      label: "Updating an existing page?"
+      description: "Leave this empty for a new page. To replace a page with this submission, paste its address (e.g. https://smpequinox.github.io/characters/swobble/) or its exact name."
+    validations:
+      required: false
+  - type: input
     id: f0
     attributes:
       label: "Faith name"
@@ -39,6 +46,13 @@ body:
       required: false
   - type: textarea
     id: f4
+    attributes:
+      label: "Ranks"
+      description: "The hierarchy, one rank per line, highest first: Rank: holder, holder\nLeave the holders empty if a rank is vacant.\nExample:\nKing: Aldric Vale\nPrince: Swobble\nKnights: Name, Name"
+    validations:
+      required: false
+  - type: textarea
+    id: f5
     attributes:
       label: "Description"
       description: "Beliefs, practices, anything public"

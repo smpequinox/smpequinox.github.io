@@ -16,6 +16,15 @@ facts:
   Faith: "The Sun Church"
   Allies: "Houses, nations or factions, separated by commas"
   Rivals: "Houses, nations or factions, separated by commas"
+# Ranks draw the Hierarchy tree on the page, highest first. Copy a 2-line block
+# per rank; list several holders separated by commas, or leave holders "" if vacant.
+ranks:
+  - rank: "Head of House"
+    holders: "Name"
+  - rank: "Heir"
+    holders: "Name"
+  - rank: "Members"
+    holders: "Name, Name"
 ---
 
 Write the public account of this house here. Use ## for section headings.

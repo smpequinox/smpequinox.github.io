@@ -1,0 +1,61 @@
+{%- comment -%}
+  On a nation's page: a chart of everything that names this nation in its info
+  box (e.g. a place "Controlled by: Arbitus", a faction with "Allegiance:
+  Arbitus", a house "Sworn to: Arbitus", or a character "Prince of Arbitus").
+  Places are grouped by their place_type: setting.
+{%- endcomment -%}
+{%- assign nm_name = page.title -%}
+{%- assign nm_place_types = "Capital,City,Town,Village,Fort,Port,Landmark,Ruin" -%}
+{%- assign nm_groups = "Capital|Capital|places,City|Cities|places,Town|Towns|places,Village|Villages|places,Fort|Forts|places,Port|Ports|places,Landmark|Landmarks|places,Ruin|Ruins|places,Other|Other places|places,factions|Factions|factions,houses|Noble houses|houses,religions|Faiths|faiths,people|People|people" | split: "," -%}
+{%- assign nm_places = site.lore | where: "category", "locations" | sort: "title" -%}
+{%- assign nm_count = 0 -%}
+{%- capture nm_branches -%}
+{%- for nm_group in nm_groups -%}
+  {%- assign nm_g = nm_group | split: "|" -%}
+  {%- if nm_g[2] == "places" -%}{%- assign nm_docs = nm_places -%}
+  {%- elsif nm_g[2] == "people" -%}{%- assign nm_docs = site.characters | sort: "title" -%}
+  {%- else -%}{%- assign nm_docs = site.lore | where: "category", nm_g[0] | sort: "title" -%}{%- endif -%}
+  {%- capture nm_items -%}
+  {%- for d in nm_docs -%}
+    {%- if nm_g[2] == "people" -%}
+      {%- assign nm_hay = d.affiliation | append: " | " | append: d.whereabouts -%}
+    {%- else -%}
+      {%- assign nm_hay = "" -%}{%- for f in d.facts %}{% assign nm_hay = nm_hay | append: f[1] | append: " | " %}{% endfor -%}
+    {%- endif -%}
+    {%- assign nm_keep = false -%}
+    {%- if nm_hay contains nm_name -%}
+      {%- if nm_g[2] != "places" -%}{%- assign nm_keep = true -%}
+      {%- elsif nm_g[0] == "Other" -%}{%- unless d.place_type and nm_place_types contains d.place_type -%}{%- assign nm_keep = true -%}{%- endunless -%}
+      {%- elsif d.place_type == nm_g[0] -%}{%- assign nm_keep = true -%}{%- endif -%}
+    {%- endif -%}
+    {%- if nm_keep -%}
+      {%- if nm_g[2] == "people" %}{% assign nm_note = d.affiliation %}{% else %}{% assign nm_note = d.summary %}{% endif -%}
+      <li><a class="bond-node" href="{{ d.url | relative_url }}"><span class="bond-node__art"><img src="{{ d.image | default: '/assets/img/emblem.png' | relative_url }}" alt="" loading="lazy"></span><span class="bond-node__text"><span class="bond-node__name">{{ d.title }}</span>{% if nm_note %}<span class="bond-node__relation">{{ nm_note }}</span>{% endif %}</span></a></li>
+    {%- endif -%}
+  {%- endfor -%}
+  {%- endcapture -%}
+  {%- if nm_items != "" -%}
+    {%- assign nm_count = nm_count | plus: 1 %}
+    <li class="bond-group realm-group realm-group--{{ nm_g[2] }}{% if nm_g[0] == 'Capital' %} realm-group--capital{% endif %}">
+      <span class="bond-group__label">{{ nm_g[1] }}</span>
+      <ul class="bond-group__people">{{ nm_items }}</ul>
+    </li>
+  {%- endif -%}
+{%- endfor -%}
+{%- endcapture -%}
+<h2 id="within">Within {{ page.title }}</h2>
+{%- if nm_count > 0 %}
+<section class="bond-tree realm-tree{% if nm_count > 3 %} bond-tree--stacked{% endif %}" aria-label="What is within {{ page.title }}">
+<ul class="bond-tree__level">
+<li>
+  <span class="bond-node bond-node--root">
+    <span class="bond-node__art"><img src="{{ page.image | default: '/assets/img/emblem.png' | relative_url }}" alt=""></span>
+    <span class="bond-node__name">{{ page.title }}</span>
+  </span>
+  <ul class="bond-tree__level">{{ nm_branches }}</ul>
+</li>
+</ul>
+</section>
+{%- else %}
+<div class="empty-state"><img src="{{ '/assets/img/emblem.png' | relative_url }}" alt="" width="44" height="44"><p>Nothing has been recorded as part of {{ page.title }} yet. Places, groups, houses, faiths and people appear here when their page names {{ page.title }}.</p></div>
+{%- endif %}

@@ -1,0 +1,23 @@
+{%- comment -%}
+  The hierarchy on nation, faction, noble house and religion pages. Reads
+  page.ranks: a list of { rank, holders }, highest rank first. holders is a
+  comma-separated list of names; names that match a wiki page link to it.
+{%- endcomment -%}
+<ol class="rank-tree" aria-label="Hierarchy of {{ page.title }}">
+{%- for r in page.ranks %}
+  <li class="rank-tree__level">
+    <span class="rank-tree__rank">{{ r.rank }}</span>
+    {%- assign rt_holders = r.holders | append: "" | strip -%}
+    {%- if rt_holders != "" %}
+    <ul class="rank-tree__holders">
+      {%- assign rt_names = rt_holders | split: ", " -%}
+      {%- for rt_name in rt_names %}
+      <li>{% include linked-names.html text=rt_name %}</li>
+      {%- endfor %}
+    </ul>
+    {%- else %}
+    <span class="rank-tree__vacant">Vacant or unknown</span>
+    {%- endif %}
+  </li>
+{%- endfor %}
+</ol>

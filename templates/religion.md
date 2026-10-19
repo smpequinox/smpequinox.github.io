@@ -10,6 +10,15 @@ status: Public                  # Public / Revealed / Draft
 facts:
   Deity or principle: "The Cycle"
   Followed by: "Nations or factions, separated by commas"
+# Ranks draw the Hierarchy tree on the page, highest first. Copy a 2-line block
+# per rank; list several holders separated by commas, or leave holders "" if vacant.
+ranks:
+  - rank: "High Priest"
+    holders: "Name"
+  - rank: "Clergy"
+    holders: "Name, Name"
+  - rank: "Faithful"
+    holders: ""
 ---
 
 Write the public account of this faith here. Use ## for section headings.

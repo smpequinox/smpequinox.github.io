@@ -15,6 +15,15 @@ facts:
   Faith: "The Sun Church"
   Allies: "Nations or factions, separated by commas"
   Rivals: "Nations or factions, separated by commas"
+# Ranks draw the Hierarchy tree on the page, highest first. Copy a 2-line block
+# per rank; list several holders separated by commas, or leave holders "" if vacant.
+ranks:
+  - rank: "Monarch"
+    holders: "Ruler's name"
+  - rank: "Heir"
+    holders: "Name"
+  - rank: "Royal Council"
+    holders: "Name, Name, Name"
 ---
 
 Write the public account of this nation here. Use ## for section headings.

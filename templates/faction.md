@@ -15,6 +15,15 @@ facts:
   Goals: "What it wants, publicly"
   Allies: "Nations or factions, separated by commas"
   Rivals: "Nations or factions, separated by commas"
+# Ranks draw the Hierarchy tree on the page, highest first. Copy a 2-line block
+# per rank; list several holders separated by commas, or leave holders "" if vacant.
+ranks:
+  - rank: "Leader"
+    holders: "Name"
+  - rank: "Officers"
+    holders: "Name, Name"
+  - rank: "Members"
+    holders: "Name, Name, Name"
 ---
 
 Write the public account of this faction here. Use ## for section headings.
