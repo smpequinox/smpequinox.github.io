@@ -261,28 +261,59 @@
     window.addEventListener("resize", function () { applyView(false); });
   }
 
-  /* ---------- Calendar: count in-world months forward from the start date in _config.yml ---------- */
+  /* ---------- Calendar: count in-world time forward from the known date in _config.yml ---------- */
   var calNow = document.querySelector("[data-calendar-now]");
-  var calTable = document.querySelector("[data-calendar]");
-  if (calNow && calTable) {
-    var rows = calTable.querySelectorAll("tr[data-month]");
-    var startParts = calNow.dataset.start.split("-");
-    var start = new Date(+startParts[0], +startParts[1] - 1, +startParts[2]);
-    var daysPerMonth = parseFloat(calNow.dataset.days);
-    var dayMs = 86400000;
-    var passed = Math.floor((Date.now() - start.getTime()) / dayMs / daysPerMonth);
-    if (passed >= 0 && rows.length === 12 && daysPerMonth > 0) {
-      var total = (+calNow.dataset.year) * 12 + (+calNow.dataset.month - 1) + passed;
-      var year = Math.floor(total / 12);
-      var index = total % 12;
-      var row = rows[index];
-      var nextRow = rows[(index + 1) % 12];
-      var nextStart = new Date(start.getTime() + Math.floor((passed + 1) * daysPerMonth) * dayMs);
-      calNow.querySelector("[data-calendar-date]").textContent = row.dataset.name + " " + year + " " + calNow.dataset.era;
-      calNow.querySelector("[data-calendar-detail]").textContent = row.dataset.season + " \u00b7 " + nextRow.dataset.name +
-        " begins around " + nextStart.toLocaleDateString(undefined, { month: "long", day: "numeric" });
-      rows.forEach(function (r) { r.classList.toggle("is-current", r === row); });
-    }
+  var calConfig = document.querySelector("[data-calendar-config]");
+  if (calNow && calConfig) {
+    try {
+      var calData = JSON.parse(calConfig.textContent);
+      var cal = calData.calendar, months = calData.months;
+      var startParts = String(cal.start_date).split("-");
+      var calStart = new Date(+startParts[0], +startParts[1] - 1, +startParts[2]);
+      var dayMs = 86400000;
+      var passed = Math.floor((Date.now() - calStart.getTime()) / dayMs / cal.days_per_month);
+      if (passed >= 0 && months.length === 12 && cal.days_per_month > 0) {
+        var startTotal = cal.start_year * 12 + (cal.start_month - 1);
+        var total = startTotal + passed;
+        var year = Math.floor(total / 12);
+        var monthIndex = total % 12;
+        var perSeason = cal.months_per_season || 6;
+        var seasons = cal.seasons;
+        var seasonAt = function (t) {
+          var shift = Math.floor(t / perSeason) - Math.floor(startTotal / perSeason);
+          return seasons[(((cal.start_season - 1 + shift) % seasons.length) + seasons.length) % seasons.length];
+        };
+        var eraFor = function (y) {
+          var found = null;
+          cal.eras.forEach(function (e) { if (y >= e.start_year && y < e.start_year + cal.years_per_era) found = e; });
+          return found;
+        };
+        var era = eraFor(year);
+        var season = seasonAt(total);
+        var realDate = function (t) {
+          return new Date(calStart.getTime() + Math.floor((t - startTotal) * cal.days_per_month) * dayMs)
+            .toLocaleDateString(undefined, { month: "long", day: "numeric" });
+        };
+        var nextSeasonTotal = (Math.floor(total / perSeason) + 1) * perSeason;
+        var nextSeason = seasonAt(nextSeasonTotal);
+        var firstEra = cal.eras[0];
+        var eraYear = era ? year - era.start_year + 1
+          : ((((year - firstEra.start_year) % cal.years_per_era) + cal.years_per_era) % cal.years_per_era) + 1;
+
+        calNow.querySelector("[data-calendar-date]").textContent =
+          months[monthIndex] + " " + year + (era && era.abbr ? " " + era.abbr : "");
+        calNow.querySelector("[data-calendar-detail]").textContent =
+          season.name + " (" + season.kind + ") \u00b7 " +
+          "year " + eraYear + " of " + cal.years_per_era + " of the era of " + (era ? era.name : cal.unnamed_era);
+        var next = calNow.querySelector("[data-calendar-next]");
+        next.textContent = months[(monthIndex + 1) % 12] + " begins around " + realDate(total + 1) + ". " +
+          nextSeason.name + " (" + nextSeason.kind + ") begins in " + months[nextSeasonTotal % 12] + ", around " + realDate(nextSeasonTotal) + ".";
+        next.hidden = false;
+        document.querySelectorAll("[data-calendar] tr[data-month]").forEach(function (r) {
+          r.classList.toggle("is-current", +r.dataset.month === monthIndex + 1);
+        });
+      }
+    } catch (err) { /* keep the date written into the page */ }
   }
 
   /* ---------- Event viewer (lightbox) ---------- */
