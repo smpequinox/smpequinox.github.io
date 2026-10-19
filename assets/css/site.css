@@ -865,3 +865,23 @@ button { font: inherit; color: inherit; }
 .realm-group--houses { --bond-color: #b996f2; }
 .realm-group--faiths { --bond-color: #8fc49a; }
 .realm-group--people { --bond-color: #f0a3b1; }
+
+/* pin editing mode on the world map (?edit-pins) */
+.world-map__canvas.is-editing-pins .world-map__pin { cursor: grab; touch-action: none; }
+.world-map__canvas.is-editing-pins .world-map__pin.is-moving { cursor: grabbing; z-index: 4; }
+.world-map__canvas.is-editing-pins .world-map__dot { background: var(--ember); }
+.pin-editor {
+  margin-top: 1rem; padding: 1rem 1.2rem; border-radius: 12px;
+  background: var(--night-2); border: 1px dashed var(--ember);
+}
+.prose .pin-editor p { margin: 0 0 .6rem; }
+.pin-editor__title { font-family: var(--display); font-size: 1.15rem; color: var(--ember); }
+.pin-editor select { font: inherit; padding: .35rem .5rem; border-radius: 8px; background: var(--night); color: var(--ink); border: 1px solid var(--line); max-width: 100%; }
+.pin-editor__empty, .pin-editor__note { color: var(--ink-3); font-size: .95rem; }
+.pin-editor__change {
+  display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: .3rem .8rem;
+  padding: .6rem 0; border-top: 1px solid var(--line-soft);
+}
+.pin-editor__change strong { grid-column: 1 / -1; font-family: var(--display); font-weight: normal; color: var(--gilt); }
+.prose .pin-editor__change pre { margin: 0; padding: .3rem .6rem; font-size: .9rem; background: var(--night); border-radius: 6px; }
+.pin-editor__change button { font: inherit; font-size: .9rem; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; color: var(--night); background: var(--gilt); border: 0; }
