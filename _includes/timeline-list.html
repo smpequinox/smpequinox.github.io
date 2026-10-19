@@ -2,7 +2,7 @@
 {%- if rows and rows.size > 0 %}
 <ol class="chronicle">
 {%- for row in rows %}
-<li{% if row.current %} class="chronicle__current"{% endif %}><p class="chronicle__date">{{ row.date }}{% if row.current %} <span class="status">Current age</span>{% endif %}</p><p class="chronicle__event">{% if row.link %}<a href="{{ row.link | relative_url }}">{{ row.event }}</a>{% else %}{{ row.event }}{% endif %}</p>{% if row.summary %}<p class="chronicle__summary">{{ row.summary }}</p>{% endif %}</li>
+<li{% if row.current %} class="chronicle__current"{% endif %}><p class="chronicle__date">{{ row.date }}{% if row.tag %} <span class="status">{{ row.tag }}</span>{% endif %}{% if row.current %} <span class="status">Current age</span>{% endif %}</p><p class="chronicle__event">{% if row.link %}<a href="{{ row.link | relative_url }}">{{ row.event }}</a>{% else %}{{ row.event }}{% endif %}</p>{% if row.summary %}<p class="chronicle__summary">{{ row.summary }}</p>{% endif %}</li>
 {%- endfor %}
 </ol>
 {%- else %}

@@ -261,18 +261,27 @@
     window.addEventListener("resize", function () { applyView(false); });
   }
 
-  /* ---------- Calendar: highlight the in-world month for today's date ---------- */
-  var calendar = document.querySelector("[data-calendar]");
-  if (calendar) {
-    var row = calendar.querySelector('[data-month="' + (new Date().getMonth() + 1) + '"]');
-    var now = document.querySelector("[data-calendar-now]");
-    if (row) {
-      row.classList.add("is-current");
-      if (now) {
-        now.innerHTML = "It is currently <strong></strong> in Equinox.";
-        now.querySelector("strong").textContent = row.querySelector(".calendar__name").textContent;
-        now.hidden = false;
-      }
+  /* ---------- Calendar: count in-world months forward from the start date in _config.yml ---------- */
+  var calNow = document.querySelector("[data-calendar-now]");
+  var calTable = document.querySelector("[data-calendar]");
+  if (calNow && calTable) {
+    var rows = calTable.querySelectorAll("tr[data-month]");
+    var startParts = calNow.dataset.start.split("-");
+    var start = new Date(+startParts[0], +startParts[1] - 1, +startParts[2]);
+    var daysPerMonth = parseFloat(calNow.dataset.days);
+    var dayMs = 86400000;
+    var passed = Math.floor((Date.now() - start.getTime()) / dayMs / daysPerMonth);
+    if (passed >= 0 && rows.length === 12 && daysPerMonth > 0) {
+      var total = (+calNow.dataset.year) * 12 + (+calNow.dataset.month - 1) + passed;
+      var year = Math.floor(total / 12);
+      var index = total % 12;
+      var row = rows[index];
+      var nextRow = rows[(index + 1) % 12];
+      var nextStart = new Date(start.getTime() + Math.floor((passed + 1) * daysPerMonth) * dayMs);
+      calNow.querySelector("[data-calendar-date]").textContent = row.dataset.name + " " + year + " " + calNow.dataset.era;
+      calNow.querySelector("[data-calendar-detail]").textContent = row.dataset.season + " \u00b7 " + nextRow.dataset.name +
+        " begins around " + nextStart.toLocaleDateString(undefined, { month: "long", day: "numeric" });
+      rows.forEach(function (r) { r.classList.toggle("is-current", r === row); });
     }
   }
 

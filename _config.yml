@@ -19,6 +19,17 @@ submit_url: "https://github.com/smpequinox/smpequinox.github.io/issues/new/choos
 # The story arc currently running
 current_arc: "Inter-Arc: Remember the Forgotten"
 
+# The in-world calendar. The Timeline page counts forward from this point
+# to show the current in-world month and year. To correct the date, set
+# start_date to today's real date and start_month / start_year to the
+# in-world date right now (start_month: 1 = Janument ... 12 = Decrimar).
+calendar:
+  era: "S.R"
+  start_date: "2026-10-19"
+  start_month: 2
+  start_year: 751
+  days_per_month: 10.1458   # real days per in-world month (3 in-world years = 1 real year)
+
 # Leave these alone unless the site moves to a different address
 url: ""
 baseurl: ""
