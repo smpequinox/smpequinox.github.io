@@ -62,6 +62,8 @@ Players submit characters, theories and lore through forms on GitHub: the **Issu
 2. **Approve it.** Add the **approved** label. Within a minute or two, a bot writes the wiki page, downloads any attached picture, and opens a pull request. It comments a link on the issue.
 3. **Publish it.** Open that pull request, check the page, fix anything by editing the file in the pull request, then **Merge**. The issue closes automatically and the page goes live.
 
+**Updates:** a player can replace an existing page by filling in "Updating an existing page?" at the top of the form with the page's address or exact name. Approving it works the same way, but the pull request is titled "Update …" and replaces the old page. Check its changes before merging: everything not in the new submission is removed, except map pins, the Featured flag, a theory's verdict, and the picture if no new one was attached. Make sure the player updating a page is allowed to (for example, that it's their own character).
+
 To reject a submission, comment why and close the issue. If the bot can't build a page (for example, the picture isn't PNG, JPG, GIF or WebP), it comments on the issue with a link to the error.
 
 **One-time setup:** in the repository's **Settings → Actions → General**, under "Workflow permissions", tick **Allow GitHub Actions to create and approve pull requests**. Without it the bot can't open pull requests.
@@ -108,6 +110,8 @@ These appear on their section page automatically. You don't need to touch the se
 **Every line between the `---` lines must be `name: value`.** A line with only a value (like `"Sun mother"` on its own) breaks the settings, and the entry silently won't appear anywhere. Extra details go under `facts:`, indented two spaces, e.g. `  Titles: "The Sun Mother"`.
 
 **Names link themselves.** Any time the name of a wiki page appears in an info box, tree or page text, exactly as its title is spelled (capitals included), it becomes a link to that page. This works inside longer text too: "Prince of Arbitus" links "Arbitus". Info boxes and trees link every mention; page text links the first mention of each page. Names shorter than 4 letters are not linked.
+
+**What's in a nation.** A nation's page lists, under "Within …", every place, faction, noble house and faith whose info box names the nation (e.g. `Controlled by: "Arbitus"`, `Allegiance: "Arbitus"`, `Sworn to: "Arbitus"`), and every character whose affiliations or whereabouts name it (e.g. "Prince of Arbitus"). Nothing needs to be added to the nation's own page.
 
 **Hierarchies.** Nation, faction, noble house and religion templates have a `ranks:` list. Write the ranks from highest to lowest, each with its holders separated by commas (or `holders: ""` if vacant). The page shows them as a tree under "Hierarchy".
 

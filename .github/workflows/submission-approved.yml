@@ -27,11 +27,12 @@ jobs:
           ISSUE_JSON: ${{ toJSON(github.event.issue) }}
         run: |
           printf '%s' "$ISSUE_JSON" > "$RUNNER_TEMP/issue.json"
-          python3 .github/scripts/submissions.py build "$RUNNER_TEMP/issue.json" > "$RUNNER_TEMP/result.json"
+          python3 .github/scripts/submissions.py build "$RUNNER_TEMP/issue.json" > "$RUNNER_TEMP/result.json" 2> "$RUNNER_TEMP/error.txt" || { cat "$RUNNER_TEMP/error.txt"; exit 1; }
           cat "$RUNNER_TEMP/result.json"
       - name: Open a pull request
         run: |
           type=$(jq -r .type "$RUNNER_TEMP/result.json")
+          action=$(jq -r .action "$RUNNER_TEMP/result.json")
           title=$(jq -r .title "$RUNNER_TEMP/result.json")
           files=$(jq -r '.files[] | "- `" + . + "`"' "$RUNNER_TEMP/result.json")
           branch="submission/issue-$NUMBER"
@@ -39,12 +40,18 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git checkout -b "$branch"
           git add -A
-          git commit -m "Add $type: $title" -m "From submission #$NUMBER"
+          git commit -m "$action $type: $title" -m "From submission #$NUMBER"
           git push --force origin "$branch"
-          body=$(printf 'Adds the %s **%s** from #%s.\n\nFiles:\n%s\n\nCheck the page reads well, then merge to publish it.\n\nCloses #%s' "$type" "$title" "$NUMBER" "$files" "$NUMBER")
-          url=$(gh pr view "$branch" --json url -q .url 2>/dev/null || gh pr create --base "$BASE" --head "$branch" --title "Add $type: $title" --body "$body")
+          if [ "$action" = "Update" ]; then
+            what=$(printf 'Replaces the %s **%s** with the version from #%s. Check the changes below: everything not in the new submission is removed (except map pins, Featured, theory verdicts, and the picture if no new one was attached).' "$type" "$title" "$NUMBER")
+          else
+            what=$(printf 'Adds the %s **%s** from #%s.' "$type" "$title" "$NUMBER")
+          fi
+          body=$(printf '%s\n\nFiles:\n%s\n\nCheck the page reads well, then merge to publish it.\n\nCloses #%s' "$what" "$files" "$NUMBER")
+          url=$(gh pr view "$branch" --json url -q .url 2>/dev/null || gh pr create --base "$BASE" --head "$branch" --title "$action $type: $title" --body "$body")
           gh issue comment "$NUMBER" --body "Approved! The wiki page is ready for a final check in $url. It goes live once that pull request is merged."
       - name: Report a problem
         if: failure()
         run: |
-          gh issue comment "$NUMBER" --body "Staff: this submission could not be turned into a wiki page automatically. See the run log: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          reason=$(grep -h "Error" "$RUNNER_TEMP/error.txt" 2>/dev/null | tail -n 1 | sed 's/^[A-Za-z]*Error: //')
+          gh issue comment "$NUMBER" --body "$(printf 'This submission could not be turned into a wiki page automatically.\n\n%s\n\nStaff: fix the issue (or ask the player to edit it), then remove and re-add the **approved** label. Run log: %s' "${reason:-See the run log for details.}" "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}")"

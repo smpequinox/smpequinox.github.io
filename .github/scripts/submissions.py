@@ -222,6 +222,15 @@ TYPES = [
 
 EMPTY_ANSWERS = {"", "_No response_", "None", "Neither", "Not sure"}
 
+# Every form starts with this question. Answering it replaces an existing page
+# instead of adding a new one.
+UPDATE_LABEL = "Updating an existing page?"
+UPDATE_HINT = ("Leave this empty for a new page. To replace a page with this submission, "
+               "paste its address (e.g. https://smpequinox.github.io/characters/swobble/) or its exact name.")
+# Settings staff add by hand that a player's update keeps: map pins, the
+# Featured flag, a theory's verdict, and the picture if no new one is attached.
+KEEP_ON_UPDATE = ["map_x", "map_y", "featured", "verdict"]
+
 
 # ---------- issue forms ----------
 
@@ -249,6 +258,13 @@ def write_forms(root):
             "      value: |",
             "        **Everything here is public.** Only share what any player is allowed to know: no secrets or staff spoilers.",
             "        Staff review every submission. Once approved, it is added to the wiki and this issue is closed.",
+            "  - type: input",
+            "    id: update",
+            "    attributes:",
+            f"      label: {q(UPDATE_LABEL)}",
+            f"      description: {q(UPDATE_HINT)}",
+            "    validations:",
+            "      required: false",
         ]
         for i, (label, kind, key, inp, required, hint) in enumerate(t["fields"]):
             fid = f"f{i}"
@@ -331,6 +347,50 @@ def download_image(url, dest_base):
     return path
 
 
+def front_matter(path):
+    with open(path, encoding="utf-8") as fh:
+        text = fh.read()
+    m = re.match(r"---\n(.*?)\n---", text, re.S)
+    return m.group(1) if m else ""
+
+
+def setting(front, key):
+    """The raw value of a top-level setting line, e.g. 'title: "Arbitus"' -> '"Arbitus"'."""
+    m = re.search(rf"^{re.escape(key)}:[ \t]*(.*)$", front, re.M)
+    return m.group(1).strip() if m else None
+
+
+def unquote(value):
+    value = (value or "").split(" #")[0].strip()
+    if value.startswith('"'):
+        try:
+            return json.loads(value)
+        except ValueError:
+            return value.strip('"')
+    return value
+
+
+def find_page(folder, ref, category=None):
+    """The file an update replaces, found by its address or its exact name."""
+    ref = ref.strip()
+    if not os.path.isdir(folder):
+        return None
+    candidates = sorted(f for f in os.listdir(folder) if f.endswith(".md"))
+    if "/" in ref:
+        name = [p for p in re.sub(r"[?#].*$", "", ref).split("/") if p][-1]
+        name = re.sub(r"\.html$", "", name)
+        matches = [f for f in candidates if f[:-3] == name]
+    else:
+        wanted = re.sub(r"\s+", " ", ref).casefold()
+        matches = [f for f in candidates
+                   if re.sub(r"\s+", " ", unquote(setting(front_matter(os.path.join(folder, f)), "title"))).casefold() == wanted]
+    for f in matches:
+        path = os.path.join(folder, f)
+        if category is None or unquote(setting(front_matter(path), "category")) == category:
+            return path
+    return None
+
+
 def unique_path(folder, slug, ext=".md"):
     path, n = os.path.join(folder, slug + ext), 2
     while os.path.exists(path):
@@ -353,7 +413,16 @@ def build(issue, root="."):
     slug = slugify(re.sub(r"<[^>]*>", "", raw_title))
     folder = os.path.join(root, t["folder"])
     os.makedirs(folder, exist_ok=True)
-    out = unique_path(folder, slug)
+    update_ref = answers.get(UPDATE_LABEL, "").strip()
+    old_front = None
+    if update_ref and update_ref not in EMPTY_ANSWERS:
+        out = find_page(folder, update_ref, t["fixed"].get("category"))
+        if not out:
+            raise ValueError(f"Couldn't find the {t['name'].lower()} page to update: {update_ref}. "
+                             "Check the address or exact name, and that the submission type matches the page.")
+        old_front = front_matter(out)
+    else:
+        out = unique_path(folder, slug)
 
     front = [f"title: {q(title)}"]
     front += [f"{k}: {q(v)}" for k, v in t["fixed"].items()]
@@ -399,6 +468,11 @@ def build(issue, root="."):
                 if len(parts) > 1 and parts[1]:
                     bonds += [f"    relation: {q(parts[1])}"]
                 bonds += [f"    type: {kind_of}"]
+    if old_front is not None:
+        for key in KEEP_ON_UPDATE + ([] if any(l.startswith("image:") for l in front) else ["image"]):
+            old = setting(old_front, key)
+            if old is not None:
+                front = [l for l in front if not l.startswith(key + ":")] + [f"{key}: {old}"]
     if facts:
         front += ["facts:"] + facts
     if ranks:
@@ -409,7 +483,7 @@ def build(issue, root="."):
 
     with open(out, "w", encoding="utf-8") as fh:
         fh.write("---\n" + "\n".join(front) + "\n---\n" + (f"\n{body}\n" if body else ""))
-    return t, title, [os.path.relpath(p, root) for p in written]
+    return t, title, [os.path.relpath(p, root) for p in written], ("Update" if old_front is not None else "Add")
 
 
 if __name__ == "__main__":
@@ -420,7 +494,7 @@ if __name__ == "__main__":
     elif len(sys.argv) >= 3 and sys.argv[1] == "build":
         with open(sys.argv[2], encoding="utf-8") as fh:
             issue = json.load(fh)
-        t, title, files = build(issue, repo)
-        print(json.dumps({"type": t["name"], "title": title, "files": files}))
+        t, title, files, action = build(issue, repo)
+        print(json.dumps({"type": t["name"], "title": title, "files": files, "action": action}))
     else:
         sys.exit(__doc__)

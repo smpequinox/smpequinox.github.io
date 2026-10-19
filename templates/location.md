@@ -12,7 +12,7 @@ summary: "One line a new player should understand."
 status: Public                  # Public / Revealed / Draft
 facts:
   Type: "City, ruin, dungeon, landmark..."
-  Controlled by: "Nation, faction or house"
+  Controlled by: "Nation, faction or house (naming a nation lists this place on the nation's page)"
   Known for: "What it is famous for"
 ---
 
