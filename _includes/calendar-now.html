@@ -1,0 +1,21 @@
+{%- comment -%}
+  The live in-world date. Shows the starting date from _config.yml, and the
+  calendar script in site.js counts it forward to today.
+  include.arc=true also shows site.current_arc (used on the home page).
+{%- endcomment -%}
+{%- assign cal = site.calendar -%}{%- assign start_index = cal.start_month | minus: 1 -%}{%- assign start = site.data.calendar[start_index] -%}
+{%- assign season_index = cal.start_season | minus: 1 -%}{%- assign season = cal.seasons[season_index] -%}{%- assign era = cal.eras | last -%}
+<div class="calendar-now{% if include.class %} {{ include.class }}{% endif %}" data-calendar-now>
+  {%- if include.arc %}
+  <p class="calendar-now__label">Current age</p>
+  <p class="calendar-now__arc"><a href="{{ '/timeline/' | relative_url }}">{{ site.current_arc }}</a></p>
+  {%- else %}
+  <p class="calendar-now__label">The date in Equinox</p>
+  {%- endif %}
+  <p class="calendar-now__date" data-calendar-date>{{ start.month }} {{ cal.start_year }} {{ era.abbr }}</p>
+  <p class="calendar-now__detail" data-calendar-detail>{{ season.name }} ({{ season.kind }}) · the era of {{ era.name }}</p>
+  {%- unless include.arc %}
+  <p class="calendar-now__next" data-calendar-next hidden></p>
+  {%- endunless %}
+</div>
+<script type="application/json" data-calendar-config>{"calendar": {{ cal | jsonify }}, "months": {{ site.data.calendar | map: "month" | jsonify }}}</script>

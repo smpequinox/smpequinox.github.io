@@ -696,10 +696,11 @@ button { font: inherit; color: inherit; }
 
 @media (max-width: 760px) {
   :root { --emblem-col: 132px; }
-  .hero { min-height: 340px; }
+  .hero { min-height: 340px; padding-top: calc(var(--topbar-h) + 1rem); }
   .hero__inner { grid-template-columns: 1fr; text-align: center; }
   .hero__titles { grid-column: 1; grid-row: 1; padding-bottom: calc(var(--emblem-col) / 2 + 1.5rem); }
   .hero__tagline { margin-left: auto; margin-right: auto; }
+  .calendar-now--hero { margin-left: auto; margin-right: auto; text-align: left; }
   .hero__emblem-wrap {
     grid-column: 1; grid-row: 1; align-self: end; justify-self: center;
     width: var(--emblem-col);
@@ -753,6 +754,13 @@ button { font: inherit; color: inherit; }
 .calendar-now__label { color: var(--ink-3); font-style: italic; font-size: .95rem; }
 .calendar-now__date { font-family: var(--display); font-size: 1.6rem; color: var(--gilt); line-height: 1.3; }
 .calendar-now__detail { color: var(--ink-2); }
+/* the current age banner on the home page */
+.calendar-now--hero { margin: 1.4rem 0 0; max-width: 34rem; background: rgba(15, 10, 32, 0.6); }
+.calendar-now--hero p { margin: 0; }
+.calendar-now__arc { font-family: var(--display); font-size: 1.35rem; line-height: 1.3; }
+.calendar-now__arc a { color: var(--ink); text-decoration: none; }
+.calendar-now__arc a:hover { color: var(--gilt); }
+.calendar-now--hero .calendar-now__date { font-size: 1.15rem; margin-top: .3rem; }
 .prose .calendar-now .calendar-now__next { margin-top: .4rem; color: var(--ink-3); font-size: .95rem; }
 .chronicle__date .status { font-style: normal; font-size: .75rem; padding: .2rem .5rem; margin-left: .4rem; vertical-align: .1em; }
 

@@ -17,14 +17,7 @@ Events appear here once the story has revealed them. Dates follow the in-world c
 
 ## Calendar
 
-{% assign cal = site.calendar %}{% assign start_index = cal.start_month | minus: 1 %}{% assign start = site.data.calendar[start_index] %}{% assign season_index = cal.start_season | minus: 1 %}{% assign season = cal.seasons[season_index] %}{% assign era = cal.eras | last %}
-<div class="calendar-now" data-calendar-now>
-  <p class="calendar-now__label">The date in Equinox</p>
-  <p class="calendar-now__date" data-calendar-date>{{ start.month }} {{ cal.start_year }} {{ era.abbr }}</p>
-  <p class="calendar-now__detail" data-calendar-detail>{{ season.name }} ({{ season.kind }}) · the era of {{ era.name }}</p>
-  <p class="calendar-now__next" data-calendar-next hidden></p>
-</div>
-<script type="application/json" data-calendar-config>{"calendar": {{ cal | jsonify }}, "months": {{ site.data.calendar | map: "month" | jsonify }}}</script>
+{% include calendar-now.html %}
 
 Time in Equinox moves about three times faster than real life: a new month begins roughly every ten real days. The date above updates by itself.
 
@@ -34,14 +27,14 @@ Each year has **two seasons**: one from {{ site.data.calendar[0].month }} to {{ 
 
 | Season | Also called |
 | --- | --- |
-{% for s in cal.seasons %}| **{{ s.name }}** | {{ s.kind }} |
+{% for s in site.calendar.seasons %}| **{{ s.name }}** | {{ s.kind }} |
 {% endfor %}
 
-An **era** lasts {{ cal.years_per_era }} years. Years are counted with the era's initials, e.g. {{ cal.start_year }} {{ era.abbr }}.
+An **era** lasts {{ site.calendar.years_per_era }} years. Years are counted with the era's initials, e.g. {{ site.calendar.start_year }} {{ site.calendar.eras.last.abbr }}.
 
 | Era | Years |
 | --- | --- |
-{% for e in cal.eras %}{% assign last_year = e.start_year | plus: cal.years_per_era | minus: 1 %}| **{{ e.name }}** ({{ e.abbr }}) | {{ e.start_year }}–{{ last_year }} |
+{% for e in site.calendar.eras %}{% assign last_year = e.start_year | plus: site.calendar.years_per_era | minus: 1 %}| **{{ e.name }}** ({{ e.abbr }}) | {{ e.start_year }}–{{ last_year }} |
 {% endfor %}
 
 ### Months
@@ -50,7 +43,7 @@ An **era** lasts {{ cal.years_per_era }} years. Years are counted with the era's
 <thead><tr><th>#</th><th>Month</th><th>Real-world counterpart</th></tr></thead>
 <tbody>
 {%- for m in site.data.calendar %}
-<tr data-month="{{ forloop.index }}"{% if forloop.index == cal.start_month %} class="is-current"{% endif %}><td>{{ forloop.index }}</td><td class="calendar__name">{{ m.month }}</td><td>{{ m.real }}</td></tr>
+<tr data-month="{{ forloop.index }}"{% if forloop.index == site.calendar.start_month %} class="is-current"{% endif %}><td>{{ forloop.index }}</td><td class="calendar__name">{{ m.month }}</td><td>{{ m.real }}</td></tr>
 {%- endfor %}
 </tbody>
 </table>
