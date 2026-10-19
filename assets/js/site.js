@@ -306,9 +306,9 @@
           season.name + " (" + season.kind + ") \u00b7 " +
           "year " + eraYear + " of " + cal.years_per_era + " of the era of " + (era ? era.name : cal.unnamed_era);
         var next = calNow.querySelector("[data-calendar-next]");
-        next.textContent = months[(monthIndex + 1) % 12] + " begins around " + realDate(total + 1) + ". " +
+        if (next) next.textContent = months[(monthIndex + 1) % 12] + " begins around " + realDate(total + 1) + ". " +
           nextSeason.name + " (" + nextSeason.kind + ") begins in " + months[nextSeasonTotal % 12] + ", around " + realDate(nextSeasonTotal) + ".";
-        next.hidden = false;
+        if (next) next.hidden = false;
         document.querySelectorAll("[data-calendar] tr[data-month]").forEach(function (r) {
           r.classList.toggle("is-current", +r.dataset.month === monthIndex + 1);
         });
