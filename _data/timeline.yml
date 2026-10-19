@@ -12,14 +12,16 @@
 #   summary: "Raiders broke the eastern wall during the harvest festival."
 #   link: "/locations-and-landmarks/"
 #   current: true marks the age the story is in now (optional)
+#   tag:     a short label shown beside the date, e.g. "Start of server" (optional)
 
-- date: "Epilogue"
+- date: "Epilogue · Miren 750 S.R"
   event: "The First Omen"
+  tag: "Start of server"
 
 - date: "Inter-Arc"
   event: "Whispers of Divinity"
 
-- date: "Arc 1"
+- date: "Arc 1 · ended 750 S.R"
   event: "Bleeding Drums"
 
 - date: "Inter-Arc"

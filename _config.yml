@@ -19,6 +19,40 @@ submit_url: "https://github.com/smpequinox/smpequinox.github.io/issues/new/choos
 # The story arc currently running
 current_arc: "Inter-Arc: Remember the Forgotten"
 
+# The in-world calendar. The Timeline page counts forward from a known date
+# to show the current in-world month, season, year and era.
+calendar:
+  # The known date: on start_date (real life) it was start_month start_year,
+  # in the start_season. start_month: 1 = Janument ... 12 = Decrimar.
+  # start_season: 1 = the first season listed below, 2 = the second, and so on.
+  # To correct the date later, set all four to a day you know.
+  start_date: "2026-10-19"
+  start_month: 2
+  start_year: 751
+  start_season: 1
+  days_per_month: 10.1458   # real days per in-world month (3 in-world years = 1 real year)
+
+  # Each year has two seasons: months 1-6 and months 7-12. The seasons below
+  # take turns in this order, one after another, and then repeat.
+  months_per_season: 6
+  seasons:
+    - name: "Shine"
+      kind: "Spring"
+    - name: "Storm"
+      kind: "Summer"
+    - name: "???"
+      kind: "Fall"
+    - name: "Eclipse"
+      kind: "Winter"
+
+  # Each era lasts 3 in-world years. Add the next era here once it is named.
+  years_per_era: 3
+  eras:
+    - name: "Sun's Rising"
+      abbr: "S.R"
+      start_year: 750
+  unnamed_era: "???"   # shown for eras that are not listed above yet
+
 # Leave these alone unless the site moves to a different address
 url: ""
 baseurl: ""
