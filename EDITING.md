@@ -54,6 +54,20 @@ Tables:
 
 ---
 
+## Player submissions
+
+Players submit characters, theories and lore through forms on GitHub: the **Issues** tab → **New issue**, or the [Submit to the Wiki](/submit/) page. Each submission arrives as an issue labelled `submission` and its type, e.g. `submission:character`.
+
+1. **Review it.** Read the issue. Ask questions or request changes in the comments; the player can edit their submission.
+2. **Approve it.** Add the **approved** label. Within a minute or two, a bot writes the wiki page, downloads any attached picture, and opens a pull request. It comments a link on the issue.
+3. **Publish it.** Open that pull request, check the page, fix anything by editing the file in the pull request, then **Merge**. The issue closes automatically and the page goes live.
+
+To reject a submission, comment why and close the issue. If the bot can't build a page (for example, the picture isn't PNG, JPG, GIF or WebP), it comments on the issue with a link to the error.
+
+**One-time setup:** in the repository's **Settings → Actions → General**, under "Workflow permissions", tick **Allow GitHub Actions to create and approve pull requests**. Without it the bot can't open pull requests.
+
+**Changing the forms:** the fields for every type live in one list, `TYPES` in `.github/scripts/submissions.py`. After editing it, run `python3 .github/scripts/submissions.py forms` and commit the regenerated files in `.github/ISSUE_TEMPLATE/`.
+
 ## Adding a lore entry (a faith, god, nation, place…)
 
 These appear on their section page automatically. You don't need to touch the section page.

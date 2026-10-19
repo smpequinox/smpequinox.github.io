@@ -1,0 +1,50 @@
+# When staff add the "approved" label to a submission issue, write the wiki page
+# and open a pull request for it. Staff review and merge the pull request.
+name: Approved submission
+on:
+  issues:
+    types: [labeled]
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+concurrency:
+  group: submission-${{ github.event.issue.number }}
+jobs:
+  add-to-wiki:
+    if: github.event.label.name == 'approved' && contains(join(github.event.issue.labels.*.name, ','), 'submission:')
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      NUMBER: ${{ github.event.issue.number }}
+      BASE: ${{ github.event.repository.default_branch }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+      - name: Write the wiki page
+        env:
+          ISSUE_JSON: ${{ toJSON(github.event.issue) }}
+        run: |
+          printf '%s' "$ISSUE_JSON" > "$RUNNER_TEMP/issue.json"
+          python3 .github/scripts/submissions.py build "$RUNNER_TEMP/issue.json" > "$RUNNER_TEMP/result.json"
+          cat "$RUNNER_TEMP/result.json"
+      - name: Open a pull request
+        run: |
+          type=$(jq -r .type "$RUNNER_TEMP/result.json")
+          title=$(jq -r .title "$RUNNER_TEMP/result.json")
+          files=$(jq -r '.files[] | "- `" + . + "`"' "$RUNNER_TEMP/result.json")
+          branch="submission/issue-$NUMBER"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$branch"
+          git add -A
+          git commit -m "Add $type: $title" -m "From submission #$NUMBER"
+          git push --force origin "$branch"
+          body=$(printf 'Adds the %s **%s** from #%s.\n\nFiles:\n%s\n\nCheck the page reads well, then merge to publish it.\n\nCloses #%s' "$type" "$title" "$NUMBER" "$files" "$NUMBER")
+          url=$(gh pr view "$branch" --json url -q .url 2>/dev/null || gh pr create --base "$BASE" --head "$branch" --title "Add $type: $title" --body "$body")
+          gh issue comment "$NUMBER" --body "Approved! The wiki page is ready for a final check in $url. It goes live once that pull request is merged."
+      - name: Report a problem
+        if: failure()
+        run: |
+          gh issue comment "$NUMBER" --body "Staff: this submission could not be turned into a wiki page automatically. See the run log: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"

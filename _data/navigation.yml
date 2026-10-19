@@ -12,6 +12,8 @@
       url: "/character-gallery/"
     - title: "Player Guide & FAQ"
       url: "/player-guide/"
+    - title: "Submit to the Wiki"
+      url: "/submit/"
 
 - section: "Discover the world"
   links:
