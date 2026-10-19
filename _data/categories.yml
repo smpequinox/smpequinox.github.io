@@ -27,6 +27,9 @@ theories:
 relics:
   title: "Relics"
   url: "/relics/"
+beastiary:
+  title: "Beastiary"
+  url: "/beastiary/"
 religions:
   title: "Religions & Orders"
   url: "/religions-and-orders/"

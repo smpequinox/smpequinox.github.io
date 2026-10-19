@@ -27,6 +27,8 @@
       url: "/locations-and-landmarks/"
     - title: "Relics"
       url: "/relics/"
+    - title: "Beastiary"
+      url: "/beastiary/"
     - title: "Timeline"
       url: "/timeline/"
     - title: "Theory Gallery"

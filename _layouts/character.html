@@ -19,6 +19,10 @@ layout: page
       {% if page.art_credit %}<div class="facts__row"><dt>Art by</dt><dd>{{ page.art_credit }}</dd></div>{% endif %}
     </dl>
   </div>
+  {% if page.bonds and page.bonds.size > 0 %}
+  <h2 id="bonds">Bonds</h2>
+  {% include bond-tree.html %}
+  {% endif %}
   {% assign body = content | strip %}
   {% if body == "" %}
   <p class="unwritten">This character’s story is still being written.</p>

@@ -1,0 +1,16 @@
+{%- comment -%} Picture cards for the beastiary entries of one kind (include.kind). {%- endcomment -%}
+{%- assign bg_entries = site.lore | where: "category", "beastiary" | where: "kind", include.kind | sort: "title" -%}
+{%- if bg_entries.size > 0 %}
+<ul class="char-grid">
+{%- for b in bg_entries %}
+<li><a class="char-card" href="{{ b.url | relative_url }}">
+<span class="char-card__art{% unless b.image %} char-card__art--blank{% endunless %}">{% if b.image %}<img src="{{ b.image | relative_url }}" alt="" loading="lazy">{% else %}<img src="{{ '/assets/img/emblem.png' | relative_url }}" alt="">{% endif %}</span>
+<span class="char-card__name">{{ b.title }}</span>
+{%- if b.temperament %}<span class="char-card__meta"><span class="status status--{{ b.temperament | downcase }}">{{ b.temperament }}</span></span>{% endif %}
+{%- if b.summary %}<span class="char-card__aff">{{ b.summary }}</span>{% endif %}
+</a></li>
+{%- endfor %}
+</ul>
+{%- else %}
+<div class="empty-state"><img src="{{ '/assets/img/emblem.png' | relative_url }}" alt="" width="44" height="44"><p>{{ include.message }}</p></div>
+{%- endif %}

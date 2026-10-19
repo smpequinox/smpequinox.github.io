@@ -68,6 +68,7 @@ These appear on their section page automatically. You don't need to touch the se
    - **a myth or legend:** `myth.md` (Figures involved, Told by, Era)
    - **an unknown:** `unknown.md` (Also called, First noticed, Seen at, Possibly linked to)
    - **a relic:** `relic.md` (rarity, nature: Cursed or Blessed, wielder, Origin, Type, Powers)
+   - **a creature or unplayable species:** `beastiary.md` (kind, temperament, picture, Habitat, Found in, Diet, Drops, Weaknesses). Upload its picture to `assets/img/beastiary/` first.
    - **a player theory:** `theory.md` (verdict, theorist, About, Evidence)
    - **a religion or order:** `religion.md` (Deity or principle, Followed by)
 2. Go to the `_lore` folder, click **Add file → Create new file**.
@@ -82,6 +83,7 @@ These appear on their section page automatically. You don't need to touch the se
    - `myths`: Deities & Mythology, under "Myths & legends"
    - `unknowns`: Deities & Mythology, under "Unknowns"
    - `relics`: the Relics page, under the heading of its `rarity:` (Awakened, Tempered, Ruler, Sovereign, Paragon, Primordial or Cataclysm Class, always ending in "Class"). Paragon Class and up also show `wielder:`. Add `nature: Cursed` or `nature: Blessed` for a sub tag beside the rarity.
+   - `beastiary`: the Beastiary. Set `kind:` to Animal, Monster or Species to choose its section, and `temperament:` to Passive, Neutral or Hostile.
    - `theories`: the Theory Gallery. Set `verdict:` to Unconfirmed, Confirmed or Debunked to choose its list.
    - `religions`: Religions & Orders
    - `locations`: Locations & Landmarks. Set `direction:` to North, Northeast, East, Southeast, South, Southwest, West or Northwest (one word, capital first letter) to list it under "By region", and `map_x:` / `map_y:` to pin it on the world map.
@@ -114,7 +116,8 @@ Uploading a new map with the same file name keeps all the pins. Re-check them if
 3. Set `image:` to `"/assets/img/characters/aster-vale.png"` and fill in the rest. Delete any lines you don't need.
 4. Set `featured: true` for staff and arc characters to show them under "Featured this arc".
 5. `type: "Staff Character"` also lists them under "Staff characters". Changing `status:` to `"Dead"` moves them from "All characters" to "Dead characters".
-6. Commit. They appear in the Character Gallery automatically.
+6. To draw their **relationship tree**, fill in the `bonds:` list. Each person gets three lines: `name`, `relation` (e.g. "Older brother") and `type` (Family, Ally, Rival, Romance or Other). If the name matches another character's page exactly, it links there and shows their portrait. Bonds are one-way: add the bond to both characters' files if both pages should show it.
+7. Commit. They appear in the Character Gallery automatically.
 
 ## Adding a recent event to the home page gallery
 

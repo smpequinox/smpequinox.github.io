@@ -1,0 +1,40 @@
+{%- comment -%}
+  The relationship tree on a character page. Reads page.bonds: a list of
+  { name, relation, type } where type is Family, Ally, Rival, Romance or Other.
+  Names that match a character page link to it and show its portrait.
+{%- endcomment -%}
+{%- assign bt_types = "Family,Ally,Rival,Romance,Other" | split: "," -%}
+{%- assign bt_labels = "Family,Allies,Rivals,Romance,Other bonds" | split: "," -%}
+{%- assign bt_count = 0 -%}
+{%- for bt_type in bt_types %}{% assign bt_group = page.bonds | where: "type", bt_type %}{% if bt_group.size > 0 %}{% assign bt_count = bt_count | plus: 1 %}{% endif %}{% endfor -%}
+<section class="bond-tree{% if bt_count > 3 %} bond-tree--stacked{% endif %}" aria-label="Relationships of {{ page.title }}">
+<ul class="bond-tree__level">
+<li>
+  <span class="bond-node bond-node--root">
+    <span class="bond-node__art">{% if page.image %}<img src="{{ page.image | relative_url }}" alt="">{% else %}<img src="{{ '/assets/img/emblem.png' | relative_url }}" alt="">{% endif %}</span>
+    <span class="bond-node__name">{{ page.title }}</span>
+  </span>
+  <ul class="bond-tree__level">
+  {%- for bt_type in bt_types %}
+    {%- assign bt_group = page.bonds | where: "type", bt_type -%}
+    {%- if bt_group.size > 0 %}
+    <li class="bond-group bond-group--{{ bt_type | downcase }}">
+      <span class="bond-group__label">{{ bt_labels[forloop.index0] }}</span>
+      <ul class="bond-group__people">
+      {%- for bond in bt_group %}
+        {%- assign bt_char = site.characters | where: "title", bond.name | first -%}
+        <li>
+          {%- if bt_char and bt_char.url != page.url %}<a class="bond-node" href="{{ bt_char.url | relative_url }}">{% else %}<span class="bond-node">{% endif -%}
+          <span class="bond-node__art">{% if bt_char.image %}<img src="{{ bt_char.image | relative_url }}" alt="" loading="lazy">{% else %}<img src="{{ '/assets/img/emblem.png' | relative_url }}" alt="">{% endif %}</span>
+          <span class="bond-node__text"><span class="bond-node__name">{{ bond.name }}</span>{% if bond.relation %}<span class="bond-node__relation">{{ bond.relation }}</span>{% endif %}{% if bt_char.status == "Dead" %}<span class="bond-node__relation">Deceased</span>{% endif %}</span>
+          {%- if bt_char and bt_char.url != page.url %}</a>{% else %}</span>{% endif -%}
+        </li>
+      {%- endfor %}
+      </ul>
+    </li>
+    {%- endif %}
+  {%- endfor %}
+  </ul>
+</li>
+</ul>
+</section>
