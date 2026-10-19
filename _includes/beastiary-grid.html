@@ -1,5 +1,5 @@
-{%- comment -%} Picture cards for the bestiary entries of one kind (include.kind). {%- endcomment -%}
-{%- assign bg_entries = site.lore | where: "category", "bestiary" | where: "kind", include.kind | sort: "title" -%}
+{%- comment -%} Picture cards for the beastiary entries of one kind (include.kind). {%- endcomment -%}
+{%- assign bg_entries = site.lore | where: "category", "beastiary" | where: "kind", include.kind | sort: "title" -%}
 {%- if bg_entries.size > 0 %}
 <ul class="char-grid">
 {%- for b in bg_entries %}
