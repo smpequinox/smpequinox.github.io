@@ -73,6 +73,13 @@ body:
   - type: textarea
     id: f9
     attributes:
+      label: "Ranks"
+      description: "The hierarchy, one rank per line, highest first: Rank: holder, holder\nLeave the holders empty if a rank is vacant.\nExample:\nKing: Aldric Vale\nPrince: Swobble\nKnights: Name, Name"
+    validations:
+      required: false
+  - type: textarea
+    id: f10
+    attributes:
       label: "Description"
       description: "History, how to join, anything public"
     validations:

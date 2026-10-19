@@ -25,6 +25,7 @@ import urllib.request
 #   body    - the page text
 #   image   - a picture the player attaches; downloaded into assets/img/<folder>/
 #   bonds   - character bonds, one per line: Name | Relation | Type
+#   ranks   - a hierarchy, one rank per line, highest first: Rank: holder, holder
 # Inputs: "input" (one line), "textarea" (several lines), or a list of choices (dropdown).
 
 LORE_STATUS = {"status": "Public"}
@@ -83,6 +84,7 @@ TYPES = [
         ("Faith", "fact", "Faith", "input", False, ""),
         ("Allies", "fact", "Allies", "input", False, "Separated by commas"),
         ("Rivals", "fact", "Rivals", "input", False, "Separated by commas"),
+        ("Ranks", "ranks", "ranks", "textarea", False, "The hierarchy, one rank per line, highest first: Rank: holder, holder\nLeave the holders empty if a rank is vacant.\nExample:\nKing: Aldric Vale\nPrince: Swobble\nKnights: Name, Name"),
         ("Description", "body", "body", "textarea", False, "History, culture, anything public"),
      ]},
     {"id": "faction", "name": "Faction", "order": 5,
@@ -98,6 +100,7 @@ TYPES = [
         ("Goals", "fact", "Goals", "input", False, "What it wants, publicly"),
         ("Allies", "fact", "Allies", "input", False, "Separated by commas"),
         ("Rivals", "fact", "Rivals", "input", False, "Separated by commas"),
+        ("Ranks", "ranks", "ranks", "textarea", False, "The hierarchy, one rank per line, highest first: Rank: holder, holder\nLeave the holders empty if a rank is vacant.\nExample:\nKing: Aldric Vale\nPrince: Swobble\nKnights: Name, Name"),
         ("Description", "body", "body", "textarea", False, "History, how to join, anything public"),
      ]},
     {"id": "house", "name": "Noble house", "order": 6,
@@ -114,6 +117,7 @@ TYPES = [
         ("Faith", "fact", "Faith", "input", False, ""),
         ("Allies", "fact", "Allies", "input", False, "Separated by commas"),
         ("Rivals", "fact", "Rivals", "input", False, "Separated by commas"),
+        ("Ranks", "ranks", "ranks", "textarea", False, "The hierarchy, one rank per line, highest first: Rank: holder, holder\nLeave the holders empty if a rank is vacant.\nExample:\nKing: Aldric Vale\nPrince: Swobble\nKnights: Name, Name"),
         ("Description", "body", "body", "textarea", False, "History, notable members, anything public"),
      ]},
     {"id": "religion", "name": "Religion or order", "order": 7,
@@ -124,6 +128,7 @@ TYPES = [
         ("Summary", "summary", "summary", "input", True, "One line a new player should understand"),
         ("Deity or principle", "fact", "Deity or principle", "input", False, "e.g. The Cycle"),
         ("Followed by", "fact", "Followed by", "input", False, "Nations or factions, separated by commas"),
+        ("Ranks", "ranks", "ranks", "textarea", False, "The hierarchy, one rank per line, highest first: Rank: holder, holder\nLeave the holders empty if a rank is vacant.\nExample:\nKing: Aldric Vale\nPrince: Swobble\nKnights: Name, Name"),
         ("Description", "body", "body", "textarea", False, "Beliefs, practices, anything public"),
      ]},
     {"id": "deity", "name": "God", "order": 8,
@@ -281,12 +286,17 @@ def parse_issue_body(body):
 
 def clean(text):
     """Keep submitted text as plain text: no HTML and no Liquid on the published site."""
-    text = text.replace("<", "&lt;").replace(">", "&gt;")
+    text = text.replace("<", "&lt;")
     return text.replace("{{", "&#123;&#123;").replace("{%", "&#123;%")
 
 
 def one_line(text):
     return clean(" ".join(text.split()))
+
+
+def plain_name(text):
+    """A name without markdown emphasis, e.g. "**The Forest**" -> "The Forest"."""
+    return re.sub(r"^[*_]+|[*_]+$", "", one_line(text)).strip()
 
 
 def slugify(text):
@@ -347,7 +357,7 @@ def build(issue, root="."):
 
     front = [f"title: {q(title)}"]
     front += [f"{k}: {q(v)}" for k, v in t["fixed"].items()]
-    facts, bonds, body, written = [], [], "", [out]
+    facts, bonds, ranks, body, written = [], [], [], "", [out]
     for label, kind, key, inp, required, hint in t["fields"]:
         raw = answers.get(label, "").strip()
         if kind == "title" or raw in EMPTY_ANSWERS:
@@ -368,9 +378,18 @@ def build(issue, root="."):
                 saved = download_image(url, os.path.splitext(unique_path(img_dir, slug, ""))[0])
                 written.append(saved)
                 front.append(f"image: {q('/' + os.path.relpath(saved, root).replace(os.sep, '/'))}")
+        elif kind == "ranks":
+            for line in raw.split("\n"):
+                rank, _, holders = line.partition(":")
+                rank = plain_name(rank.lstrip("-* "))
+                if not rank:
+                    continue
+                names = [plain_name(n) for n in holders.split(",") if plain_name(n)]
+                ranks += [f"  - rank: {q(rank)}", f"    holders: {q(', '.join(names))}"]
         elif kind == "bonds":
             for line in raw.split("\n"):
                 parts = [one_line(p) for p in line.split("|")]
+                parts[0] = plain_name(parts[0])
                 if not parts[0]:
                     continue
                 kind_of = parts[2].title() if len(parts) > 2 and parts[2] else "Other"
@@ -382,6 +401,8 @@ def build(issue, root="."):
                 bonds += [f"    type: {kind_of}"]
     if facts:
         front += ["facts:"] + facts
+    if ranks:
+        front += ["ranks:"] + ranks
     if bonds:
         front += ["bonds:"] + bonds
     front.append(f"# Submitted in issue #{issue.get('number', '?')}")

@@ -10,7 +10,7 @@ player: "ArcadianAtlas"
 image: "/assets/img/characters/ezra-fairfax.png"
 art_credit: "Haru Seiran"
 bonds:
-  - name: "**The Forest**"
+  - name: "The Forest"
     type: Other
   - name: "Swobble"
     relation: "Younger Brother"
@@ -21,7 +21,7 @@ bonds:
   - name: "Uetel"
     relation: "Forest Member"
     type: Other
-  - name: "**Principality of Hesperos**"
+  - name: "Principality of Hesperos"
     type: Other
   - name: "Neriadra Cadence"
     relation: "Friend"
@@ -29,7 +29,7 @@ bonds:
   - name: "Livia Argyrum"
     relation: "Friend"
     type: Other
-  - name: "**Kingdom of Ashmount**"
+  - name: "Kingdom of Ashmount"
     type: Other
   - name: "Matthis Blackfyre"
     relation: "Close Ally"
@@ -40,7 +40,7 @@ bonds:
   - name: "Brutas"
     relation: "Swobble's Friend"
     type: Ally
-  - name: "**Solari**"
+  - name: "Solari"
     type: Other
   - name: "Bo de Cni'Daria"
     relation: "Ex-Pope"
@@ -48,7 +48,7 @@ bonds:
   - name: "Shinsei de Cni'Daria"
     relation: "Mentor"
     type: Other
-  - name: "**Bailmont**"
+  - name: "Bailmont"
     type: Other
   - name: "Eychon Rivenheart"
     relation: "Friend"

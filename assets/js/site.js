@@ -261,6 +261,59 @@
     window.addEventListener("resize", function () { applyView(false); });
   }
 
+  /* ---------- Link names of wiki pages mentioned anywhere in the text ---------- */
+  // e.g. "Prince of Arbitus" links "Arbitus". Info boxes, trees and tables link every
+  // mention; ordinary page text links only the first mention of each page.
+  var indexEl = document.getElementById("wiki-index");
+  var mainEl = document.getElementById("main");
+  if (indexEl && mainEl) {
+    try {
+      var here = location.pathname.replace(/index\.html$/, "");
+      var pages = JSON.parse(indexEl.textContent).filter(function (p) { return p && p.u !== here; });
+      pages.sort(function (a, b) { return b.t.length - a.t.length; });
+      var byTitle = {};
+      pages.forEach(function (p) { byTitle[p.t] = p.u; });
+      var escapeRe = function (s) { return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); };
+      if (pages.length) {
+        var nameRe = new RegExp("(^|[^\\p{L}\\p{N}_])(" + pages.map(function (p) { return escapeRe(p.t); }).join("|") + ")(?![\\p{L}\\p{N}_])", "gu");
+        var skip = "a, button, h1, h2, h3, h4, h5, h6, code, pre, script, style, .calendar-now, .world-map, .toc, [data-no-autolink]";
+        var everyMention = ".facts, .bond-tree, .rank-tree, table";
+        var linkedOnce = {};
+        mainEl.querySelectorAll("a[href]").forEach(function (a) { linkedOnce[a.getAttribute("href")] = true; });
+        var walker = document.createTreeWalker(mainEl, NodeFilter.SHOW_TEXT, {
+          acceptNode: function (n) {
+            if (!n.nodeValue.trim() || !n.parentElement || n.parentElement.closest(skip)) return NodeFilter.FILTER_REJECT;
+            return NodeFilter.FILTER_ACCEPT;
+          }
+        });
+        var textNodes = [];
+        while (walker.nextNode()) textNodes.push(walker.currentNode);
+        textNodes.forEach(function (node) {
+          var text = node.nodeValue, last = 0, m, frag = null;
+          var all = !!node.parentElement.closest(everyMention);
+          nameRe.lastIndex = 0;
+          while ((m = nameRe.exec(text))) {
+            var url = byTitle[m[2]];
+            if (!all && linkedOnce[url]) continue;
+            var start = m.index + m[1].length;
+            frag = frag || document.createDocumentFragment();
+            frag.appendChild(document.createTextNode(text.slice(last, start)));
+            var a = document.createElement("a");
+            a.href = url;
+            a.textContent = m[2];
+            frag.appendChild(a);
+            last = start + m[2].length;
+            linkedOnce[url] = true;
+          }
+          if (frag) {
+            frag.appendChild(document.createTextNode(text.slice(last)));
+            node.parentNode.replaceChild(frag, node);
+          }
+        });
+      }
+    } catch (err) { /* names stay as plain text */ }
+  }
+
   /* ---------- Calendar: count in-world time forward from the known date in _config.yml ---------- */
   var calNow = document.querySelector("[data-calendar-now]");
   var calConfig = document.querySelector("[data-calendar-config]");

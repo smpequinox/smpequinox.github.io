@@ -107,7 +107,9 @@ These appear on their section page automatically. You don't need to touch the se
 
 **Every line between the `---` lines must be `name: value`.** A line with only a value (like `"Sun mother"` on its own) breaks the settings, and the entry silently won't appear anywhere. Extra details go under `facts:`, indented two spaces, e.g. `  Titles: "The Sun Mother"`.
 
-**Facts link themselves.** If a fact names another entry exactly as its title is spelled (e.g. `Worshipped by: "The Sun Church"`), it becomes a link to that page. List several names separated by a comma and a space. This also works for a character's `affiliation:` and `whereabouts:`, and character names link to their gallery page.
+**Names link themselves.** Any time the name of a wiki page appears in an info box, tree or page text, exactly as its title is spelled (capitals included), it becomes a link to that page. This works inside longer text too: "Prince of Arbitus" links "Arbitus". Info boxes and trees link every mention; page text links the first mention of each page. Names shorter than 4 letters are not linked.
+
+**Hierarchies.** Nation, faction, noble house and religion templates have a `ranks:` list. Write the ranks from highest to lowest, each with its holders separated by commas (or `holders: ""` if vacant). The page shows them as a tree under "Hierarchy".
 
 **Need a folder that doesn't exist yet?** GitHub can't hold empty folders. In **Add file → Create new file**, type the folder name and a slash into the file name box (e.g. `_characters/` then `aster-vale.md`) and GitHub creates the folder for you.
 

@@ -22,6 +22,10 @@ layout: page
   </dl>
   {% if page.image %}</div>{% endif %}
   {% endif %}
+  {% if page.ranks and page.ranks.size > 0 %}
+  <h2 id="hierarchy">Hierarchy</h2>
+  {% include rank-tree.html %}
+  {% endif %}
   {% assign body = content | strip %}
   {% if body == "" %}
   <p class="unwritten">This entry is still being written. More will be recorded as the story reveals it.</p>
