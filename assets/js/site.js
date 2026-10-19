@@ -262,6 +262,17 @@
     }, true);
     window.addEventListener("resize", function () { applyView(false); });
 
+    /* ---------- Touch: the first tap on a pin shows its name, the second opens its page ---------- */
+    var lastPointer = "mouse";
+    mapCanvas.addEventListener("pointerdown", function (e) { lastPointer = e.pointerType; }, true);
+    mapStage.addEventListener("click", function (e) {
+      var pin = e.target.closest(".world-map__pin");
+      mapStage.querySelectorAll(".world-map__pin.is-active").forEach(function (p) { if (p !== pin) p.classList.remove("is-active"); });
+      if (!pin || editingPins || lastPointer !== "touch" || pin.classList.contains("is-active")) return;
+      e.preventDefault();
+      pin.classList.add("is-active");
+    });
+
     /* ---------- Pin editing mode (open the page with ?edit-pins) ---------- */
     var pinEditor = document.querySelector("[data-pin-editor]");
     if (editingPins && pinEditor) {

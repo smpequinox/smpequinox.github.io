@@ -550,6 +550,14 @@ button { font: inherit; color: inherit; }
 .prose .world-map__pin:hover, .prose .world-map__pin:focus-visible { z-index: 2; }
 .world-map__pin:hover .world-map__dot, .world-map__pin:focus-visible .world-map__dot { transform: scale(1.25); }
 .world-map__pin:hover .world-map__label, .world-map__pin:focus-visible .world-map__label { color: var(--gilt); border-color: rgba(239, 205, 151, 0.45); }
+/* the map already has names on it, so pins are dots; a pin's name shows on hover,
+   keyboard focus or a first tap, and always while editing pins */
+.world-map__label { opacity: 0; visibility: hidden; transition: opacity .15s, visibility 0s .15s; }
+.world-map__pin:hover .world-map__label, .world-map__pin:focus-visible .world-map__label,
+.world-map__pin.is-active .world-map__label, .world-map__canvas.is-editing-pins .world-map__label {
+  opacity: 1; visibility: visible; transition: opacity .15s;
+}
+.prose .world-map__pin.is-active { z-index: 2; }
 .world-map__coords {
   position: absolute; left: .6rem; bottom: .6rem; margin: 0; padding: .3rem .6rem; border-radius: 6px;
   font-size: .9rem; color: var(--ink); background: rgba(15, 10, 32, 0.9); border: 1px solid var(--line); pointer-events: none; z-index: 3;
