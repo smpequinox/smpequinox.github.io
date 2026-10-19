@@ -261,6 +261,21 @@
     window.addEventListener("resize", function () { applyView(false); });
   }
 
+  /* ---------- Calendar: highlight the in-world month for today's date ---------- */
+  var calendar = document.querySelector("[data-calendar]");
+  if (calendar) {
+    var row = calendar.querySelector('[data-month="' + (new Date().getMonth() + 1) + '"]');
+    var now = document.querySelector("[data-calendar-now]");
+    if (row) {
+      row.classList.add("is-current");
+      if (now) {
+        now.innerHTML = "It is currently <strong></strong> in Equinox.";
+        now.querySelector("strong").textContent = row.querySelector(".calendar__name").textContent;
+        now.hidden = false;
+      }
+    }
+  }
+
   /* ---------- Event viewer (lightbox) ---------- */
   var dialog = document.querySelector("[data-lightbox-dialog]");
   if (dialog && typeof dialog.showModal === "function") {

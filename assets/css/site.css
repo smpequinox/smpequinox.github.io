@@ -741,6 +741,11 @@ button { font: inherit; color: inherit; }
 .chronicle__summary { margin: .3rem 0 0 !important; color: var(--ink-2); }
 .prose .chronicle > li.chronicle__current::before { width: 16px; height: 16px; left: calc(-1.5rem - 8px); background: var(--gilt); }
 .chronicle__current .chronicle__event { color: var(--gilt); }
+.calendar td:first-child, .calendar th:first-child { width: 3rem; color: var(--ink-3); }
+.calendar__name { font-family: var(--display); color: var(--gilt); }
+.calendar tr.is-current td { background: rgba(239, 205, 151, 0.08); }
+.calendar tr.is-current td:first-child { box-shadow: inset 3px 0 0 var(--gilt); }
+.calendar__now { color: var(--ink-2); }
 .chronicle__date .status { font-style: normal; font-size: .75rem; padding: .2rem .5rem; margin-left: .4rem; vertical-align: .1em; }
 
 /* relationship tree on character pages */
