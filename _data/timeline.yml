@@ -11,3 +11,20 @@
 #   event: "The Fall of the Eastern Gate"
 #   summary: "Raiders broke the eastern wall during the harvest festival."
 #   link: "/locations-and-landmarks/"
+#   current: true marks the age the story is in now (optional)
+
+- date: "Epilogue"
+  event: "The First Omen"
+
+- date: "Inter-Arc"
+  event: "Whispers of Divinity"
+
+- date: "Arc 1"
+  event: "Bleeding Drums"
+
+- date: "Inter-Arc"
+  event: "Remember the Forgotten"
+  current: true
+
+- date: "Arc 2"
+  event: "???"

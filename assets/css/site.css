@@ -739,6 +739,9 @@ button { font: inherit; color: inherit; }
 .chronicle__date { margin: 0 !important; color: var(--ember); font-style: italic; font-size: 1rem; }
 .chronicle__event { margin: .1rem 0 0 !important; font-family: var(--display); font-size: 1.2rem; }
 .chronicle__summary { margin: .3rem 0 0 !important; color: var(--ink-2); }
+.prose .chronicle > li.chronicle__current::before { width: 16px; height: 16px; left: calc(-1.5rem - 8px); background: var(--gilt); }
+.chronicle__current .chronicle__event { color: var(--gilt); }
+.chronicle__date .status { font-style: normal; font-size: .75rem; padding: .2rem .5rem; margin-left: .4rem; vertical-align: .1em; }
 
 /* relationship tree on character pages */
 .bond-tree { overflow-x: auto; margin: 0 0 2rem; padding: .5rem 0 1rem; --bond-line: var(--line); }
