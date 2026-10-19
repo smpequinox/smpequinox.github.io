@@ -15,6 +15,8 @@ application_url: "https://docs.google.com/forms/d/e/1FAIpQLSfwPFXMHKCIY7TYrILYH1
 discord_url: "https://discord.gg/gAXSsrGtDv"
 # Where players submit characters, theories and lore (GitHub issue forms)
 submit_url: "https://github.com/smpequinox/smpequinox.github.io/issues/new/choose"
+# The repository this wiki lives in (used for "Edit file" links)
+repository_url: "https://github.com/smpequinox/smpequinox.github.io"
 
 # The story arc currently running
 current_arc: "Inter-Arc: Remember the Forgotten"

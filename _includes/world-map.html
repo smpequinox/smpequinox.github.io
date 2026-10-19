@@ -10,7 +10,7 @@
     <div class="world-map__stage" data-world-map-stage>
     <img class="world-map__img" src="{{ include.image | relative_url }}" alt="Map of the world" draggable="false">
     {%- for place in wm_places %}{% if place.map_x and place.map_y %}
-    {% assign wm_x = place.map_x | plus: 0 %}<a class="world-map__pin{% if wm_x > 65 %} world-map__pin--left{% endif %}" href="{{ place.url | relative_url }}" style="left: {{ place.map_x }}%; top: {{ place.map_y }}%;"><span class="world-map__dot" aria-hidden="true"></span><span class="world-map__label">{{ place.title }}</span></a>
+    {% assign wm_x = place.map_x | plus: 0 %}<a class="world-map__pin{% if wm_x > 65 %} world-map__pin--left{% endif %}" href="{{ place.url | relative_url }}" data-pin="{{ place.path }}" style="left: {{ place.map_x }}%; top: {{ place.map_y }}%;"><span class="world-map__dot" aria-hidden="true"></span><span class="world-map__label">{{ place.title }}</span></a>
     {%- endif %}{% endfor %}
     </div>
     <div class="world-map__zoom" data-world-map-zoom hidden>
@@ -20,7 +20,20 @@
     </div>
     <p class="world-map__coords" data-world-map-coords hidden></p>
   </div>
-  <figcaption>Click a name to open its page. Zoom with the buttons, the mouse wheel or a pinch, and drag to move around. Click anywhere else on the map to see that spot's map coordinates.</figcaption>
+  {%- comment -%} Pin editing mode: open the page with ?edit-pins at the end of its address. {%- endcomment %}
+  <div class="pin-editor" data-pin-editor data-repo="{{ site.repository_url }}" hidden>
+    <p class="pin-editor__title">Pin editing mode</p>
+    <p>Drag a pin to move it. To pin a place that isn't on the map yet, choose it here, then click its spot on the map.</p>
+    <p><select data-pin-new aria-label="Place to pin">
+      <option value="">Choose a place to pin…</option>
+      {%- for place in wm_places %}{% unless place.map_x and place.map_y %}
+      <option value="{{ place.path }}" data-url="{{ place.url | relative_url }}">{{ place.title }}</option>
+      {%- endunless %}{% endfor %}
+    </select></p>
+    <div data-pin-changes><p class="pin-editor__empty">No pins moved yet.</p></div>
+    <p class="pin-editor__note">Nothing is saved automatically. For each place you moved, click <strong>Edit file</strong>, replace its <code>map_x</code> and <code>map_y</code> lines with the copied ones (or add them), and commit.</p>
+  </div>
+  <figcaption>Point at or tap a dot to see its name, and click it to open its page. Zoom with the buttons, the mouse wheel or a pinch, and drag to move around. Click anywhere else on the map to see that spot's map coordinates.</figcaption>
 </figure>
 {%- else %}
 <div class="empty-state"><img src="{{ '/assets/img/emblem.png' | relative_url }}" alt="" width="44" height="44"><p>The world map is still being drawn.</p></div>

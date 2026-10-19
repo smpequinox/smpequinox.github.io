@@ -127,6 +127,10 @@ The map on Locations & Landmarks is `assets/img/world-map.webp`.
 2. To pin a location, open the Locations & Landmarks page and click its spot on the map. Zoom in first for a more exact spot; the numbers stay correct at any zoom. The bottom corner shows `map_x` and `map_y` for that spot.
 3. Put those two numbers in the location's file (`map_x: 42.5` and `map_y: 18.3`) and commit. Its name now appears on the map and links to its page.
 
+**Pins are dots.** The map image already has place names written on it, so each pin is a small dot; its name appears when you point at it (or tap it once on a phone, then tap again to open the page). Place a pin right on the place's name or spot on the map.
+
+**Pin editing mode:** open the Locations & Landmarks page with `?edit-pins` at the end of its address (`https://smpequinox.github.io/locations-and-landmarks/?edit-pins`). Pins turn orange and can be dragged; to pin a place that has no pin yet, choose it from the list under the map, then click its spot. A list shows each moved place with its new `map_x` / `map_y`, a **Copy** button and an **Edit file** link: paste the lines into that file and commit. Nothing saves until you do.
+
 Uploading a new map with the same file name keeps all the pins. Re-check them if the new map's shape or borders changed.
 
 ## Adding a character

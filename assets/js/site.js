@@ -208,8 +208,10 @@
       zoomAt(Math.exp(-e.deltaY * 0.0015), p.x, p.y, false);
     }, { passive: false });
 
+    var editingPins = /[?&]edit-pins\b/.test(location.search);
     mapCanvas.addEventListener("pointerdown", function (e) {
       if (e.target.closest("[data-world-map-zoom]")) return;
+      if (editingPins && e.target.closest("[data-pin]")) return;
       pointers[e.pointerId] = localPoint(e);
       var ids = Object.keys(pointers);
       if (ids.length === 1) {
@@ -259,6 +261,111 @@
       mapCoords.hidden = false;
     }, true);
     window.addEventListener("resize", function () { applyView(false); });
+
+    /* ---------- Touch: the first tap on a pin shows its name, the second opens its page ---------- */
+    var lastPointer = "mouse";
+    mapCanvas.addEventListener("pointerdown", function (e) { lastPointer = e.pointerType; }, true);
+    mapStage.addEventListener("click", function (e) {
+      var pin = e.target.closest(".world-map__pin");
+      mapStage.querySelectorAll(".world-map__pin.is-active").forEach(function (p) { if (p !== pin) p.classList.remove("is-active"); });
+      if (!pin || editingPins || lastPointer !== "touch" || pin.classList.contains("is-active")) return;
+      e.preventDefault();
+      pin.classList.add("is-active");
+    });
+
+    /* ---------- Pin editing mode (open the page with ?edit-pins) ---------- */
+    var pinEditor = document.querySelector("[data-pin-editor]");
+    if (editingPins && pinEditor) {
+      pinEditor.hidden = false;
+      mapCanvas.classList.add("is-editing-pins");
+      var newSelect = pinEditor.querySelector("[data-pin-new]");
+      var changeList = pinEditor.querySelector("[data-pin-changes]");
+      var repo = pinEditor.dataset.repo;
+      var changes = {};
+      var percentAt = function (e) {
+        var box = mapStage.getBoundingClientRect();
+        var clamp = function (v) { return Math.min(100, Math.max(0, v)); };
+        return {
+          x: Math.round(clamp((e.clientX - box.left) / box.width * 100) * 10) / 10,
+          y: Math.round(clamp((e.clientY - box.top) / box.height * 100) * 10) / 10
+        };
+      };
+      var showChanges = function () {
+        var paths = Object.keys(changes);
+        changeList.textContent = "";
+        if (!paths.length) {
+          changeList.innerHTML = '<p class="pin-editor__empty">No pins moved yet.</p>';
+          return;
+        }
+        paths.forEach(function (path) {
+          var c = changes[path];
+          var lines = "map_x: " + c.x + "\nmap_y: " + c.y;
+          var row = document.createElement("div");
+          row.className = "pin-editor__change";
+          var name = document.createElement("strong");
+          name.textContent = c.title;
+          var code = document.createElement("pre");
+          code.textContent = lines;
+          var copy = document.createElement("button");
+          copy.type = "button";
+          copy.textContent = "Copy";
+          copy.addEventListener("click", function () {
+            if (navigator.clipboard) navigator.clipboard.writeText(lines).then(function () { copy.textContent = "Copied"; });
+          });
+          var edit = document.createElement("a");
+          edit.href = repo + "/edit/main/" + path;
+          edit.target = "_blank";
+          edit.rel = "noopener";
+          edit.textContent = "Edit file";
+          row.append(name, code, copy, edit);
+          changeList.appendChild(row);
+        });
+      };
+      var record = function (pin, pos) {
+        pin.style.left = pos.x + "%";
+        pin.style.top = pos.y + "%";
+        pin.classList.toggle("world-map__pin--left", pos.x > 65);
+        changes[pin.dataset.pin] = { title: pin.querySelector(".world-map__label").textContent, x: pos.x, y: pos.y };
+      };
+      var makeDraggable = function (pin) {
+        pin.addEventListener("click", function (e) { e.preventDefault(); });
+        pin.addEventListener("pointerdown", function (e) {
+          e.preventDefault();
+          pin.setPointerCapture(e.pointerId);
+          pin.classList.add("is-moving");
+          var move = function (ev) { record(pin, percentAt(ev)); };
+          var stop = function (ev) {
+            record(pin, percentAt(ev));
+            pin.classList.remove("is-moving");
+            pin.removeEventListener("pointermove", move);
+            pin.removeEventListener("pointerup", stop);
+            pin.removeEventListener("pointercancel", stop);
+            showChanges();
+          };
+          pin.addEventListener("pointermove", move);
+          pin.addEventListener("pointerup", stop);
+          pin.addEventListener("pointercancel", stop);
+        });
+      };
+      mapStage.querySelectorAll("[data-pin]").forEach(makeDraggable);
+      // with a place chosen, a click on the map pins it there
+      mapCanvas.addEventListener("click", function (e) {
+        if (dragged || !newSelect.value || e.target.closest("a, [data-world-map-zoom]")) return;
+        var option = newSelect.options[newSelect.selectedIndex];
+        var pin = document.createElement("a");
+        pin.className = "world-map__pin";
+        pin.href = option.dataset.url;
+        pin.dataset.pin = option.value;
+        pin.innerHTML = '<span class="world-map__dot" aria-hidden="true"></span><span class="world-map__label"></span>';
+        pin.querySelector(".world-map__label").textContent = option.textContent;
+        mapStage.appendChild(pin);
+        makeDraggable(pin);
+        record(pin, percentAt(e));
+        option.remove();
+        newSelect.value = "";
+        showChanges();
+      });
+    }
   }
 
   /* ---------- Link names of wiki pages mentioned anywhere in the text ---------- */

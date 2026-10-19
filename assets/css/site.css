@@ -550,6 +550,14 @@ button { font: inherit; color: inherit; }
 .prose .world-map__pin:hover, .prose .world-map__pin:focus-visible { z-index: 2; }
 .world-map__pin:hover .world-map__dot, .world-map__pin:focus-visible .world-map__dot { transform: scale(1.25); }
 .world-map__pin:hover .world-map__label, .world-map__pin:focus-visible .world-map__label { color: var(--gilt); border-color: rgba(239, 205, 151, 0.45); }
+/* the map already has names on it, so pins are dots; a pin's name shows on hover,
+   keyboard focus or a first tap, and always while editing pins */
+.world-map__label { opacity: 0; visibility: hidden; transition: opacity .15s, visibility 0s .15s; }
+.world-map__pin:hover .world-map__label, .world-map__pin:focus-visible .world-map__label,
+.world-map__pin.is-active .world-map__label, .world-map__canvas.is-editing-pins .world-map__label {
+  opacity: 1; visibility: visible; transition: opacity .15s;
+}
+.prose .world-map__pin.is-active { z-index: 2; }
 .world-map__coords {
   position: absolute; left: .6rem; bottom: .6rem; margin: 0; padding: .3rem .6rem; border-radius: 6px;
   font-size: .9rem; color: var(--ink); background: rgba(15, 10, 32, 0.9); border: 1px solid var(--line); pointer-events: none; z-index: 3;
@@ -865,3 +873,23 @@ button { font: inherit; color: inherit; }
 .realm-group--houses { --bond-color: #b996f2; }
 .realm-group--faiths { --bond-color: #8fc49a; }
 .realm-group--people { --bond-color: #f0a3b1; }
+
+/* pin editing mode on the world map (?edit-pins) */
+.world-map__canvas.is-editing-pins .world-map__pin { cursor: grab; touch-action: none; }
+.world-map__canvas.is-editing-pins .world-map__pin.is-moving { cursor: grabbing; z-index: 4; }
+.world-map__canvas.is-editing-pins .world-map__dot { background: var(--ember); }
+.pin-editor {
+  margin-top: 1rem; padding: 1rem 1.2rem; border-radius: 12px;
+  background: var(--night-2); border: 1px dashed var(--ember);
+}
+.prose .pin-editor p { margin: 0 0 .6rem; }
+.pin-editor__title { font-family: var(--display); font-size: 1.15rem; color: var(--ember); }
+.pin-editor select { font: inherit; padding: .35rem .5rem; border-radius: 8px; background: var(--night); color: var(--ink); border: 1px solid var(--line); max-width: 100%; }
+.pin-editor__empty, .pin-editor__note { color: var(--ink-3); font-size: .95rem; }
+.pin-editor__change {
+  display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: .3rem .8rem;
+  padding: .6rem 0; border-top: 1px solid var(--line-soft);
+}
+.pin-editor__change strong { grid-column: 1 / -1; font-family: var(--display); font-weight: normal; color: var(--gilt); }
+.prose .pin-editor__change pre { margin: 0; padding: .3rem .6rem; font-size: .9rem; background: var(--night); border-radius: 6px; }
+.pin-editor__change button { font: inherit; font-size: .9rem; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; color: var(--night); background: var(--gilt); border: 0; }
