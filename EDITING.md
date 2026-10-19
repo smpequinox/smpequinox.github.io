@@ -68,6 +68,7 @@ These appear on their section page automatically. You don't need to touch the se
    - **a myth or legend:** `myth.md` (Figures involved, Told by, Era)
    - **an unknown:** `unknown.md` (Also called, First noticed, Seen at, Possibly linked to)
    - **a relic:** `relic.md` (rarity, nature: Cursed or Blessed, wielder, Origin, Type, Powers)
+   - **a creature or unplayable species:** `bestiary.md` (kind, temperament, picture, Habitat, Found in, Diet, Drops, Weaknesses). Upload its picture to `assets/img/bestiary/` first.
    - **a player theory:** `theory.md` (verdict, theorist, About, Evidence)
    - **a religion or order:** `religion.md` (Deity or principle, Followed by)
 2. Go to the `_lore` folder, click **Add file → Create new file**.
@@ -82,6 +83,7 @@ These appear on their section page automatically. You don't need to touch the se
    - `myths`: Deities & Mythology, under "Myths & legends"
    - `unknowns`: Deities & Mythology, under "Unknowns"
    - `relics`: the Relics page, under the heading of its `rarity:` (Awakened, Tempered, Ruler, Sovereign, Paragon, Primordial or Cataclysm Class, always ending in "Class"). Paragon Class and up also show `wielder:`. Add `nature: Cursed` or `nature: Blessed` for a sub tag beside the rarity.
+   - `bestiary`: the Bestiary. Set `kind:` to Animal, Monster or Species to choose its section, and `temperament:` to Passive, Neutral or Hostile.
    - `theories`: the Theory Gallery. Set `verdict:` to Unconfirmed, Confirmed or Debunked to choose its list.
    - `religions`: Religions & Orders
    - `locations`: Locations & Landmarks. Set `direction:` to North, Northeast, East, Southeast, South, Southwest, West or Northwest (one word, capital first letter) to list it under "By region", and `map_x:` / `map_y:` to pin it on the world map.

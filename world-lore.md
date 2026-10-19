@@ -13,6 +13,7 @@ description: "The world, as it is remembered. This is the public canon: the hist
 <li><a href="{{ '/religions-and-orders/' | relative_url }}"><span class="atlas__title">Religions & Orders</span><span class="atlas__hint">Living faiths, sacred orders, and their customs</span></a></li>
 <li><a href="{{ '/locations-and-landmarks/' | relative_url }}"><span class="atlas__title">Locations & Landmarks</span><span class="atlas__hint">Settlements, ruins, wonders, and the roads between</span></a></li>
 <li><a href="{{ '/relics/' | relative_url }}"><span class="atlas__title">Relics</span><span class="atlas__hint">Artifacts of power, their rarity, origins and current wielders</span></a></li>
+<li><a href="{{ '/bestiary/' | relative_url }}"><span class="atlas__title">Bestiary</span><span class="atlas__hint">Animals, monsters and the species players cannot play</span></a></li>
 <li><a href="{{ '/theory-gallery/' | relative_url }}"><span class="atlas__title">Theory Gallery</span><span class="atlas__hint">Player theories about the world's mysteries, confirmed, debunked or still open</span></a></li>
 <li><a href="{{ '/timeline/' | relative_url }}"><span class="atlas__title">Timeline</span><span class="atlas__hint">Eras, wars, discoveries, and turning points</span></a></li>
 </ul>

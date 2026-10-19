@@ -2,7 +2,9 @@
 layout: page
 ---
 <article class="entry">
-  {% if page.facts or page.status or page.standing or page.verdict or page.rarity %}
+  {% if page.facts or page.status or page.standing or page.verdict or page.rarity or page.temperament %}
+  {% if page.image %}<div class="character__card">
+  <a class="character__portrait" href="{{ page.image | relative_url }}"><img src="{{ page.image | relative_url }}" alt="Picture of {{ page.title }}"></a>{% endif %}
   <dl class="facts">
     {% if page.status %}<div class="facts__row"><dt>Canon status</dt><dd><span class="status status--{{ page.status | downcase }}">{{ page.status }}</span></dd></div>{% endif %}
     {% if page.verdict %}<div class="facts__row"><dt>Verdict</dt><dd><span class="status status--{{ page.verdict | downcase }}">{{ page.verdict }}</span></dd></div>{% endif %}
@@ -11,11 +13,14 @@ layout: page
     {% assign relic_tier = site.data.relic_tiers | where: "name", page.rarity | first %}
     {% if relic_tier.wielded %}<div class="facts__row"><dt>Wielded by</dt><dd>{% assign wielder = page.wielder | default: "No one" %}{% include linked-names.html text=wielder %}</dd></div>{% endif %}
     {% endif %}
+    {% if page.kind %}<div class="facts__row"><dt>Kind</dt><dd>{{ page.kind }}</dd></div>{% endif %}
+    {% if page.temperament %}<div class="facts__row"><dt>Temperament</dt><dd><span class="status status--{{ page.temperament | downcase }}">{{ page.temperament }}</span></dd></div>{% endif %}
     {% if page.standing %}<div class="facts__row"><dt>Standing</dt><dd><span class="status status--{{ page.standing | downcase }}">{{ page.standing }}</span></dd></div>{% endif %}
     {% for fact in page.facts %}
     <div class="facts__row"><dt>{{ fact[0] }}</dt><dd>{% assign fact_value = fact[1] %}{% include linked-names.html text=fact_value %}</dd></div>
     {% endfor %}
   </dl>
+  {% if page.image %}</div>{% endif %}
   {% endif %}
   {% assign body = content | strip %}
   {% if body == "" %}
