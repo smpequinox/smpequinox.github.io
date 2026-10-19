@@ -1,0 +1,27 @@
+# Creates the labels the submission forms use. Runs whenever the list of
+# submission types changes on main, or by hand from the Actions tab.
+name: Submission labels
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/scripts/submissions.py
+      - .github/workflows/submission-labels.yml
+permissions:
+  issues: write
+jobs:
+  labels:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create or update labels
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh label create submission --color 6f42c1 --description "A player submission for the wiki" --force
+          gh label create approved --color 2ea44f --description "Staff: add to a submission to put it on the wiki" --force
+          python3 -c "import sys; sys.path.insert(0, '.github/scripts'); import submissions; print('\n'.join(t['id'] for t in submissions.TYPES))" |
+          while read -r id; do
+            gh label create "submission:$id" --color d4c5f9 --description "Submission type: $id" --force
+          done

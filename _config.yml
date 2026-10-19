@@ -13,6 +13,8 @@ minecraft_version: "1.21.11"
 server_address: "equinoxsmp.kinetic.host"   # leave as "" to hide it
 application_url: "https://docs.google.com/forms/d/e/1FAIpQLSfwPFXMHKCIY7TYrILYH1gYLXKXWcwUL-7Ji-aFT25rrLyZXA/viewform"
 discord_url: "https://discord.gg/gAXSsrGtDv"
+# Where players submit characters, theories and lore (GitHub issue forms)
+submit_url: "https://github.com/smpequinox/smpequinox.github.io/issues/new/choose"
 
 # The story arc currently running
 current_arc: "Arc 2: Remember the Forgotten"

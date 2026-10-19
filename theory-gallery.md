@@ -19,4 +19,4 @@ description: "The wildest, cleverest and most unhinged theories from the player 
 
 ## Submitting a theory
 
-Share your theory with staff on Discord. Staff choose which theories go up here, and credit the player who came up with them.
+Use the **Theory** form on the [Submit to the Wiki]({{ '/submit/' | relative_url }}) page. Staff choose which theories go up here, and credit the player who came up with them.

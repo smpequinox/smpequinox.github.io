@@ -57,7 +57,7 @@ Those who have fallen in the story. Their pages remain as a record.
 
 ## Gallery standards
 
-- Only approved characters or clearly marked NPCs are added.
+- Only approved characters or clearly marked NPCs are added. To add yours, use the **Character** form on the [Submit to the Wiki]({{ '/submit/' | relative_url }}) page.
 - Entries use public knowledge, never hidden motives or staff spoilers.
 - Player-created art is credited, and featured only with the artist’s permission.
 - Major events and relationships link back to their lore pages.

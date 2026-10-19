@@ -485,6 +485,13 @@ button { font: inherit; color: inherit; }
 .prose details[open] summary::after { transform: translateY(-30%) rotate(-135deg); }
 .prose details > :not(summary) { color: var(--ink-2); }
 
+/* a call-to-action link inside page text */
+.prose a.button {
+  display: inline-block; padding: .6rem 1.2rem; border-radius: 999px; text-decoration: none;
+  color: var(--night); background: var(--gilt); font-weight: 600; transition: background-color .2s;
+}
+.prose a.button:hover { color: var(--night); background: #f7dcae; }
+
 /* lists of lore entries */
 .prose .entry-list, .prose .atlas, .prose .char-grid { list-style: none; padding: 0; margin: 0 0 1.75rem; }
 .prose .entry-list > li::before, .prose .atlas > li::before, .prose .char-grid > li::before { content: none; }

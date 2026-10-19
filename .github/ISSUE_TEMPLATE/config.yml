@@ -1,0 +1,6 @@
+# Players pick a submission type from the forms in this folder.
+blank_issues_enabled: false
+contact_links:
+  - name: Ask staff on Discord
+    url: https://discord.gg/gAXSsrGtDv
+    about: Questions about the wiki or a submission? Ask in the Equinox SMP Discord.
