@@ -12,14 +12,19 @@ whereabouts: "Publicly known location"
 player: "Minecraft or Discord name"
 art_credit: "Artist name"
 featured: false                 # true = shown under "Featured this arc"
+# Bonds draw the relationship tree on this character's page. Copy a 3-line block per person.
+# type: Family / Ally / Rival / Romance / Other. If "name" matches a character page title
+# exactly, it links to that page and shows their portrait. Delete the whole block if none.
+bonds:
+  - name: "Other Character Name"
+    relation: "Older brother"
+    type: Family
+  - name: "Another Character"
+    relation: "Sworn rival"
+    type: Rival
 ---
 
 Write the character's public background here. Only public knowledge, never staff spoilers.
-
-## Bonds
-
-- Ally name
-- Rival name
 
 ## Introduced in
 

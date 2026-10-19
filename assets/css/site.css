@@ -729,3 +729,74 @@ button { font: inherit; color: inherit; }
 .chronicle__date { margin: 0 !important; color: var(--ember); font-style: italic; font-size: 1rem; }
 .chronicle__event { margin: .1rem 0 0 !important; font-family: var(--display); font-size: 1.2rem; }
 .chronicle__summary { margin: .3rem 0 0 !important; color: var(--ink-2); }
+
+/* relationship tree on character pages */
+.bond-tree { overflow-x: auto; margin: 0 0 2rem; padding: .5rem 0 1rem; --bond-line: var(--line); }
+.prose .bond-tree ul { list-style: none; margin: 0; padding: 0; }
+.prose .bond-tree li { margin: 0; padding: 0; }
+.prose .bond-tree li::before { content: none; }
+.bond-tree__level { display: flex; justify-content: center; min-width: min-content; }
+.bond-tree > .bond-tree__level > li { display: flex; flex-direction: column; align-items: center; }
+/* the trunk from the character down to the row of groups */
+.bond-tree > .bond-tree__level > li > .bond-tree__level { position: relative; gap: 1rem; padding-top: 2.4rem; }
+.bond-tree > .bond-tree__level > li > .bond-tree__level::before {
+  content: ""; position: absolute; top: 0; left: 50%; height: 1.2rem; border-left: 2px solid var(--bond-line);
+}
+/* each group hangs from a shared crossbar */
+.prose .bond-tree .bond-group { position: relative; display: flex; flex-direction: column; align-items: center; padding-top: 1.2rem; min-width: 11rem; }
+.prose .bond-tree .bond-group::before {
+  content: ""; position: absolute; top: -1.2rem; left: 50%; height: 2.4rem; border-left: 2px solid var(--bond-line);
+  width: 0; background: none; clip-path: none;
+}
+.prose .bond-tree .bond-group::after {
+  content: ""; position: absolute; top: -1.2rem; left: -.5rem; right: -.5rem; border-top: 2px solid var(--bond-line);
+}
+.prose .bond-tree .bond-group:first-child::after { left: 50%; }
+.prose .bond-tree .bond-group:last-child::after { right: 50%; }
+.prose .bond-tree .bond-group:only-child::after { content: none; }
+.bond-group__label {
+  position: relative; z-index: 1; font-family: var(--display); font-size: 1rem; padding: .3rem .8rem; border-radius: 999px;
+  color: var(--bond-color, var(--gilt)); border: 1px solid var(--bond-color, var(--gilt-dim)); background: var(--night);
+}
+.bond-group--family { --bond-color: #8fc49a; }
+.bond-group--ally { --bond-color: #7fb2e5; }
+.bond-group--rival { --bond-color: #f0a3b1; }
+.bond-group--romance { --bond-color: #f5a3d4; }
+.bond-group--other { --bond-color: var(--ink-2); }
+.prose .bond-tree .bond-group__people {
+  display: flex; flex-direction: column; gap: .5rem; margin-top: .6rem; padding-left: .9rem;
+  border-left: 2px solid var(--bond-color, var(--bond-line)); align-self: stretch; margin-left: 1rem;
+}
+.prose .bond-node {
+  display: flex; align-items: center; gap: .6rem; padding: .4rem .7rem .4rem .4rem; border-radius: 10px;
+  text-decoration: none; color: var(--ink); background: var(--night-2); border: 1px solid var(--line-soft);
+  transition: border-color .2s, background-color .2s;
+}
+.prose a.bond-node:hover, .prose a.bond-node:focus-visible { border-color: var(--bond-color, var(--gilt)); background: var(--night-3); }
+.prose a.bond-node:hover .bond-node__name { color: var(--gilt); }
+.bond-node__art { width: 2.6rem; height: 2.6rem; flex: none; border-radius: 50%; overflow: hidden; border: 1px solid var(--line); background: var(--night-3); }
+.bond-node__art img { width: 100%; height: 100%; object-fit: cover; }
+.bond-node__text { display: flex; flex-direction: column; line-height: 1.25; }
+.bond-node__name { font-family: var(--display); font-size: 1.02rem; }
+.bond-node__relation { color: var(--ink-3); font-size: .9rem; }
+.prose .bond-node--root { flex-direction: column; gap: .4rem; padding: .7rem 1.1rem; border-color: var(--gilt-dim); text-align: center; }
+.bond-node--root .bond-node__art { width: 4.2rem; height: 4.2rem; border-color: var(--gilt-dim); }
+.bond-node--root .bond-node__name { font-size: 1.2rem; color: var(--gilt); }
+/* stacked layout: groups hang one under another. Used on phones, and always when a
+   character has 4+ kinds of bond (too wide to spread sideways). */
+  .bond-tree--stacked > .bond-tree__level { justify-content: flex-start; }
+  .bond-tree--stacked > .bond-tree__level > li { align-items: flex-start; }
+  .bond-tree--stacked > .bond-tree__level > li > .bond-tree__level { flex-direction: column; align-items: stretch; gap: 1.2rem; }
+  .prose .bond-tree--stacked .bond-group { align-items: flex-start; min-width: 0; }
+  .prose .bond-tree--stacked .bond-group::after { content: none; }
+  .prose .bond-tree--stacked .bond-group::before { left: 2rem; }
+  .bond-tree--stacked > .bond-tree__level > li > .bond-tree__level::before { left: 2rem; height: 100%; }
+@media (max-width: 640px) {
+  .bond-tree > .bond-tree__level { justify-content: flex-start; }
+  .bond-tree > .bond-tree__level > li { align-items: flex-start; }
+  .bond-tree > .bond-tree__level > li > .bond-tree__level { flex-direction: column; align-items: stretch; gap: 1.2rem; }
+  .prose .bond-tree .bond-group { align-items: flex-start; min-width: 0; }
+  .prose .bond-tree .bond-group::after { content: none; }
+  .prose .bond-tree .bond-group::before { left: 2rem; }
+  .bond-tree > .bond-tree__level > li > .bond-tree__level::before { left: 2rem; height: 100%; }
+}

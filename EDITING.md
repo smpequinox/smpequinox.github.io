@@ -116,7 +116,8 @@ Uploading a new map with the same file name keeps all the pins. Re-check them if
 3. Set `image:` to `"/assets/img/characters/aster-vale.png"` and fill in the rest. Delete any lines you don't need.
 4. Set `featured: true` for staff and arc characters to show them under "Featured this arc".
 5. `type: "Staff Character"` also lists them under "Staff characters". Changing `status:` to `"Dead"` moves them from "All characters" to "Dead characters".
-6. Commit. They appear in the Character Gallery automatically.
+6. To draw their **relationship tree**, fill in the `bonds:` list. Each person gets three lines: `name`, `relation` (e.g. "Older brother") and `type` (Family, Ally, Rival, Romance or Other). If the name matches another character's page exactly, it links there and shows their portrait. Bonds are one-way: add the bond to both characters' files if both pages should show it.
+7. Commit. They appear in the Character Gallery automatically.
 
 ## Adding a recent event to the home page gallery
 
