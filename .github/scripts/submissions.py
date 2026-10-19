@@ -64,10 +64,11 @@ TYPES = [
      "folder": "_lore", "fixed": dict(category="locations", **LORE_STATUS),
      "fields": [
         ("Location name", "title", "title", "input", True, ""),
+        ("Kind of place", "front", "place_type", ["Capital", "City", "Town", "Village", "Fort", "Port", "Landmark", "Ruin", "Other"], False, ""),
         ("Region", "front", "direction", ["North", "Northeast", "East", "Southeast", "South", "Southwest", "West", "Northwest", "Not sure"], False, ""),
         ("Summary", "summary", "summary", "input", True, "One line a new player should understand"),
-        ("Type of place", "fact", "Type", "input", False, "City, ruin, dungeon, landmark..."),
-        ("Controlled by", "fact", "Controlled by", "input", False, "Nation, faction or house"),
+        ("Type of place", "fact", "Type", "input", False, "A short description, e.g. walled port city, mountain fortress"),
+        ("Controlled by", "fact", "Controlled by", "input", False, "Nation, faction or house. Naming a nation lists this place in its chart."),
         ("Known for", "fact", "Known for", "input", False, ""),
         ("Description", "body", "body", "textarea", False, "History, points of interest, anything public"),
      ]},

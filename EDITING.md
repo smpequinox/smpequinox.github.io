@@ -111,7 +111,7 @@ These appear on their section page automatically. You don't need to touch the se
 
 **Names link themselves.** Any time the name of a wiki page appears in an info box, tree or page text, exactly as its title is spelled (capitals included), it becomes a link to that page. This works inside longer text too: "Prince of Arbitus" links "Arbitus". Info boxes and trees link every mention; page text links the first mention of each page. Names shorter than 4 letters are not linked.
 
-**What's in a nation.** A nation's page lists, under "Within …", every place, faction, noble house and faith whose info box names the nation (e.g. `Controlled by: "Arbitus"`, `Allegiance: "Arbitus"`, `Sworn to: "Arbitus"`), and every character whose affiliations or whereabouts name it (e.g. "Prince of Arbitus"). Nothing needs to be added to the nation's own page.
+**What's in a nation.** A nation's page lists, under "Within …", every place, faction, noble house and faith whose info box names the nation (e.g. `Controlled by: "Arbitus"`, `Allegiance: "Arbitus"`, `Sworn to: "Arbitus"`), and every character whose affiliations or whereabouts name it (e.g. "Prince of Arbitus"). They're drawn as a chart, with places grouped by their `place_type:` (Capital, City, Town, Village, Fort, Port, Landmark, Ruin or Other). Nothing needs to be added to the nation's own page.
 
 **Hierarchies.** Nation, faction, noble house and religion templates have a `ranks:` list. Write the ranks from highest to lowest, each with its holders separated by commas (or `holders: ""` if vacant). The page shows them as a tree under "Hierarchy".
 

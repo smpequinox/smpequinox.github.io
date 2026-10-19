@@ -856,3 +856,12 @@ button { font: inherit; color: inherit; }
 .prose .rank-tree__holders > li { margin: 0; padding: .35rem .8rem; border-radius: 10px; background: var(--night-2); border: 1px solid var(--line-soft); }
 .prose .rank-tree__holders > li::before { content: none; }
 .rank-tree__vacant { color: var(--ink-3); font-style: italic; font-size: .95rem; }
+
+/* the "Within <nation>" chart reuses the bond tree; colours by kind of member */
+.realm-group--places { --bond-color: var(--gilt-dim); }
+.realm-group--capital { --bond-color: var(--gilt); }
+.realm-group--capital .bond-group__label { font-size: 1.1rem; border-width: 2px; }
+.realm-group--factions { --bond-color: #7fb2e5; }
+.realm-group--houses { --bond-color: #b996f2; }
+.realm-group--faiths { --bond-color: #8fc49a; }
+.realm-group--people { --bond-color: #f0a3b1; }

@@ -5,6 +5,7 @@
 # automatically. Separate several names with commas.
 title: "Location Name"
 category: locations
+place_type: City                # Capital / City / Town / Village / Fort / Port / Landmark / Ruin / Other: its section in a nation's "Within" chart
 direction: North                # North / Northeast / East / Southeast / South / Southwest / West / Northwest: which "By region" list it appears in
 map_x: 50                       # Pin position on the world map, % from the LEFT edge (0-100)
 map_y: 50                       # Pin position on the world map, % from the TOP edge (0-100)
