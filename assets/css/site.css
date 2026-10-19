@@ -632,6 +632,9 @@ button { font: inherit; color: inherit; }
   transition: border-color .2s;
 }
 .char-card__art img { width: 100%; height: 100%; object-fit: cover; }
+.char-card__art--square { aspect-ratio: 1 / 1; }
+/* lore pages (e.g. beastiary creatures) show their whole picture, uncropped */
+.entry .character__portrait img { aspect-ratio: auto; height: auto; }
 .char-card__art--blank { background: url("../img/starfield.jpg") center / cover; }
 .char-card__art--blank img { width: 46%; height: auto; position: absolute; inset: 0; margin: auto; opacity: .8; }
 .prose .char-card:hover .char-card__art { border-color: var(--gilt); }

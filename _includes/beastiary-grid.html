@@ -4,7 +4,7 @@
 <ul class="char-grid">
 {%- for b in bg_entries %}
 <li><a class="char-card" href="{{ b.url | relative_url }}">
-<span class="char-card__art{% unless b.image %} char-card__art--blank{% endunless %}">{% if b.image %}<img src="{{ b.image | relative_url }}" alt="" loading="lazy">{% else %}<img src="{{ '/assets/img/emblem.png' | relative_url }}" alt="">{% endif %}</span>
+<span class="char-card__art char-card__art--square{% unless b.image %} char-card__art--blank{% endunless %}">{% if b.image %}<img src="{{ b.image | relative_url }}" alt="" loading="lazy">{% else %}<img src="{{ '/assets/img/emblem.png' | relative_url }}" alt="">{% endif %}</span>
 <span class="char-card__name">{{ b.title }}</span>
 {%- if b.temperament %}<span class="char-card__meta"><span class="status status--{{ b.temperament | downcase }}">{{ b.temperament }}</span></span>{% endif %}
 {%- if b.summary %}<span class="char-card__aff">{{ b.summary }}</span>{% endif %}
