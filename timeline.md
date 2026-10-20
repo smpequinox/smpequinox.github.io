@@ -15,6 +15,37 @@ Events appear here once the story has revealed them. Dates follow the in-world c
 
 {% include timeline-list.html %}
 
+## Events
+
+The moments that shaped the story, newest first.
+
+{% assign story_events = site.data.events %}
+{% if story_events and story_events.size > 0 %}
+<div class="event-cards">
+{%- for ev in story_events %}
+<article class="event-card" id="event-{{ ev.title | slugify }}">
+  {%- if ev.image %}
+  <a class="event-card__cover" href="{{ ev.image | relative_url }}"><img src="{{ ev.image | relative_url }}" alt="Cover art for {{ ev.title }}" loading="lazy"></a>
+  {%- endif %}
+  <div class="event-card__body">
+    <p class="event-card__when">{% if ev.arc %}{{ ev.arc }}{% endif %}{% if ev.arc and ev.date %} · {% endif %}{{ ev.date }}</p>
+    <h3 class="event-card__title">{{ ev.title }}</h3>
+    {%- if ev.description %}
+    <div class="event-card__text">{{ ev.description | markdownify }}</div>
+    {%- elsif ev.summary %}
+    <p class="event-card__text">{{ ev.summary }}</p>
+    {%- endif %}
+  </div>
+</article>
+{%- endfor %}
+</div>
+{% else %}
+<div class="empty-state">
+  <img src="{{ '/assets/img/emblem.png' | relative_url }}" alt="" width="44" height="44">
+  <p>No events have been recorded yet.</p>
+</div>
+{% endif %}
+
 ## Calendar
 
 {% include calendar-now.html %}
