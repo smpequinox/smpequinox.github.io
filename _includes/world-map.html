@@ -5,7 +5,8 @@
 {%- assign wm_file = site.static_files | where: "path", include.image | first -%}
 {%- if wm_file %}
 {%- assign wm_houses = site.lore | where: "category", "houses" -%}
-{%- assign wm_places = site.lore | where: "category", "locations" | concat: wm_houses | sort: "title" %}
+{%- assign wm_nations = site.lore | where: "category", "nations" -%}
+{%- assign wm_places = site.lore | where: "category", "locations" | concat: wm_houses | concat: wm_nations | sort: "title" %}
 <figure class="world-map">
   <div class="world-map__canvas" data-world-map>
     <div class="world-map__stage" data-world-map-stage>
