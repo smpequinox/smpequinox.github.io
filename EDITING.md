@@ -102,7 +102,7 @@ These appear on their section page automatically. You don't need to touch the se
    - `beastiary`: the Beastiary. Set `kind:` to Animal, Monster or Species to choose its section, and `temperament:` to Passive, Neutral or Hostile.
    - `theories`: the Theory Gallery. Set `verdict:` to Unconfirmed, Confirmed or Debunked to choose its list.
    - `religions`: Religions & Orders
-   - `locations`: Locations & Landmarks. Set `direction:` to North, Northeast, East, Southeast, South, Southwest, West or Northwest (one word, capital first letter) to list it under "By region", and `map_x:` / `map_y:` to pin it on the world map.
+   - `locations`: Locations & Landmarks. Set `direction:` to North, Northeast, East, Southeast, South, Southwest, West, Northwest or Central (one word, capital first letter) to list it under "By region", and `map_x:` / `map_y:` to pin it on the world map.
 5. Commit.
 
 **Keep the dashes and colons exactly as in the template.** The block between the two `---` lines is the entry's settings. Text values with special characters should stay inside "quotes".

@@ -6,7 +6,7 @@
 title: "Location Name"
 category: locations
 place_type: City                # Capital / City / Town / Village / Fort / Port / Landmark / Ruin / Other: its section in a nation's "Within" chart
-direction: North                # North / Northeast / East / Southeast / South / Southwest / West / Northwest: which "By region" list it appears in
+direction: North                # North / Northeast / East / Southeast / South / Southwest / West / Northwest / Central: which "By region" list it appears in
 map_x: 50                       # Pin position on the world map, % from the LEFT edge (0-100)
 map_y: 50                       # Pin position on the world map, % from the TOP edge (0-100)
 summary: "One line a new player should understand."

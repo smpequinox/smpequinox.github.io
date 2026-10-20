@@ -52,6 +52,7 @@ body:
         - "Southwest"
         - "West"
         - "Northwest"
+        - "Central"
         - "Not sure"
     validations:
       required: false

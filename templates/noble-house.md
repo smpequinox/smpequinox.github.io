@@ -5,7 +5,9 @@
 # Names that match another wiki entry's title link to it automatically.
 title: "House Name"
 category: houses
-standing: Ruling                # Ruling / Fallen
+standing: Ruling                # Ruling / Fallen (delete the line if unknown: listed under "Other houses")
+direction: North                # optional: region, as for locations
+# map_x / map_y: optional map pin, as for locations
 summary: "One line a new player should understand."
 status: Public                  # Public / Revealed / Draft
 facts:
