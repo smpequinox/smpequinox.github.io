@@ -14,6 +14,8 @@ Players can add to the wiki through submission forms. Staff review every submiss
 3. **Staff review it.** They may ask questions or suggest changes in the comments on your submission.
 4. **It goes live.** Once approved, your submission becomes a wiki page and appears in the right section automatically.
 
+**Updating your page later?** Use the same form and paste your page's address in "Updating an existing page?" at the top. Only fill in what's changed: empty boxes keep what's already there, and new bonds are added to your existing ones. To remove something, write a single `-` in its box; to remove a bond, write `Name | remove`.
+
 ## What you can submit
 
 | Type | Appears in |

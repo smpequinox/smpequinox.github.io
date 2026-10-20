@@ -43,7 +43,7 @@ jobs:
           git commit -m "$action $type: $title" -m "From submission #$NUMBER"
           git push --force origin "$branch"
           if [ "$action" = "Update" ]; then
-            what=$(printf 'Replaces the %s **%s** with the version from #%s. Check the changes below: everything not in the new submission is removed (except map pins, Featured, theory verdicts, and the picture if no new one was attached).' "$type" "$title" "$NUMBER")
+            what=$(printf 'Updates the %s **%s** with the changes from #%s. Boxes the player left empty keep their current info, new bonds are added, and anything they marked with - is removed. Check the changes below.' "$type" "$title" "$NUMBER")
           else
             what=$(printf 'Adds the %s **%s** from #%s.' "$type" "$title" "$NUMBER")
           fi
