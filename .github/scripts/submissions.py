@@ -229,8 +229,9 @@ UPDATE_LABEL = "Updating an existing page?"
 UPDATE_HINT = ("Leave this empty for a new page. To replace a page with this submission, "
                "paste its address (e.g. https://smpequinox.github.io/characters/swobble/) or its exact name.")
 # Settings staff add by hand that a player's update keeps: map pins, the
-# Featured flag, a theory's verdict, and the picture if no new one is attached.
-KEEP_ON_UPDATE = ["map_x", "map_y", "featured", "verdict"]
+# Featured flag, the Living Legend honour, a theory's verdict, and the
+# picture if no new one is attached.
+KEEP_ON_UPDATE = ["map_x", "map_y", "featured", "verdict", "legend", "legend_for", "legend_since"]
 
 
 # ---------- issue forms ----------

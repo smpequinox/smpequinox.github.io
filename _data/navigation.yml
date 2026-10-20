@@ -10,6 +10,8 @@
       url: "/character-creation/"
     - title: "Character Gallery"
       url: "/character-gallery/"
+    - title: "Living Legends"
+      url: "/living-legends/"
     - title: "Player Guide & FAQ"
       url: "/player-guide/"
     - title: "Submit to the Wiki"

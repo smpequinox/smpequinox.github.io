@@ -143,6 +143,18 @@ Uploading a new map with the same file name keeps all the pins. Re-check them if
 6. To draw their **relationship tree**, fill in the `bonds:` list. Each person gets three lines: `name`, `relation` (e.g. "Older brother") and `type` (Family, Ally, Rival, Romance or Other). If the name matches another character's page exactly, it links there and shows their portrait. Bonds are one-way: add the bond to both characters' files if both pages should show it.
 7. Commit. They appear in the Character Gallery automatically.
 
+## Naming a Living Legend
+
+After a community vote, add these lines to the character's file in `_characters/` (between the `---` lines) and commit:
+
+```yaml
+legend: true
+legend_for: "Slew the Frost Wyrm and saved Neo Abrallie"
+legend_since: "Fulgrament 751 S.R"
+```
+
+`legend_for` and `legend_since` are optional. The character then appears on the Living Legends page with a gold frame, and their own page shows a **Living Legend** badge. Player updates through the submission forms keep these lines. To remove the honour, delete them.
+
 ## Adding a recent event to the home page gallery
 
 1. Upload the screenshot to `assets/img/events/`.
