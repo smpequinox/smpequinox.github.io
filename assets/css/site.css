@@ -906,3 +906,17 @@ button { font: inherit; color: inherit; }
   border-color: transparent; font-weight: 600;
 }
 .legend-badge__for { display: block; margin-top: .35rem; color: var(--ink-2); font-style: italic; }
+
+/* Events section on the Timeline: cards with cover art */
+.event-cards { display: grid; gap: 1.5rem; margin: 0 0 2rem; }
+.event-card {
+  border-radius: 14px; overflow: hidden; background: var(--night-2); border: 1px solid var(--line);
+  scroll-margin-top: calc(var(--topbar-h) + 1rem);
+}
+.event-card:target { border-color: var(--gilt); box-shadow: 0 0 0 3px rgba(239, 205, 151, 0.2); }
+.event-card__cover { display: block; background: #000; }
+.event-card__cover img { display: block; width: 100%; height: auto; max-height: 30rem; object-fit: cover; }
+.event-card__body { padding: 1.1rem 1.4rem 1.3rem; }
+.prose .event-card__when { margin: 0; color: var(--ember); font-style: italic; font-size: .95rem; }
+.prose .event-card__title { margin: .2rem 0 .6rem; font-family: var(--display); font-size: 1.5rem; color: var(--gilt); }
+.event-card__text p:last-child { margin-bottom: 0; }

@@ -6,6 +6,14 @@
 #   summary: one or two sentences (optional)
 #   image:   a screenshot uploaded to assets/img/events/ (optional)
 #   link:    a wiki page with the full story, e.g. "/timeline/" (optional)
+#   arc:     the arc or inter-arc it happened in (optional)
+#   description: the full account, shown in the Events section of the Timeline
+#            page (optional; start it with "description: |" and indent the
+#            lines below by four spaces, leaving a blank line between paragraphs)
+#
+# Every event also appears in the Events section of the Timeline page, with its
+# image as cover art. Link to it there with "/timeline/#event-" and the title in
+# lower case with dashes, e.g. "/timeline/#event-whispers-of-the-night".
 #
 # Example — copy this block, remove the # marks, and fill it in:
 #
@@ -15,7 +23,13 @@
 #   image: "/assets/img/events/eastern-gate.png"
 #   link: "/timeline/"
 
-- title: "Inter-Arc: Remember the Forgotten"
-  date: "Current age"
-  summary: "The world rests between Arc 1 and Arc 2. What comes next is still unknown."
-  link: "/timeline/"
+- title: "Whispers of the Night"
+  date: "Shine (Spring), 751 S.R"
+  arc: "Inter-Arc: Remember the Forgotten"
+  image: "/assets/img/events/whispers-of-the-night.webp"
+  summary: "A voice that sounded like Luni lured House Gilleth outside, and the Wendigo revealed itself."
+  description: |
+    Whispers were heard outside. Mel and others heard who they thought was Luni calling for them. After investigating, the Wendigo revealed itself, starting the chase with 8 joining in the chase, forcing House Gilleth into their cottage.
+
+    They ended up surviving the encounter, but the thought still lingers. How many more whispers of the night will grace us this spring?
+  link: "/timeline/#event-whispers-of-the-night"
