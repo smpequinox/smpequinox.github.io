@@ -226,11 +226,14 @@ EMPTY_ANSWERS = {"", "_No response_", "None", "Neither", "Not sure"}
 # Every form starts with this question. Answering it replaces an existing page
 # instead of adding a new one.
 UPDATE_LABEL = "Updating an existing page?"
-UPDATE_HINT = ("Leave this empty for a new page. To replace a page with this submission, "
-               "paste its address (e.g. https://smpequinox.github.io/characters/swobble/) or its exact name.")
-# Settings staff add by hand that a player's update keeps: map pins, the
-# Featured flag, the Living Legend honour, a theory's verdict, and the
-# picture if no new one is attached.
+UPDATE_HINT = ("Leave this empty for a new page. To update a page, paste its address "
+               "(e.g. https://smpequinox.github.io/characters/swobble/) or its exact name, then fill in only "
+               "what changes: empty boxes keep the current info, and new bonds are added to the existing ones. "
+               "To remove something, write a single - in its box; to remove a bond, write: Name | remove")
+# In an update, an answer of exactly this removes the current value.
+CLEAR = "-"
+# Settings staff add by hand that a player's update can never change: map
+# pins, the Featured flag, the Living Legend honour and a theory's verdict.
 KEEP_ON_UPDATE = ["map_x", "map_y", "featured", "verdict", "legend", "legend_for", "legend_since"]
 
 
@@ -400,6 +403,108 @@ def unique_path(folder, slug, ext=".md"):
     return path
 
 
+def split_page(path):
+    """A page's front matter lines and body text."""
+    with open(path, encoding="utf-8") as fh:
+        text = fh.read()
+    m = re.match(r"---\n(.*?)\n---\n?(.*)", text, re.S)
+    if not m:
+        return [], text
+    return m.group(1).split("\n"), m.group(2).strip()
+
+
+def parse_front(lines):
+    """Front matter as an ordered list of ("scalar", key, line) and ("block", key, [lines])."""
+    entries = []
+    for line in lines:
+        if not line.strip() or line.startswith("# Submitted in issue"):
+            continue
+        if line[0] in " \t-":
+            if entries and entries[-1][0] == "block":
+                entries[-1][2].append(line)
+            continue
+        if line.startswith("#"):
+            entries.append(("comment", None, line))
+            continue
+        key, _, value = line.partition(":")
+        if value.strip() == "":
+            entries.append(("block", key.strip(), []))
+        else:
+            entries.append(("scalar", key.strip(), line))
+    return entries
+
+
+def fact_key(line):
+    m = re.match(r'^\s+("(?:[^"\\]|\\.)*"|[^:]+):', line)
+    return unquote(m.group(1).strip()) if m else line.strip()
+
+
+def bond_items(lines):
+    """Bond blocks grouped per person: [(name, [lines])]."""
+    items = []
+    for line in lines:
+        m = re.match(r"^\s*- name:\s*(.*)$", line)
+        if m:
+            items.append((unquote(m.group(1)), [line]))
+        elif items:
+            items[-1][1].append(line)
+    return items
+
+
+def merge_update(old_lines, old_body, new, cleared, removed_bonds, fixed_keys=()):
+    """Merge a player's update into the page it updates. Empty answers keep the
+    old values, "-" answers remove them, and bonds are merged by name."""
+    entries = parse_front(old_lines)
+    old_scalars = {k: l for kind, k, l in entries if kind == "scalar"}
+    out = []
+    for kind, key, value in entries:
+        if kind == "comment":
+            out.append(value)
+        elif kind == "scalar":
+            if key in KEEP_ON_UPDATE or key in fixed_keys or key not in new["scalars"]:
+                if key not in cleared or key in KEEP_ON_UPDATE:
+                    out.append(value)
+            else:
+                out.append(new["scalars"][key])
+        else:
+            out.append(("block", key, value))
+    for key, line in new["scalars"].items():
+        if key not in old_scalars:
+            out.append(line)
+    scalars = [l for l in out if isinstance(l, str)]
+    blocks = {b[1]: b[2] for b in out if not isinstance(b, str)}
+    order = [b[1] for b in out if not isinstance(b, str)]
+
+    # facts: merge by fact name
+    facts = [(fact_key(l), l) for l in blocks.get("facts", [])]
+    for line in new["facts"]:
+        k = fact_key(line)
+        facts = [(fk, fl) if fk != k else (k, line) for fk, fl in facts] if any(fk == k for fk, _ in facts) else facts + [(k, line)]
+    facts = [(k, l) for k, l in facts if ("fact:" + k) not in cleared]
+    # bonds: merge by name; "Name | remove" deletes
+    bonds = bond_items(blocks.get("bonds", []))
+    for name, lines in bond_items(new["bonds"]):
+        if any(n == name for n, _ in bonds):
+            bonds = [(n, lines if n == name else ls) for n, ls in bonds]
+        else:
+            bonds.append((name, lines))
+    bonds = [(n, ls) for n, ls in bonds if n.casefold() not in removed_bonds]
+    # ranks: a new hierarchy replaces the old one as a whole
+    ranks = new["ranks"] or ([] if "ranks" in cleared else blocks.get("ranks", []))
+
+    merged = {"facts": [l for _, l in facts], "bonds": [l for _, ls in bonds for l in ls], "ranks": ranks}
+    for key in ("facts", "ranks", "bonds"):
+        if key not in order:
+            order.append(key)
+    front = list(scalars)
+    for key in order:
+        lines = merged.get(key, blocks.get(key, []))
+        if lines:
+            front += [f"{key}:"] + lines
+    body = new["body"] if new["body"] else ("" if "body" in cleared else old_body)
+    return front, body
+
+
 def build(issue, root="."):
     labels = [l["name"] if isinstance(l, dict) else l for l in issue.get("labels", [])]
     type_ids = [l.split(":", 1)[1] for l in labels if l.startswith("submission:")]
@@ -429,8 +534,12 @@ def build(issue, root="."):
     front = [f"title: {q(title)}"]
     front += [f"{k}: {q(v)}" for k, v in t["fixed"].items()]
     facts, bonds, ranks, body, written = [], [], [], "", [out]
+    cleared, removed_bonds = set(), set()
     for label, kind, key, inp, required, hint in t["fields"]:
         raw = answers.get(label, "").strip()
+        if old_front is not None and raw == CLEAR and kind != "title":
+            cleared.add("fact:" + key if kind == "fact" else ("summary" if kind == "summary" else key))
+            continue
         if kind == "title" or raw in EMPTY_ANSWERS:
             continue
         if kind == "front":
@@ -463,6 +572,9 @@ def build(issue, root="."):
                 parts[0] = plain_name(parts[0])
                 if not parts[0]:
                     continue
+                if len(parts) > 1 and parts[1].strip().casefold() == "remove":
+                    removed_bonds.add(parts[0].casefold())
+                    continue
                 kind_of = parts[2].title() if len(parts) > 2 and parts[2] else "Other"
                 if kind_of not in ("Family", "Ally", "Rival", "Romance", "Other"):
                     kind_of = "Other"
@@ -471,16 +583,17 @@ def build(issue, root="."):
                     bonds += [f"    relation: {q(parts[1])}"]
                 bonds += [f"    type: {kind_of}"]
     if old_front is not None:
-        for key in KEEP_ON_UPDATE + ([] if any(l.startswith("image:") for l in front) else ["image"]):
-            old = setting(old_front, key)
-            if old is not None:
-                front = [l for l in front if not l.startswith(key + ":")] + [f"{key}: {old}"]
-    if facts:
-        front += ["facts:"] + facts
-    if ranks:
-        front += ["ranks:"] + ranks
-    if bonds:
-        front += ["bonds:"] + bonds
+        old_lines, old_body = split_page(out)
+        new = {"scalars": {l.partition(":")[0]: l for l in front}, "facts": facts,
+               "bonds": bonds, "ranks": ranks, "body": body}
+        front, body = merge_update(old_lines, old_body, new, cleared, removed_bonds, t["fixed"].keys())
+    else:
+        if facts:
+            front += ["facts:"] + facts
+        if ranks:
+            front += ["ranks:"] + ranks
+        if bonds:
+            front += ["bonds:"] + bonds
     front.append(f"# Submitted in issue #{issue.get('number', '?')}")
 
     with open(out, "w", encoding="utf-8") as fh:

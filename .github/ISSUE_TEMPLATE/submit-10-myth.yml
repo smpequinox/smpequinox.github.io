@@ -14,7 +14,7 @@ body:
     id: update
     attributes:
       label: "Updating an existing page?"
-      description: "Leave this empty for a new page. To replace a page with this submission, paste its address (e.g. https://smpequinox.github.io/characters/swobble/) or its exact name."
+      description: "Leave this empty for a new page. To update a page, paste its address (e.g. https://smpequinox.github.io/characters/swobble/) or its exact name, then fill in only what changes: empty boxes keep the current info, and new bonds are added to the existing ones. To remove something, write a single - in its box; to remove a bond, write: Name | remove"
     validations:
       required: false
   - type: input
