@@ -4,4 +4,5 @@ category: nations
 status: Public
 facts:
   Capital: "Ashmount"
+  Ruling house: "House Blackfyre"
 ---
