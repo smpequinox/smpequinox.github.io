@@ -1,7 +1,8 @@
 {%- comment -%}
   The relationship tree on a character page. Reads page.bonds: a list of
   { name, relation, type } where type is Family, Ally, Rival, Romance or Other.
-  Names that match a character page link to it and show its portrait.
+  Names that match a character page link to it and show its portrait. A first
+  name alone also works if exactly one character has that first name.
 {%- endcomment -%}
 {%- assign bt_types = "Family,Ally,Rival,Romance,Other" | split: "," -%}
 {%- assign bt_labels = "Family,Allies,Rivals,Romance,Other bonds" | split: "," -%}
@@ -23,6 +24,16 @@
       <ul class="bond-group__people">
       {%- for bond in bt_group %}
         {%- assign bt_char = site.characters | where: "title", bond.name | first -%}
+        {%- unless bt_char -%}
+          {%- comment -%} "Ezra" finds "Ezra Fairfax" when only one character has that first name {%- endcomment -%}
+          {%- assign bt_wanted = bond.name | remove: '"' | strip -%}
+          {%- assign bt_found = 0 -%}
+          {%- for c in site.characters -%}
+            {%- assign bt_first = c.title | remove: '"' | split: " " | first -%}
+            {%- if bt_first == bt_wanted %}{% assign bt_found = bt_found | plus: 1 %}{% assign bt_candidate = c %}{% endif -%}
+          {%- endfor -%}
+          {%- if bt_found == 1 %}{% assign bt_char = bt_candidate %}{% endif -%}
+        {%- endunless -%}
         <li>
           {%- if bt_char and bt_char.url != page.url %}<a class="bond-node" href="{{ bt_char.url | relative_url }}">{% else %}<span class="bond-node">{% endif -%}
           <span class="bond-node__art">{% if bt_char.image %}<img src="{{ bt_char.image | relative_url }}" alt="" loading="lazy">{% else %}<img src="{{ '/assets/img/emblem.png' | relative_url }}" alt="">{% endif %}</span>

@@ -2,8 +2,8 @@
 title: "Ezra Fairfax"
 type: "Player Character"
 status: "Alive"
-known_for: "Being the leader of the Principality of Hesperos, ex-Paladin of Light of the Sun, known as a \"Schizophrenic\" and reliably unreliable."
-affiliation: "Principality of Hesperos, The Forest"
+known_for: "Being the leader of the Principality of Hesparos, ex-Paladin of Light of the Sun, known as a \"Schizophrenic\" and reliably unreliable."
+affiliation: "Principality of Hesparos, The Forest"
 race: "Physically Human, otherwise complicated"
 whereabouts: "In the Deeps"
 player: "ArcadianAtlas"
@@ -21,7 +21,7 @@ bonds:
   - name: "Uetel"
     relation: "Forest Member"
     type: Other
-  - name: "Principality of Hesperos"
+  - name: "Principality of Hesparos"
     type: Other
   - name: "Neriadra Cadence"
     relation: "Friend"
@@ -59,4 +59,4 @@ bonds:
 # Submitted in issue #27
 ---
 
-After a failed seance, Ezra is plagued by a multitude of constant voices. He learned to utilize these voices and their experiences to help him achieve his goal. He is now the Warden of the Principality of Hesperos, and one of the most powerful people on Velthren. He is now the voices, and the voices are him.
+After a failed seance, Ezra is plagued by a multitude of constant voices. He learned to utilize these voices and their experiences to help him achieve his goal. He is now the Warden of the Principality of Hesparos, and one of the most powerful people on Velthren. He is now the voices, and the voices are him.

@@ -12,5 +12,5 @@ ranks:
   - rank: "Head of House"
     holders: "Mel Gilleth"
   - rank: "Members"
-    holders: "Jasmine Gilleth, Manny Gilleth"
+    holders: "Jasmine Gilleth, Mani Gilleth"
 ---

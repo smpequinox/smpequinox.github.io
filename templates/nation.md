@@ -5,6 +5,7 @@
 # link to it automatically. Separate several names with commas.
 title: "Nation Name"
 category: nations
+# aliases: short names that also count as this nation in its "Within" chart, e.g. ["Nerestel"]
 summary: "One line a new player should understand."
 status: Public                  # Public / Revealed / Draft
 facts:
