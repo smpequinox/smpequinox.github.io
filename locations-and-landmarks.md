@@ -15,10 +15,10 @@ map_image: "/assets/img/world-map.webp"
 
 ## By region
 
-{% assign directions = "North,Northeast,East,Southeast,South,Southwest,West,Northwest" | split: "," %}
+{% assign directions = "North,Northeast,East,Southeast,South,Southwest,West,Northwest,Central" | split: "," %}
 {% for d in directions %}
 ### {{ d }}
 
-{% capture empty_msg %}No {{ d | downcase }}ern locations have been recorded yet.{% endcapture %}
-{% include entry-list.html category="locations" direction=d message=empty_msg %}
+{% if d == "Central" %}{% capture empty_msg %}No central locations have been recorded yet.{% endcapture %}{% else %}{% capture empty_msg %}No {{ d | downcase }}ern locations have been recorded yet.{% endcapture %}{% endif %}
+{% include entry-list.html category="places" direction=d message=empty_msg %}
 {% endfor %}
