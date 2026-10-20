@@ -893,3 +893,16 @@ button { font: inherit; color: inherit; }
 .pin-editor__change strong { grid-column: 1 / -1; font-family: var(--display); font-weight: normal; color: var(--gilt); }
 .prose .pin-editor__change pre { margin: 0; padding: .3rem .6rem; font-size: .9rem; background: var(--night); border-radius: 6px; }
 .pin-editor__change button { font: inherit; font-size: .9rem; padding: .3rem .8rem; border-radius: 999px; cursor: pointer; color: var(--night); background: var(--gilt); border: 0; }
+
+/* Living Legends */
+.char-card--legend .char-card__art {
+  border: 2px solid var(--gilt);
+  box-shadow: 0 0 0 4px rgba(239, 205, 151, 0.12), 0 10px 30px -12px rgba(239, 205, 151, 0.45);
+}
+.char-card--legend .char-card__name { color: var(--gilt); }
+.char-card--legend .char-card__aff { color: var(--ink-2); font-style: italic; }
+.prose a.legend-badge {
+  text-decoration: none; color: var(--night); background: linear-gradient(90deg, #e2a63f, #fff0b5);
+  border-color: transparent; font-weight: 600;
+}
+.legend-badge__for { display: block; margin-top: .35rem; color: var(--ink-2); font-style: italic; }

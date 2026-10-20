@@ -9,6 +9,7 @@ layout: page
     </a>
     {% endif %}
     <dl class="facts">
+      {% if page.legend %}<div class="facts__row"><dt>Honour</dt><dd><a class="status legend-badge" href="{{ '/living-legends/' | relative_url }}">Living Legend</a>{% if page.legend_for %}<span class="legend-badge__for">{{ page.legend_for }}</span>{% endif %}</dd></div>{% endif %}
       {% if page.type %}<div class="facts__row"><dt>Character type</dt><dd>{{ page.type }}</dd></div>{% endif %}
       {% if page.status %}<div class="facts__row"><dt>Status</dt><dd>{{ page.status }}</dd></div>{% endif %}
       {% if page.known_for %}<div class="facts__row"><dt>Known for</dt><dd>{{ page.known_for }}</dd></div>{% endif %}

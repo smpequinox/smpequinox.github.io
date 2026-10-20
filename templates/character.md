@@ -12,6 +12,10 @@ whereabouts: "Publicly known location"
 player: "Minecraft or Discord name"
 art_credit: "Artist name"
 featured: false                 # true = shown under "Featured this arc"
+# Staff only, after a community vote: add these to name the character a Living Legend.
+# legend: true
+# legend_for: "One line on why they earned it"
+# legend_since: "Fulgrament 751 S.R"
 # Bonds draw the relationship tree on this character's page. Copy a 3-line block per person.
 # type: Family / Ally / Rival / Romance / Other. If "name" matches a character page title
 # exactly, it links to that page and shows their portrait. Delete the whole block if none.

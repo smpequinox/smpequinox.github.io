@@ -8,6 +8,9 @@ description: "The people of the present age: approved player characters, staff c
 {% assign staff = living | where: "type", "Staff Character" %}
 {% assign dead = site.characters | where: "status", "Dead" | sort: "title" %}
 
+{% assign legend_count = site.characters | where: "legend", true | size %}
+> **[Living Legends]({{ '/living-legends/' | relative_url }})**: the characters the community has voted into legend{% if legend_count > 0 %} ({{ legend_count }} so far){% endif %}.
+
 {% if featured.size > 0 %}
 ## Featured this arc
 
