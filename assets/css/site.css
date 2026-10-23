@@ -920,3 +920,29 @@ button { font: inherit; color: inherit; }
 .prose .event-card__when { margin: 0; color: var(--ember); font-style: italic; font-size: .95rem; }
 .prose .event-card__title { margin: .2rem 0 .6rem; font-family: var(--display); font-size: 1.5rem; color: var(--gilt); }
 .event-card__text p:last-child { margin-bottom: 0; }
+
+/* a god's vassals (e.g. The Arbiter's 12 Marshals) */
+.vassal-tree { display: flex; flex-direction: column; align-items: center; margin: 0 0 2rem; }
+.prose .vassal-tree__root { flex-direction: column; gap: .4rem; padding: .7rem 1.1rem; border-color: var(--gilt-dim); text-align: center; }
+.prose .vassal-tree__tier {
+  position: relative; list-style: none; margin: 0; padding: 2.2rem 0 0; width: 100%;
+  display: flex; flex-wrap: wrap; justify-content: center; gap: .8rem;
+}
+.prose .vassal-tree__tier > li { margin: 0; }
+.prose .vassal-tree__tier > li::before { content: none; }
+/* the line down from the tier above */
+.prose .vassal-tree__tier::before {
+  content: ""; position: absolute; top: .3rem; left: 50%; height: 1.6rem; border-left: 2px solid var(--line);
+}
+.vassal-card {
+  display: flex; flex-direction: column; align-items: center; text-align: center; gap: .15rem;
+  min-width: 11rem; max-width: 14rem; padding: .7rem .9rem; border-radius: 12px;
+  background: var(--night-2); border: 1px solid var(--line-soft);
+}
+.vassal-tree__tier--single .vassal-card { border-color: var(--gilt-dim); min-width: 14rem; }
+.vassal-tree__tier:nth-of-type(1) .vassal-card { border-width: 2px; border-color: var(--gilt); }
+.vassal-card__title { font-family: var(--display); color: var(--gilt); font-size: 1.02rem; line-height: 1.25; }
+.vassal-card__also { color: var(--ember); font-style: italic; font-size: .9rem; }
+.vassal-card__holder { margin-top: .25rem; color: var(--ink); font-size: .95rem; }
+.vassal-card__holder em { color: var(--ink-3); }
+.vassal-card--open { border-style: dashed; }
