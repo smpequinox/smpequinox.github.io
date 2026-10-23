@@ -8,9 +8,9 @@ map_y: 11.2
 status: Public
 summary: "A new house established by Eychon Rivenheart when he abandoned the Blackfyre name."
 facts:
-  "Sworn to": "Bailmont"
+  "Sworn to": "Baillmont"
   "Head of house": "Eychon Rivenheart"
-  "Seat": "Bailmont"
+  "Seat": "Baillmont"
   "Words": "Unrelenting Before Death."
   "Faith": "None."
   "Allies": "House Vale, House Cnidaria, House Fairfax"
@@ -22,4 +22,4 @@ ranks:
 # Submitted in issue #54
 ---
 
-House Rivenheart was founded when Eychon left House Blackfyre in 750 SR. He then adopted Lynn, who then became Lynn Rivenheart, and the great houses of the realm acknowledged their ascent as a noble house. Rivenheart territory includes more than half of the northern Bailmont claim, and the former Fu Empire.
+House Rivenheart was founded when Eychon left House Blackfyre in 750 SR. He then adopted Lynn, who then became Lynn Rivenheart, and the great houses of the realm acknowledged their ascent as a noble house. Rivenheart territory includes more than half of the northern Baillmont claim, and the former Fu Empire.

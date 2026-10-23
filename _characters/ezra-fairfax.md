@@ -48,7 +48,7 @@ bonds:
   - name: "Shinsei de Cni'Daria"
     relation: "Mentor"
     type: Other
-  - name: "Bailmont"
+  - name: "Baillmont"
     type: Other
   - name: "Eychon Rivenheart"
     relation: "Friend"
