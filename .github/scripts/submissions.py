@@ -234,7 +234,7 @@ UPDATE_HINT = ("Leave this empty for a new page. To update a page, paste its add
 CLEAR = "-"
 # Settings staff add by hand that a player's update can never change: map
 # pins, the Featured flag, the Living Legend honour and a theory's verdict.
-KEEP_ON_UPDATE = ["map_x", "map_y", "featured", "verdict", "legend", "legend_for", "legend_since"]
+KEEP_ON_UPDATE = ["map_x", "map_y", "featured", "verdict", "legend", "legend_for", "legend_since", "image_focus"]
 
 
 # ---------- issue forms ----------

@@ -11,7 +11,7 @@ A place in the Living Legends is earned, not given. Characters are put forward a
 <ul class="char-grid legend-grid">
 {%- for c in legends %}
 <li><a class="char-card char-card--legend" href="{{ c.url | relative_url }}">
-<span class="char-card__art{% unless c.image %} char-card__art--blank{% endunless %}">{% if c.image %}<img src="{{ c.image | relative_url }}" alt="" loading="lazy">{% else %}<img src="{{ '/assets/img/emblem.png' | relative_url }}" alt="">{% endif %}</span>
+<span class="char-card__art{% unless c.image %} char-card__art--blank{% endunless %}">{% if c.image %}<img src="{{ c.image | relative_url }}" alt="" loading="lazy"{% if c.image_focus %} style="object-position: {{ c.image_focus }};"{% endif %}>{% else %}<img src="{{ '/assets/img/emblem.png' | relative_url }}" alt="">{% endif %}</span>
 <span class="char-card__name">{{ c.title }}</span>
 {%- if c.legend_for %}<span class="char-card__aff">{{ c.legend_for }}</span>{% endif %}
 {%- if c.legend_since %}<span class="char-card__meta">Honoured {{ c.legend_since }}</span>{% endif %}

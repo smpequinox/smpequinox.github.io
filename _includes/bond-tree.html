@@ -13,7 +13,7 @@
 <ul class="bond-tree__level">
 <li>
   <span class="bond-node bond-node--root">
-    <span class="bond-node__art">{% if page.image %}<img src="{{ page.image | relative_url }}" alt="">{% else %}<img src="{{ '/assets/img/emblem.png' | relative_url }}" alt="">{% endif %}</span>
+    <span class="bond-node__art">{% if page.image %}<img src="{{ page.image | relative_url }}" alt=""{% if page.image_focus %} style="object-position: {{ page.image_focus }};"{% endif %}>{% else %}<img src="{{ '/assets/img/emblem.png' | relative_url }}" alt="">{% endif %}</span>
     <span class="bond-node__name">{{ page.title }}</span>
   </span>
   <ul class="bond-tree__level">
@@ -38,7 +38,7 @@
         {%- endunless -%}
         <li>
           {%- if bt_char and bt_char.url != page.url %}<a class="bond-node" href="{{ bt_char.url | relative_url }}">{% else %}<span class="bond-node">{% endif -%}
-          <span class="bond-node__art">{% if bt_char.image %}<img src="{{ bt_char.image | relative_url }}" alt="" loading="lazy">{% else %}<img src="{{ '/assets/img/emblem.png' | relative_url }}" alt="">{% endif %}</span>
+          <span class="bond-node__art">{% if bt_char.image %}<img src="{{ bt_char.image | relative_url }}" alt="" loading="lazy"{% if bt_char.image_focus %} style="object-position: {{ bt_char.image_focus }};"{% endif %}>{% else %}<img src="{{ '/assets/img/emblem.png' | relative_url }}" alt="">{% endif %}</span>
           <span class="bond-node__text"><span class="bond-node__name">{{ bond.name }}</span>{% if bond.relation %}<span class="bond-node__relation">{{ bond.relation }}</span>{% endif %}{% if bt_char.status == "Dead" %}<span class="bond-node__relation">Deceased</span>{% endif %}</span>
           {%- if bt_char and bt_char.url != page.url %}</a>{% else %}</span>{% endif -%}
         </li>

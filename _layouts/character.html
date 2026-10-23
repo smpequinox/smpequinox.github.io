@@ -5,7 +5,7 @@ layout: page
   <div class="character__card">
     {% if page.image %}
     <a class="character__portrait" href="{{ page.image | relative_url }}">
-      <img src="{{ page.image | relative_url }}" alt="Character art of {{ page.title }}">
+      <img src="{{ page.image | relative_url }}" alt="Character art of {{ page.title }}"{% if page.image_focus %} style="object-position: {{ page.image_focus }};"{% endif %}>
     </a>
     {% endif %}
     <dl class="facts">
