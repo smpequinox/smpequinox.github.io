@@ -17,17 +17,7 @@
   {%- assign vt_row = page.vassals | where: "tier", vt_tier %}
   <ul class="vassal-tree__tier{% if vt_row.size == 1 %} vassal-tree__tier--single{% endif %}">
     {%- for v in vt_row %}
-    {%- assign vt_holder = v.holder | append: "" | strip -%}
-    {%- assign vt_holder_key = vt_holder | downcase -%}
-    <li class="vassal-card{% if vt_holder == '' or vt_holder_key == 'unclaimed' %} vassal-card--open{% endif %}">
-      <span class="vassal-card__title">{{ v.title }}</span>
-      {%- if v.also %}<span class="vassal-card__also">{{ v.also }}</span>{% endif %}
-      <span class="vassal-card__holder">
-        {%- if vt_holder == "" or vt_holder_key == "unclaimed" %}<em>Unclaimed</em>
-        {%- elsif vt_holder_key == "unknown" %}<em>Unknown</em>
-        {%- else %}{% include linked-names.html text=vt_holder %}{% endif -%}
-      </span>
-    </li>
+    {% include vassal-card.html v=v %}
     {%- endfor %}
   </ul>
   {%- endfor %}

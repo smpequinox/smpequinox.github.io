@@ -1,0 +1,13 @@
+{%- comment -%} One vassal title card (include.v). Used by the vassal tree and the scale. {%- endcomment -%}
+{%- assign vc = include.v -%}
+{%- assign vc_holder = vc.holder | append: "" | strip -%}
+{%- assign vc_key = vc_holder | downcase -%}
+<li class="vassal-card{% if vc_holder == '' or vc_key == 'unclaimed' %} vassal-card--open{% endif %}{% if include.class %} {{ include.class }}{% endif %}">
+  <span class="vassal-card__title">{{ vc.title }}</span>
+  {%- if vc.also %}<span class="vassal-card__also">{{ vc.also }}</span>{% endif %}
+  <span class="vassal-card__holder">
+    {%- if vc_holder == "" or vc_key == "unclaimed" %}<em>Unclaimed</em>
+    {%- elsif vc_key == "unknown" %}<em>Unknown</em>
+    {%- else %}{% include linked-names.html text=vc_holder %}{% endif -%}
+  </span>
+</li>

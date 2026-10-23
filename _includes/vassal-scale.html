@@ -1,0 +1,30 @@
+{%- comment -%}
+  A god's vassals drawn as a balanced scale (vassal_layout: scale). Each vassal
+  has place: fulcrum (top of the pillar), left or right (the two pans, in
+  order), or base (foot of the pillar). On phones it stacks top to bottom.
+{%- endcomment -%}
+{%- assign vs_top = page.vassals | where: "place", "fulcrum" -%}
+{%- assign vs_left = page.vassals | where: "place", "left" -%}
+{%- assign vs_right = page.vassals | where: "place", "right" -%}
+{%- assign vs_base = page.vassals | where: "place", "base" -%}
+<section class="vassal-scale" aria-label="Vassals of {{ page.title }}, arranged as a balanced scale">
+  <div class="vassal-scale__god bond-node bond-node--root">
+    <span class="bond-node__art"><img src="{{ page.image | default: '/assets/img/emblem.png' | relative_url }}" alt=""></span>
+    <span class="bond-node__name">{{ page.title }}</span>
+  </div>
+  <ul class="vassal-scale__fulcrum">{% for v in vs_top %}{% include vassal-card.html v=v class="vassal-card--fulcrum" %}{% endfor %}</ul>
+  <div class="vassal-scale__pans">
+    <div class="vassal-scale__beam" aria-hidden="true"></div>
+    <div class="vassal-scale__side vassal-scale__side--left">
+      <span class="vassal-scale__chains" aria-hidden="true"></span>
+      <ul class="vassal-scale__pan">{% for v in vs_left %}{% include vassal-card.html v=v %}{% endfor %}</ul>
+    </div>
+    <div class="vassal-scale__pillar" aria-hidden="true"></div>
+    <div class="vassal-scale__side vassal-scale__side--right">
+      <span class="vassal-scale__chains" aria-hidden="true"></span>
+      <ul class="vassal-scale__pan">{% for v in vs_right %}{% include vassal-card.html v=v %}{% endfor %}</ul>
+    </div>
+  </div>
+  <ul class="vassal-scale__base">{% for v in vs_base %}{% include vassal-card.html v=v class="vassal-card--base" %}{% endfor %}</ul>
+  <div class="vassal-scale__foot" aria-hidden="true"></div>
+</section>

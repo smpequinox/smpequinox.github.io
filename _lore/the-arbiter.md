@@ -9,40 +9,41 @@ facts:
   Worshipped by: "Path of the Arbiter"
   Blessed Justicar: "Aasim Fadel"
 vassal_title: "The 12 Marshals"
+vassal_layout: scale
 vassal_intro: "The Arbiter has twelve known vassal positions, called the 12 Marshals."
 vassals:
   - title: "Marshal of Balance"
     also: "Grand Marshal"
     holder: "Unknown"
-    tier: 1
+    place: fulcrum
   - title: "Marshal of Verdicts"
     also: "High Marshal"
     holder: "Eda Vossen"
-    tier: 2
+    place: left
   - title: "Marshal of Sanctuary"
     holder: "Fara"
-    tier: 3
+    place: left
   - title: "Marshal of Vigil"
     holder: "Ira Whisp"
-    tier: 3
+    place: left
   - title: "Marshal of Oaths"
     holder: "Unclaimed"
-    tier: 3
+    place: left
   - title: "Marshal of Silence"
     holder: "Unclaimed"
-    tier: 3
+    place: left
   - title: "Marshal of Mercy"
     holder: "Unknown"
-    tier: 3
+    place: right
   - title: "Marshal of Restraint"
-    tier: 3
+    place: right
   - title: "Marshal of Reconciliation"
-    tier: 3
+    place: right
   - title: "Marshal of Chains"
-    tier: 3
+    place: right
   - title: "Marshal of Witness"
-    tier: 3
+    place: right
   - title: "The Sentinel"
     also: "The last of the Marshals, shared with The Blade"
-    tier: 4
+    place: base
 ---
