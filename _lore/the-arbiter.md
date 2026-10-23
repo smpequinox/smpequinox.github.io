@@ -45,5 +45,6 @@ vassals:
     place: right
   - title: "The Sentinel"
     also: "The last of the Marshals, shared with The Blade"
+    holder: "Unknown"
     place: base
 ---
