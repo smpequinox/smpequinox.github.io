@@ -6,6 +6,7 @@
 title: "House Name"
 category: houses
 standing: Ruling                # Ruling / Fallen (delete the line if unknown: listed under "Other houses")
+# aliases: ["Vale"]             # optional: other names that should link here, e.g. the family name
 direction: North                # optional: region, as for locations
 # map_x / map_y: optional map pin, as for locations
 summary: "One line a new player should understand."

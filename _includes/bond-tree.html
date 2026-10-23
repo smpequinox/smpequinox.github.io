@@ -2,7 +2,8 @@
   The relationship tree on a character page. Reads page.bonds: a list of
   { name, relation, type } where type is Family, Ally, Rival, Romance or Other.
   Names that match a character page link to it and show its portrait. A first
-  name alone also works if exactly one character has that first name.
+  name alone also works if exactly one character has that first name. Matching
+  ignores capitals, apostrophes, quotation marks and hyphens.
 {%- endcomment -%}
 {%- assign bt_types = "Family,Ally,Rival,Romance,Other" | split: "," -%}
 {%- assign bt_labels = "Family,Allies,Rivals,Romance,Other bonds" | split: "," -%}
@@ -12,7 +13,7 @@
 <ul class="bond-tree__level">
 <li>
   <span class="bond-node bond-node--root">
-    <span class="bond-node__art">{% if page.image %}<img src="{{ page.image | relative_url }}" alt="">{% else %}<img src="{{ '/assets/img/emblem.png' | relative_url }}" alt="">{% endif %}</span>
+    <span class="bond-node__art">{% if page.image %}<img src="{{ page.image | relative_url }}" alt=""{% if page.image_focus %} style="object-position: {{ page.image_focus }};"{% endif %}>{% else %}<img src="{{ '/assets/img/emblem.png' | relative_url }}" alt="">{% endif %}</span>
     <span class="bond-node__name">{{ page.title }}</span>
   </span>
   <ul class="bond-tree__level">
@@ -23,20 +24,21 @@
       <span class="bond-group__label">{{ bt_labels[forloop.index0] }}</span>
       <ul class="bond-group__people">
       {%- for bond in bt_group %}
-        {%- assign bt_char = site.characters | where: "title", bond.name | first -%}
+        {%- assign bt_wanted = bond.name | downcase | remove: "'" | remove: "’" | remove: "‘" | remove: "`" | remove: '"' | remove: "“" | remove: "”" | replace: "-", " " | split: " " | join: " " -%}
+        {%- assign bt_char = nil -%}
+        {%- for c in site.characters -%}{%- assign bt_k = c.title | downcase | remove: "'" | remove: "’" | remove: "‘" | remove: "`" | remove: '"' | remove: "“" | remove: "”" | replace: "-", " " | split: " " | join: " " -%}{%- if bt_k == bt_wanted %}{% assign bt_char = c %}{% break %}{% endif -%}{%- endfor -%}
         {%- unless bt_char -%}
           {%- comment -%} "Ezra" finds "Ezra Fairfax" when only one character has that first name {%- endcomment -%}
-          {%- assign bt_wanted = bond.name | remove: '"' | strip -%}
           {%- assign bt_found = 0 -%}
           {%- for c in site.characters -%}
-            {%- assign bt_first = c.title | remove: '"' | split: " " | first -%}
+            {%- assign bt_first = c.title | downcase | remove: "'" | remove: "’" | remove: "‘" | remove: "`" | remove: '"' | remove: "“" | remove: "”" | replace: "-", " " | split: " " | join: " " | split: " " | first -%}
             {%- if bt_first == bt_wanted %}{% assign bt_found = bt_found | plus: 1 %}{% assign bt_candidate = c %}{% endif -%}
           {%- endfor -%}
           {%- if bt_found == 1 %}{% assign bt_char = bt_candidate %}{% endif -%}
         {%- endunless -%}
         <li>
           {%- if bt_char and bt_char.url != page.url %}<a class="bond-node" href="{{ bt_char.url | relative_url }}">{% else %}<span class="bond-node">{% endif -%}
-          <span class="bond-node__art">{% if bt_char.image %}<img src="{{ bt_char.image | relative_url }}" alt="" loading="lazy">{% else %}<img src="{{ '/assets/img/emblem.png' | relative_url }}" alt="">{% endif %}</span>
+          <span class="bond-node__art">{% if bt_char.image %}<img src="{{ bt_char.image | relative_url }}" alt="" loading="lazy"{% if bt_char.image_focus %} style="object-position: {{ bt_char.image_focus }};"{% endif %}>{% else %}<img src="{{ '/assets/img/emblem.png' | relative_url }}" alt="">{% endif %}</span>
           <span class="bond-node__text"><span class="bond-node__name">{{ bond.name }}</span>{% if bond.relation %}<span class="bond-node__relation">{{ bond.relation }}</span>{% endif %}{% if bt_char.status == "Dead" %}<span class="bond-node__relation">Deceased</span>{% endif %}</span>
           {%- if bt_char and bt_char.url != page.url %}</a>{% else %}</span>{% endif -%}
         </li>

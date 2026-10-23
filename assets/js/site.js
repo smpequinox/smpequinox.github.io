@@ -378,11 +378,23 @@
       var here = location.pathname.replace(/index\.html$/, "");
       var pages = JSON.parse(indexEl.textContent).filter(function (p) { return p && p.u !== here; });
       pages.sort(function (a, b) { return b.t.length - a.t.length; });
-      var byTitle = {};
-      pages.forEach(function (p) { byTitle[p.t] = p.u; });
-      var escapeRe = function (s) { return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); };
+      // Names match ignoring capitals, apostrophes, quotation marks and hyphens,
+      // so "Cni'daria", "Cni’Daria" and "cnidaria" are the same name.
+      var marks = /['’‘`ʼ"“”]/g;
+      var nameKey = function (s) { return s.toLowerCase().replace(marks, "").replace(/[\s-]+/g, " ").trim(); };
+      var byKey = {}, hasMark = {};
+      pages.forEach(function (p) { if (p.a) byKey[nameKey(p.t)] = p.u; });   // aliases first,
+      pages.forEach(function (p) { if (!p.a) byKey[nameKey(p.t)] = p.u; });  // so titles win
+      pages.forEach(function (p) { if (p.t.search(marks) >= 0) hasMark[nameKey(p.t)] = true; });
+      var namePattern = function (t) {
+        return t.split("").map(function (ch) {
+          if (/['’‘`ʼ"“”]/.test(ch)) return "['’‘`ʼ\"“”]?";
+          if (/[\s-]/.test(ch)) return "[\\s-]+";
+          return ch.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        }).join("").replace(/(\[\\s-\]\+)+/g, "[\\s-]+");
+      };
       if (pages.length) {
-        var nameRe = new RegExp("(^|[^\\p{L}\\p{N}_])(" + pages.map(function (p) { return escapeRe(p.t); }).join("|") + ")(?![\\p{L}\\p{N}_])", "gu");
+        var nameRe = new RegExp("(^|[^\\p{L}\\p{N}_])(" + pages.map(function (p) { return namePattern(p.t); }).join("|") + ")(?![\\p{L}\\p{N}_])", "giu");
         var skip = "a, button, h1, h2, h3, h4, h5, h6, code, pre, script, style, .calendar-now, .world-map, .toc, [data-no-autolink]";
         var everyMention = ".facts, .bond-tree, .rank-tree, table";
         var linkedOnce = {};
@@ -400,7 +412,11 @@
           var all = !!node.parentElement.closest(everyMention);
           nameRe.lastIndex = 0;
           while ((m = nameRe.exec(text))) {
-            var url = byTitle[m[2]];
+            var key = nameKey(m[2]);
+            var url = byKey[key];
+            // all-lowercase mentions of ordinary words ("the blade", "lament") stay plain text;
+            // made-up names with an apostrophe ("cnidaria") still link
+            if (!url || (m[2] === m[2].toLowerCase() && !hasMark[key])) continue;
             if (!all && linkedOnce[url]) continue;
             var start = m.index + m[1].length;
             frag = frag || document.createDocumentFragment();

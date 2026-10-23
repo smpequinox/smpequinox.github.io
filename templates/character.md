@@ -3,6 +3,8 @@
 # (lowercase, dashes instead of spaces). Delete any line you don't need.
 title: "Character Name"
 image: "/assets/img/characters/character-name.png"   # upload art to assets/img/characters/
+# image_focus: "75% 40%"        # optional: which part of the picture to keep when it's cropped,
+#                               # as % from the left and % from the top (e.g. where the face is)
 type: "Player Character"        # Player Character / Staff Character / Important NPC ("Staff Character" = shown under Staff characters)
 status: "Alive"                 # Alive / Dead / Retired / Unknown ("Dead" = moved to Dead characters)
 known_for: "Public reputation in one sentence"

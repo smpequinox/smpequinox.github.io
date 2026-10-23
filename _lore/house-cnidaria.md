@@ -1,6 +1,7 @@
 ---
 title: "House Cni'Daria"
 category: houses
+aliases: ["Cni'Daria"]
 standing: Ruling
 status: Public
 facts:

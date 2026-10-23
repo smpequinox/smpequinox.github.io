@@ -155,6 +155,10 @@ legend_since: "Fulgrament 751 S.R"
 
 `legend_for` and `legend_since` are optional. The character then appears on the Living Legends page with a gold frame, and their own page shows a **Living Legend** badge. Player updates through the submission forms keep these lines. To remove the honour, delete them.
 
+## Fixing how a picture is cropped
+
+Character cards and portraits are tall, so a wide picture is cropped to its centre. If the face is cut off, add `image_focus:` under `image:` in the character's file, giving where to keep as % from the left and % from the top, e.g. `image_focus: "78% 42%"` keeps the area 78% across and 42% down. Player updates keep this line.
+
 ## Adding a recent event to the home page gallery
 
 1. Upload the screenshot to `assets/img/events/`.

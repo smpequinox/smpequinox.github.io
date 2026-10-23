@@ -1,11 +1,16 @@
 {%- comment -%}
   Prints include.text, turning any name that matches a lore entry's or character's title into a link to it.
-  Separate several names with a comma and a space.
+  Separate several names with a comma and a space. Matching ignores capitals, apostrophes, quotation
+  marks and hyphens, so "Cni'daria", "Cni’Daria" and "cnidaria" are the same name. A page's
+  aliases: (other names) count too, after titles.
 {%- endcomment -%}
 {%- assign ln_names = include.text | append: "" | split: ", " -%}
 {%- for ln_name in ln_names -%}
-{%- assign ln_target = site.lore | where: "title", ln_name | first -%}
-{%- unless ln_target %}{% assign ln_target = site.characters | where: "title", ln_name | first %}{% endunless -%}
+{%- assign ln_key = ln_name | downcase | remove: "'" | remove: "’" | remove: "‘" | remove: "`" | remove: '"' | remove: "“" | remove: "”" | replace: "-", " " | split: " " | join: " " -%}
+{%- assign ln_target = nil -%}
+{%- for d in site.lore -%}{%- assign ln_k = d.title | downcase | remove: "'" | remove: "’" | remove: "‘" | remove: "`" | remove: '"' | remove: "“" | remove: "”" | replace: "-", " " | split: " " | join: " " -%}{%- if ln_k == ln_key %}{% assign ln_target = d %}{% break %}{% endif -%}{%- endfor -%}
+{%- unless ln_target -%}{%- for d in site.characters -%}{%- assign ln_k = d.title | downcase | remove: "'" | remove: "’" | remove: "‘" | remove: "`" | remove: '"' | remove: "“" | remove: "”" | replace: "-", " " | split: " " | join: " " -%}{%- if ln_k == ln_key %}{% assign ln_target = d %}{% break %}{% endif -%}{%- endfor -%}{%- endunless -%}
+{%- unless ln_target -%}{%- for d in site.lore -%}{%- for ln_a in d.aliases -%}{%- assign ln_k = ln_a | downcase | remove: "'" | remove: "’" | remove: "‘" | remove: "`" | remove: '"' | remove: "“" | remove: "”" | replace: "-", " " | split: " " | join: " " -%}{%- if ln_k == ln_key %}{% assign ln_target = d %}{% endif -%}{%- endfor -%}{%- endfor -%}{%- endunless -%}
 {%- if ln_target and ln_target.url != page.url -%}<a href="{{ ln_target.url | relative_url }}">{{ ln_name }}</a>{%- else -%}{{ ln_name }}{%- endif -%}
 {%- unless forloop.last %}, {% endunless -%}
 {%- endfor -%}
