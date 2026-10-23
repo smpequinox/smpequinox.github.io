@@ -315,6 +315,13 @@ def one_line(text):
     return clean(" ".join(text.split()))
 
 
+def name_key(text):
+    """A name for comparing: capitals, apostrophes, quotation marks and hyphens
+    don't matter, so "Cni'daria", "Cni’Daria" and "cnidaria" are the same."""
+    text = re.sub(r"[\'’‘`ʼ\"“”]", "", text or "").casefold()
+    return re.sub(r"[\s-]+", " ", text).strip()
+
+
 def plain_name(text):
     """A name without markdown emphasis, e.g. "**The Forest**" -> "The Forest"."""
     return re.sub(r"^[*_]+|[*_]+$", "", one_line(text)).strip()
@@ -386,9 +393,9 @@ def find_page(folder, ref, category=None):
         name = re.sub(r"\.html$", "", name)
         matches = [f for f in candidates if f[:-3] == name]
     else:
-        wanted = re.sub(r"\s+", " ", ref).casefold()
+        wanted = name_key(ref)
         matches = [f for f in candidates
-                   if re.sub(r"\s+", " ", unquote(setting(front_matter(os.path.join(folder, f)), "title"))).casefold() == wanted]
+                   if name_key(unquote(setting(front_matter(os.path.join(folder, f)), "title"))) == wanted]
     for f in matches:
         path = os.path.join(folder, f)
         if category is None or unquote(setting(front_matter(path), "category")) == category:
@@ -484,11 +491,11 @@ def merge_update(old_lines, old_body, new, cleared, removed_bonds, fixed_keys=()
     # bonds: merge by name; "Name | remove" deletes
     bonds = bond_items(blocks.get("bonds", []))
     for name, lines in bond_items(new["bonds"]):
-        if any(n == name for n, _ in bonds):
-            bonds = [(n, lines if n == name else ls) for n, ls in bonds]
+        if any(name_key(n) == name_key(name) for n, _ in bonds):
+            bonds = [(n, lines if name_key(n) == name_key(name) else ls) for n, ls in bonds]
         else:
             bonds.append((name, lines))
-    bonds = [(n, ls) for n, ls in bonds if n.casefold() not in removed_bonds]
+    bonds = [(n, ls) for n, ls in bonds if name_key(n) not in removed_bonds]
     # ranks: a new hierarchy replaces the old one as a whole
     ranks = new["ranks"] or ([] if "ranks" in cleared else blocks.get("ranks", []))
 
@@ -573,7 +580,7 @@ def build(issue, root="."):
                 if not parts[0]:
                     continue
                 if len(parts) > 1 and parts[1].strip().casefold() == "remove":
-                    removed_bonds.add(parts[0].casefold())
+                    removed_bonds.add(name_key(parts[0]))
                     continue
                 kind_of = parts[2].title() if len(parts) > 2 and parts[2] else "Other"
                 if kind_of not in ("Family", "Ally", "Rival", "Romance", "Other"):

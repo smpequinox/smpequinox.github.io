@@ -5,7 +5,7 @@
   Places are grouped by their place_type: setting. A nation's aliases: (short
   names, e.g. "Nerestel" for the Nation of Nerestel) count as naming it too.
 {%- endcomment -%}
-{%- assign nm_name = page.title -%}
+{%- assign nm_name = page.title | downcase | remove: "'" | remove: "’" | remove: "‘" | remove: "`" | remove: '"' | remove: "“" | remove: "”" | replace: "-", " " | split: " " | join: " " -%}
 {%- assign nm_place_types = "Capital,City,Town,Village,Fort,Port,Landmark,Ruin" -%}
 {%- assign nm_groups = "Capital|Capital|places,City|Cities|places,Town|Towns|places,Village|Villages|places,Fort|Forts|places,Port|Ports|places,Landmark|Landmarks|places,Ruin|Ruins|places,Other|Other places|places,factions|Factions|factions,houses|Noble houses|houses,religions|Faiths|faiths,people|People|people" | split: "," -%}
 {%- assign nm_places = site.lore | where: "category", "locations" | sort: "title" -%}
@@ -23,10 +23,11 @@
     {%- else -%}
       {%- assign nm_hay = "" -%}{%- for f in d.facts %}{% assign nm_hay = nm_hay | append: f[1] | append: " | " %}{% endfor -%}
     {%- endif -%}
+    {%- assign nm_hay = nm_hay | downcase | remove: "'" | remove: "’" | remove: "‘" | remove: "`" | remove: '"' | remove: "“" | remove: "”" | replace: "-", " " | split: " " | join: " " -%}
     {%- assign nm_keep = false -%}
     {%- assign nm_hit = false -%}
     {%- if nm_hay contains nm_name %}{% assign nm_hit = true %}{% endif -%}
-    {%- if page.aliases %}{% for nm_alias in page.aliases %}{% if nm_hay contains nm_alias %}{% assign nm_hit = true %}{% endif %}{% endfor %}{% endif -%}
+    {%- if page.aliases %}{% for nm_alias in page.aliases %}{% assign nm_alias_key = nm_alias | downcase | remove: "'" | remove: "’" | remove: "‘" | remove: "`" | remove: '"' | remove: "“" | remove: "”" | replace: "-", " " | split: " " | join: " " %}{% if nm_hay contains nm_alias_key %}{% assign nm_hit = true %}{% endif %}{% endfor %}{% endif -%}
     {%- if d.url == page.url %}{% assign nm_hit = false %}{% endif -%}
     {%- if nm_hit -%}
       {%- if nm_g[2] != "places" -%}{%- assign nm_keep = true -%}

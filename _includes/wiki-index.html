@@ -1,10 +1,12 @@
 {%- comment -%}
-  Every wiki page title with its address, for the script that turns names
-  mentioned in text (e.g. "Prince of Arbitus") into links. Titles shorter than
-  4 letters, or made only of "?" marks, are left out so they don't match by accident.
+  Every wiki page title (and alias) with its address, for the script that turns
+  names mentioned in text (e.g. "Prince of Arbitus") into links. Titles shorter
+  than 4 letters, or made only of "?" marks, are left out so they don't match by accident.
+  "a":1 marks an alias; a page title always wins over an alias.
 {%- endcomment -%}
 {%- capture wi_items -%}
-{%- for d in site.lore -%}{%- assign wi_t = d.title | strip -%}{%- assign wi_q = wi_t | remove: "?" | strip -%}{%- if wi_t.size > 3 and wi_q != "" -%}{"t":{{ wi_t | jsonify }},"u":{{ d.url | relative_url | jsonify }}},{%- endif -%}{%- endfor -%}
+{%- for d in site.lore -%}{%- assign wi_t = d.title | strip -%}{%- assign wi_q = wi_t | remove: "?" | strip -%}{%- if wi_t.size > 3 and wi_q != "" -%}{"t":{{ wi_t | jsonify }},"u":{{ d.url | relative_url | jsonify }}},{%- endif -%}
+{%- for wi_a in d.aliases -%}{%- if wi_a.size > 3 -%}{"t":{{ wi_a | jsonify }},"u":{{ d.url | relative_url | jsonify }},"a":1},{%- endif -%}{%- endfor -%}{%- endfor -%}
 {%- for d in site.characters -%}{%- assign wi_t = d.title | strip -%}{%- if wi_t.size > 3 -%}{"t":{{ wi_t | jsonify }},"u":{{ d.url | relative_url | jsonify }}},{%- endif -%}{%- endfor -%}
 {%- endcapture -%}
 <script type="application/json" id="wiki-index">[{{ wi_items }}null]</script>
