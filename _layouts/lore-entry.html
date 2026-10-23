@@ -23,7 +23,7 @@ layout: page
   {% if page.image %}</div>{% endif %}
   {% endif %}
   {% if page.category == "nations" %}{% include nation-members.html %}{% endif %}
-  {% if page.vassals and page.vassals.size > 0 %}
+  {% if page.vassal_title or page.vassals %}
   <h2 id="vassals">{{ page.vassal_title | default: "Vassals" }}</h2>
   {% if page.vassal_intro %}<p>{{ page.vassal_intro }}</p>{% endif %}
   {% include vassal-tree.html %}

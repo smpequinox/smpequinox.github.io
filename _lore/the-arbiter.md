@@ -43,6 +43,6 @@ vassals:
   - title: "Marshal of Witness"
     tier: 3
   - title: "The Sentinel"
-    also: "The last of the Marshals"
+    also: "The last of the Marshals, shared with The Blade"
     tier: 4
 ---

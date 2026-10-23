@@ -10,6 +10,9 @@
     <span class="bond-node__art"><img src="{{ page.image | default: '/assets/img/emblem.png' | relative_url }}" alt=""></span>
     <span class="bond-node__name">{{ page.title }}</span>
   </div>
+  {%- unless page.vassals %}
+  <ul class="vassal-tree__tier vassal-tree__tier--single"><li class="vassal-card vassal-card--open"><span class="vassal-card__holder"><em>No titles have been recorded yet.</em></span></li></ul>
+  {%- endunless %}
   {%- for vt_tier in vt_tiers %}
   {%- assign vt_row = page.vassals | where: "tier", vt_tier %}
   <ul class="vassal-tree__tier{% if vt_row.size == 1 %} vassal-tree__tier--single{% endif %}">
