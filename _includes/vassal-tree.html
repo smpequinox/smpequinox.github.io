@@ -1,8 +1,8 @@
 {%- comment -%}
   A god's vassals as a tree: the god at the top, then each tier of vassal titles.
   Reads page.vassals: a list of { title, also, holder, tier }, where tier 1 is
-  the highest. holder can be a name, "Unclaimed" or "Unknown"; leave it out if
-  it hasn't been recorded. Names that match a wiki page link to it.
+  the highest. No holder means the title is Unclaimed; "Unknown" means it is
+  claimed but the holder hasn't been revealed. Names that match a wiki page link to it.
 {%- endcomment -%}
 {%- assign vt_tiers = page.vassals | map: "tier" | uniq | sort -%}
 <section class="vassal-tree" aria-label="Vassals of {{ page.title }}">
@@ -16,13 +16,12 @@
     {%- for v in vt_row %}
     {%- assign vt_holder = v.holder | append: "" | strip -%}
     {%- assign vt_holder_key = vt_holder | downcase -%}
-    <li class="vassal-card{% if vt_holder_key == 'unclaimed' %} vassal-card--open{% endif %}">
+    <li class="vassal-card{% if vt_holder == '' or vt_holder_key == 'unclaimed' %} vassal-card--open{% endif %}">
       <span class="vassal-card__title">{{ v.title }}</span>
       {%- if v.also %}<span class="vassal-card__also">{{ v.also }}</span>{% endif %}
       <span class="vassal-card__holder">
-        {%- if vt_holder == "" %}<em>Not yet recorded</em>
-        {%- elsif vt_holder_key == "unclaimed" %}<em>Unclaimed</em>
-        {%- elsif vt_holder_key == "unknown" %}<em>Claimed by someone unknown</em>
+        {%- if vt_holder == "" or vt_holder_key == "unclaimed" %}<em>Unclaimed</em>
+        {%- elsif vt_holder_key == "unknown" %}<em>Unknown</em>
         {%- else %}{% include linked-names.html text=vt_holder %}{% endif -%}
       </span>
     </li>

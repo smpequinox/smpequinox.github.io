@@ -10,7 +10,7 @@ facts:
   Domain: "What the god rules over, e.g. the sun, rebirth"
   Worshipped by: "The Sun Church"
 # Optional: the god's vassal titles, drawn as a tree. tier 1 is the highest.
-# holder: a name, "Unclaimed" or "Unknown"; leave it out if not recorded.
+# holder: a name, or "Unknown" if claimed but the name isn't revealed; leave it out if unclaimed.
 # vassal_title: "The 12 Marshals"
 # vassals:
 #   - title: "Marshal of Balance"
