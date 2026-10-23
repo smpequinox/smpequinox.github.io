@@ -7,4 +7,6 @@ facts:
   Titles: "Not yet recorded"
   Domain: "Craftsmanship and Creativity"
   Worshipped by: "Not yet recorded"
+vassal_title: "The Makers"
+vassal_intro: "The Spark's vassals are called Makers."
 ---

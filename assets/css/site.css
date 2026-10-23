@@ -920,3 +920,89 @@ button { font: inherit; color: inherit; }
 .prose .event-card__when { margin: 0; color: var(--ember); font-style: italic; font-size: .95rem; }
 .prose .event-card__title { margin: .2rem 0 .6rem; font-family: var(--display); font-size: 1.5rem; color: var(--gilt); }
 .event-card__text p:last-child { margin-bottom: 0; }
+
+/* a god's vassals (e.g. The Arbiter's 12 Marshals) */
+.vassal-tree { display: flex; flex-direction: column; align-items: center; margin: 0 0 2rem; }
+.prose .vassal-tree__root { flex-direction: column; gap: .4rem; padding: .7rem 1.1rem; border-color: var(--gilt-dim); text-align: center; }
+.prose .vassal-tree__tier {
+  position: relative; list-style: none; margin: 0; padding: 2.2rem 0 0; width: 100%;
+  display: flex; flex-wrap: wrap; justify-content: center; gap: .8rem;
+}
+.prose .vassal-tree__tier > li { margin: 0; }
+.prose .vassal-tree__tier > li::before { content: none; }
+/* the line down from the tier above */
+.prose .vassal-tree__tier::before {
+  content: ""; position: absolute; top: .3rem; left: 50%; height: 1.6rem; border-left: 2px solid var(--line);
+}
+.vassal-card {
+  display: flex; flex-direction: column; align-items: center; text-align: center; gap: .15rem;
+  min-width: 11rem; max-width: 14rem; padding: .7rem .9rem; border-radius: 12px;
+  background: var(--night-2); border: 1px solid var(--line-soft);
+}
+.vassal-tree__tier--single .vassal-card { border-color: var(--gilt-dim); min-width: 14rem; }
+.vassal-tree__tier:nth-of-type(1) .vassal-card { border-width: 2px; border-color: var(--gilt); }
+.vassal-card__title { font-family: var(--display); color: var(--gilt); font-size: 1.02rem; line-height: 1.25; }
+.vassal-card__also { color: var(--ember); font-style: italic; font-size: .9rem; }
+.vassal-card__holder { margin-top: .25rem; color: var(--ink); font-size: .95rem; }
+.vassal-card__holder em { color: var(--ink-3); }
+.vassal-card--open { border-style: dashed; }
+
+/* vassal_layout: scale (The Arbiter): a pillar with a beam and two hanging pans */
+.vassal-scale { --scale-line: var(--gilt-dim); display: flex; flex-direction: column; align-items: center; margin: 0 0 2rem; }
+.prose .vassal-scale ul { list-style: none; margin: 0; padding: 0; }
+.prose .vassal-scale li { margin: 0; }
+.prose .vassal-scale li::before { content: none; }
+.prose .vassal-scale__god { flex-direction: column; gap: .4rem; padding: .7rem 1.1rem; border-color: var(--gilt-dim); text-align: center; }
+.vassal-scale__fulcrum, .vassal-scale__base { position: relative; padding-top: 1.6rem !important; display: flex; justify-content: center; }
+.vassal-scale__fulcrum::before, .vassal-scale__base::before {
+  content: ""; position: absolute; top: 0; left: 50%; height: 1.6rem; border-left: 3px solid var(--scale-line); transform: translateX(-50%);
+}
+.vassal-card--fulcrum, .vassal-card--base { min-width: 14rem; border-width: 2px; border-color: var(--gilt); }
+.vassal-card--base { border-color: var(--gilt-dim); }
+.vassal-scale__pans {
+  position: relative; width: 100%; max-width: 46rem; padding-top: 1.4rem;
+  display: grid; grid-template-columns: 1fr 3rem 1fr; align-items: start;
+}
+/* the beam: a bar from one pan's chains to the other's, with the pivot in the middle */
+.vassal-scale__beam {
+  position: absolute; top: 1.4rem; left: calc((100% - 3rem) / 4); right: calc((100% - 3rem) / 4);
+  height: 5px; border-radius: 3px; background: linear-gradient(90deg, var(--gilt-dim), var(--gilt), var(--gilt-dim));
+}
+.vassal-scale__beam::before {
+  content: ""; position: absolute; left: 50%; top: -1.4rem; width: 3px; height: 1.4rem; background: var(--scale-line); transform: translateX(-50%);
+}
+.vassal-scale__beam::after {
+  content: ""; position: absolute; left: 50%; top: -.55rem; width: 1rem; height: 1rem; transform: translateX(-50%) rotate(45deg);
+  background: var(--night); border: 2px solid var(--gilt);
+}
+/* the pillar runs down between the pans */
+.vassal-scale__pillar { justify-self: center; width: 5px; height: 100%; min-height: 4rem; background: linear-gradient(var(--gilt-dim), var(--line)); }
+.vassal-scale__side { display: flex; flex-direction: column; align-items: center; }
+/* two chains meeting at the beam, opening down to the pan's rim */
+.vassal-scale__chains {
+  display: block; width: 78%; height: 3rem; margin-top: 5px;
+  background:
+    linear-gradient(to top left, transparent calc(50% - 1px), var(--scale-line) calc(50% - 1px), var(--scale-line) calc(50% + 1px), transparent calc(50% + 1px)) left / 50% 100% no-repeat,
+    linear-gradient(to top right, transparent calc(50% - 1px), var(--scale-line) calc(50% - 1px), var(--scale-line) calc(50% + 1px), transparent calc(50% + 1px)) right / 50% 100% no-repeat;
+}
+/* the pan: a gilt rim and a rounded bowl holding the cards */
+.prose .vassal-scale__pan {
+  width: 100%; display: flex; flex-direction: column; align-items: center; gap: .6rem;
+  padding: .9rem .7rem 1.6rem; border-top: 4px solid var(--gilt);
+  border-radius: 6px 6px 50% 50% / 6px 6px 2.5rem 2.5rem;
+  background: linear-gradient(rgba(239, 205, 151, .08), rgba(59, 42, 124, .25));
+  box-shadow: inset 0 -3px 0 var(--line);
+}
+.vassal-scale__pan .vassal-card { width: 100%; max-width: 15rem; min-width: 0; }
+.vassal-scale__pan > .vassal-card:first-child { border-color: var(--gilt-dim); border-width: 2px; }
+/* the foot of the pillar */
+.vassal-scale__foot {
+  width: 15rem; max-width: 80%; height: .9rem; margin-top: .5rem;
+  background: var(--gilt-dim); clip-path: polygon(12% 0, 88% 0, 100% 100%, 0 100%); opacity: .7;
+}
+/* phones: the pans stack, one under the other */
+@media (max-width: 640px) {
+  .vassal-scale__pans { grid-template-columns: 1fr; gap: 1.2rem; }
+  .vassal-scale__beam, .vassal-scale__pillar { display: none; }
+  .vassal-scale__chains { width: 50%; height: 1.6rem; }
+}

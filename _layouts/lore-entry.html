@@ -23,6 +23,11 @@ layout: page
   {% if page.image %}</div>{% endif %}
   {% endif %}
   {% if page.category == "nations" %}{% include nation-members.html %}{% endif %}
+  {% if page.vassal_title or page.vassals %}
+  <h2 id="vassals">{{ page.vassal_title | default: "Vassals" }}</h2>
+  {% if page.vassal_intro %}<p>{{ page.vassal_intro }}</p>{% endif %}
+  {% if page.vassal_layout == "scale" %}{% include vassal-scale.html %}{% else %}{% include vassal-tree.html %}{% endif %}
+  {% endif %}
   {% if page.ranks and page.ranks.size > 0 %}
   <h2 id="hierarchy">Hierarchy</h2>
   {% include rank-tree.html %}

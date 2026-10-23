@@ -7,4 +7,6 @@ facts:
   Titles: "Not yet recorded"
   Domain: "Knowledge"
   Worshipped by: "Not yet recorded"
+vassal_title: "The Scholars"
+vassal_intro: "The Scribe's vassals are called Scholars."
 ---

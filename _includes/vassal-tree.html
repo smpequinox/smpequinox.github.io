@@ -1,0 +1,24 @@
+{%- comment -%}
+  A god's vassals as a tree: the god at the top, then each tier of vassal titles.
+  Reads page.vassals: a list of { title, also, holder, tier }, where tier 1 is
+  the highest. No holder means the title is Unclaimed; "Unknown" means it is
+  claimed but the holder hasn't been revealed. Names that match a wiki page link to it.
+{%- endcomment -%}
+{%- assign vt_tiers = page.vassals | map: "tier" | uniq | sort -%}
+<section class="vassal-tree" aria-label="Vassals of {{ page.title }}">
+  <div class="vassal-tree__root bond-node bond-node--root">
+    <span class="bond-node__art"><img src="{{ page.image | default: '/assets/img/emblem.png' | relative_url }}" alt=""></span>
+    <span class="bond-node__name">{{ page.title }}</span>
+  </div>
+  {%- unless page.vassals %}
+  <ul class="vassal-tree__tier vassal-tree__tier--single"><li class="vassal-card vassal-card--open"><span class="vassal-card__holder"><em>No titles have been recorded yet.</em></span></li></ul>
+  {%- endunless %}
+  {%- for vt_tier in vt_tiers %}
+  {%- assign vt_row = page.vassals | where: "tier", vt_tier %}
+  <ul class="vassal-tree__tier{% if vt_row.size == 1 %} vassal-tree__tier--single{% endif %}">
+    {%- for v in vt_row %}
+    {% include vassal-card.html v=v %}
+    {%- endfor %}
+  </ul>
+  {%- endfor %}
+</section>
