@@ -6,7 +6,7 @@ description: "A good character has a want, a pressure, a relationship, and a rea
 ## The path to your first scene
 
 1. Read the [Rules]({{ '/rules/' | relative_url }}).
-2. Pick one of the [Playable Races]({{ '/playable-races/' | relative_url }}).
+2. Choose your race. See the [Native Races]({{ '/native-races/' | relative_url }}).
 3. Choose a starting region, nation, faction, or faith from the [World Lore]({{ '/world-lore/' | relative_url }}).
 4. Create a simple concept with one clear desire.
 5. Add a flaw, a complication, and a relationship.
@@ -23,7 +23,7 @@ Copy this into your application or notes and fill in each line.
 | **Name** | Full name |
 | **Pronouns** | Your character’s pronouns |
 | **Age or life stage** | Age, or the setting’s equivalent |
-| **Race** | One of the [Playable Races]({{ '/playable-races/' | relative_url }}), or a mix of two |
+| **Race** | See the [Native Races]({{ '/native-races/' | relative_url }}). Mixed heritage is allowed |
 | **Home** | Nation, region, or settlement |
 | **Occupation** | What they do day to day |
 | **Affiliations** | Factions, religions, mentors |
