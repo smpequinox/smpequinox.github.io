@@ -27,6 +27,9 @@ theories:
 relics:
   title: "Relics"
   url: "/relics/"
+races:
+  title: "Playable Races"
+  url: "/playable-races/"
 beastiary:
   title: "Beastiary"
   url: "/beastiary/"

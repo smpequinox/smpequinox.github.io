@@ -6,12 +6,13 @@ description: "A good character has a want, a pressure, a relationship, and a rea
 ## The path to your first scene
 
 1. Read the [Rules]({{ '/rules/' | relative_url }}).
-2. Choose a starting region, nation, faction, or faith from the [World Lore]({{ '/world-lore/' | relative_url }}).
-3. Create a simple concept with one clear desire.
-4. Add a flaw, a complication, and a relationship.
-5. Check that your concept fits the public canon.
-6. Submit your [application]({{ site.application_url }}).
-7. Once approved, your character can be added to the [Character Gallery]({{ '/character-gallery/' | relative_url }}).
+2. Pick one of the [Playable Races]({{ '/playable-races/' | relative_url }}).
+3. Choose a starting region, nation, faction, or faith from the [World Lore]({{ '/world-lore/' | relative_url }}).
+4. Create a simple concept with one clear desire.
+5. Add a flaw, a complication, and a relationship.
+6. Check that your concept fits the public canon.
+7. Submit your [application]({{ site.application_url }}).
+8. Once approved, your character can be added to the [Character Gallery]({{ '/character-gallery/' | relative_url }}).
 
 ## Character sheet
 
@@ -22,7 +23,7 @@ Copy this into your application or notes and fill in each line.
 | **Name** | Full name |
 | **Pronouns** | Your character’s pronouns |
 | **Age or life stage** | Age, or the setting’s equivalent |
-| **Species or origin** | If relevant to the setting |
+| **Race** | One of the [Playable Races]({{ '/playable-races/' | relative_url }}), or a mix of two |
 | **Home** | Nation, region, or settlement |
 | **Occupation** | What they do day to day |
 | **Affiliations** | Factions, religions, mentors |

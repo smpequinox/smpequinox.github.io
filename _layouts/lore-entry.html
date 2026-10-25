@@ -38,4 +38,5 @@ layout: page
   {% else %}
   {{ content }}
   {% endif %}
+  {% if page.category == "races" %}{% include race-characters.html %}{% endif %}
 </article>
