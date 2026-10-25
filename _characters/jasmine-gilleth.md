@@ -70,5 +70,15 @@ bonds:
   - name: "Dominion"
     relation: "Goblin Horror"
     type: Rival
-# Submitted in issue #48
+# Submitted in issue #69
 ---
+
+Jasmine the Plantling awoke in the year 750 S.R at the top of her tree. She spent the first few months alive meeting new people and exploring the world around her. Through her thorough exploration she came across Equi Crimson, Mel Gilleth, Nerestel and the Vale brothers, Lyra Lafruad, Bo de Cni'Daria, Swobble, Brutas, Wakaba, and many others who began leading Jasmine though life. 
+
+She quickly became quite close with the only other children of Velthren, Brutas and Swobble, and the three became known as the Tomato Troupe.
+
+However, a childhood in Velthren will never be a simple one. Between her never ending quest of making new friends and her own naivety this young plantling has seen horrors that none should ever have to fathom.
+
+The goblin war was unkind to Jasmine. She was manipulated by Dominion in the Telepathica and forced to chose one of the prisioners to die. Her choice will forever haunt her.
+
+Eventually, Jasmine was taken in by the City of Nerestel, where she was officially adopted by Mel, becoming Jasmine Gilleth.
