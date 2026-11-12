@@ -37,6 +37,42 @@
     wrap.appendChild(table);
   });
 
+  /* ---------- Tabs (a race's variants) ---------- */
+  // Without this script every panel simply shows, one after another.
+  document.querySelectorAll("[data-tabs]").forEach(function (box) {
+    var list = box.querySelector("[role=tablist]");
+    var tabs = Array.prototype.slice.call(box.querySelectorAll("[role=tab]"));
+    var panels = tabs.map(function (t) { return document.getElementById(t.getAttribute("aria-controls")); });
+    var show = function (i) {
+      tabs.forEach(function (t, j) { t.setAttribute("aria-selected", i === j ? "true" : "false"); t.tabIndex = i === j ? 0 : -1; });
+      panels.forEach(function (p, j) { p.hidden = i !== j; });
+    };
+    tabs.forEach(function (t, i) {
+      t.addEventListener("click", function () { show(i); });
+      t.addEventListener("keydown", function (e) {
+        var d = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+        if (d) { var n = (i + d + tabs.length) % tabs.length; show(n); tabs[n].focus(); }
+      });
+    });
+    // Opening a link to a variant or one of its lineages opens that tab first.
+    var openHash = function () {
+      var target = location.hash && document.getElementById(decodeURIComponent(location.hash.slice(1)));
+      var i = target ? panels.findIndex(function (p) { return p.contains(target); }) : -1;
+      if (i >= 0) { show(i); target.scrollIntoView(); }
+    };
+    list.hidden = false;
+    box.classList.add("is-ready");
+    show(0);
+    openHash();
+    window.addEventListener("hashchange", openHash);
+    document.addEventListener("click", function (e) {
+      var a = e.target.closest && e.target.closest('a[href^="#"]');
+      var target = a && document.getElementById(decodeURIComponent(a.hash.slice(1)));
+      var i = target ? panels.findIndex(function (p) { return p.contains(target); }) : -1;
+      if (i >= 0) show(i);
+    });
+  });
+
   /* ---------- "On this page" outline ---------- */
   var tocList = document.querySelector("[data-toc]");
   if (tocList) {

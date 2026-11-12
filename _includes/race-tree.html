@@ -1,0 +1,74 @@
+{%- comment -%}
+  On a race's page: its variants and their lineages as a tree (race at the top,
+  each variant below it, each variant's lineages under that), then a tab for
+  each variant with its information and a section for each lineage.
+  Reads page.variants: a list of { name, image, info, lineages }, where
+  lineages is a list of { name, image, info }. Clicking a name in the tree
+  opens its tab. Without JavaScript the tabs simply show one after another.
+{%- endcomment -%}
+{%- assign rt_emblem = '/assets/img/emblem.png' -%}
+<h2 id="variants">Variants and lineages</h2>
+<section class="race-tree" aria-label="Variants and lineages of {{ page.title }}">
+  <div class="race-tree__root bond-node bond-node--root">
+    <span class="bond-node__art"><img src="{{ page.image | default: rt_emblem | relative_url }}" alt=""></span>
+    <span class="bond-node__name">{{ page.title }}</span>
+  </div>
+  {%- if page.variants and page.variants.size > 0 %}
+  <ul class="race-tree__variants">
+    {%- for v in page.variants %}
+    {%- assign rt_v = v.name | slugify | prepend: "variant-" %}
+    <li class="race-tree__branch">
+      <a class="bond-node race-node" href="#{{ rt_v }}" data-tab-link>
+        <span class="bond-node__art"><img src="{{ v.image | default: rt_emblem | relative_url }}" alt=""></span>
+        <span class="bond-node__name">{{ v.name }}</span>
+      </a>
+      {%- if v.lineages and v.lineages.size > 0 %}
+      <ul class="race-tree__lineages">
+        {%- for l in v.lineages %}
+        <li><a class="bond-node race-node race-node--lineage" href="#{{ rt_v | replace_first: 'variant-', 'lineage-' }}-{{ l.name | slugify }}" data-tab-link>
+          <span class="bond-node__art"><img src="{{ l.image | default: rt_emblem | relative_url }}" alt=""></span>
+          <span class="bond-node__name">{{ l.name }}</span>
+        </a></li>
+        {%- endfor %}
+      </ul>
+      {%- endif %}
+    </li>
+    {%- endfor %}
+  </ul>
+  {%- endif %}
+</section>
+{%- if page.variants and page.variants.size > 0 %}
+<div class="race-tabs" data-tabs>
+  <div class="race-tabs__list" role="tablist" hidden>
+    {%- for v in page.variants %}
+    <button type="button" role="tab" class="race-tabs__tab" aria-controls="{{ v.name | slugify | prepend: 'variant-' }}">{{ v.name }}</button>
+    {%- endfor %}
+  </div>
+  {%- for v in page.variants %}
+  {%- assign rt_v = v.name | slugify | prepend: "variant-" %}
+  <section class="race-tabs__panel" id="{{ rt_v }}" role="tabpanel">
+    <div class="race-panel__head">
+      <span class="bond-node__art race-panel__art"><img src="{{ v.image | default: rt_emblem | relative_url }}" alt=""></span>
+      <h3>{{ v.name }}</h3>
+    </div>
+    {% if v.info %}{{ v.info | markdownify }}{% else %}<p class="unwritten">Nothing has been recorded about this variant yet.</p>{% endif %}
+    <h4 class="race-panel__sub">Lineages</h4>
+    {%- if v.lineages and v.lineages.size > 0 %}
+    {%- for l in v.lineages %}
+    <article class="race-lineage" id="{{ rt_v | replace_first: 'variant-', 'lineage-' }}-{{ l.name | slugify }}">
+      <div class="race-panel__head">
+        <span class="bond-node__art"><img src="{{ l.image | default: rt_emblem | relative_url }}" alt=""></span>
+        <h4>{{ l.name }}</h4>
+      </div>
+      {% if l.info %}{{ l.info | markdownify }}{% else %}<p class="unwritten">Nothing has been recorded about this lineage yet.</p>{% endif %}
+    </article>
+    {%- endfor %}
+    {%- else %}
+    <p class="unwritten">No lineages have been recorded for this variant yet.</p>
+    {%- endif %}
+  </section>
+  {%- endfor %}
+</div>
+{%- else %}
+<p class="unwritten">No variants have been recorded for this race yet.</p>
+{%- endif %}

@@ -1,0 +1,20 @@
+{%- comment -%}
+  On a race's page: the characters whose race mentions it (by title or alias,
+  ignoring capitals), so "Half Highlander, Half Saltfolk" shows under both.
+{%- endcomment -%}
+{%- assign rc_names = page.title | split: "|" -%}
+{%- for rc_a in page.aliases %}{% assign rc_one = rc_a | split: "|" %}{% assign rc_names = rc_names | concat: rc_one %}{% endfor -%}
+{%- assign rc_found = "" | split: "" -%}
+{%- for c in site.characters -%}
+  {%- assign rc_race = c.race | append: "" | downcase -%}
+  {%- for n in rc_names -%}
+    {%- assign rc_n = n | downcase -%}
+    {%- if rc_race contains rc_n -%}{% assign rc_one = site.characters | where: "title", c.title %}{% assign rc_found = rc_found | concat: rc_one %}{% break %}{%- endif -%}
+  {%- endfor -%}
+{%- endfor %}
+<h2 id="characters">Characters</h2>
+{% if rc_found.size > 0 -%}
+{% include character-grid.html characters=rc_found %}
+{%- else -%}
+<p class="unwritten">No characters of this race are in the gallery yet.</p>
+{%- endif %}

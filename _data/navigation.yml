@@ -8,6 +8,8 @@
       url: "/rules/"
     - title: "Character Creation"
       url: "/character-creation/"
+    - title: "Native Races"
+      url: "/native-races/"
     - title: "Character Gallery"
       url: "/character-gallery/"
     - title: "Living Legends"

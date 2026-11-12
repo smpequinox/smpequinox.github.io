@@ -14,7 +14,7 @@
 #   current: true marks the age the story is in now (optional)
 #   tag:     a short label shown beside the date, e.g. "Start of server" (optional)
 
-- date: "Epilogue · Miren 750 S.R"
+- date: "Prologue · Miren 750 S.R"
   event: "The First Omen"
   tag: "Start of server"
 

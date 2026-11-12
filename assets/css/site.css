@@ -1006,3 +1006,42 @@ button { font: inherit; color: inherit; }
   .vassal-scale__beam, .vassal-scale__pillar { display: none; }
   .vassal-scale__chains { width: 50%; height: 1.6rem; }
 }
+
+/* a race's variants and lineages: the tree, then a tab for each variant */
+.race-tree { display: flex; flex-direction: column; align-items: center; margin: 0 0 1.5rem; }
+.prose .race-tree ul { list-style: none; margin: 0; padding: 0; }
+.prose .race-tree li { margin: 0; }
+.prose .race-tree li::before { content: none; }
+.prose .race-tree__variants {
+  position: relative; width: 100%; padding-top: 2.2rem;
+  display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; gap: 1.2rem;
+}
+.prose .race-tree__variants::before {
+  content: ""; position: absolute; top: .3rem; left: 50%; height: 1.6rem; border-left: 2px solid var(--line);
+}
+.race-tree__branch { display: flex; flex-direction: column; align-items: center; }
+.prose .race-node { border-color: var(--gilt-dim); }
+/* lineages hang under their variant on a line */
+.prose .race-tree__lineages {
+  position: relative; margin: .5rem 0 0 1.4rem; padding-left: 1rem;
+  display: flex; flex-direction: column; gap: .45rem; border-left: 2px solid var(--line);
+}
+.prose .race-node--lineage { border-color: var(--line-soft); padding-top: .3rem; padding-bottom: .3rem; }
+.race-node--lineage .bond-node__art { width: 2rem; height: 2rem; }
+.race-node--lineage .bond-node__name { font-size: .95rem; }
+.race-tabs { margin: 0 0 2rem; }
+.race-tabs__list { display: flex; gap: .4rem; overflow-x: auto; scrollbar-width: thin; border-bottom: 1px solid var(--line); margin-bottom: 1.2rem; }
+.race-tabs__tab { flex: none; white-space: nowrap;
+  font: inherit; font-family: var(--display); color: var(--ink-2); background: none; cursor: pointer;
+  padding: .5rem .9rem; border: 1px solid transparent; border-bottom: none; border-radius: 10px 10px 0 0;
+}
+.race-tabs__tab:hover { color: var(--gilt); }
+.race-tabs__tab[aria-selected="true"] { color: var(--gilt); background: var(--night-2); border-color: var(--line); border-bottom: 1px solid var(--night-2); }
+.race-tabs__panel { padding: 1rem 1.2rem; border-radius: 12px; background: var(--night-2); border: 1px solid var(--line-soft); margin-bottom: 1rem; }
+.race-tabs.is-ready .race-tabs__panel { border-top-left-radius: 0; }
+.race-panel__head { display: flex; align-items: center; gap: .7rem; margin-bottom: .6rem; }
+.race-panel__head h3, .race-panel__head h4 { margin: 0; }
+.race-panel__art { width: 3.2rem; height: 3.2rem; border-color: var(--gilt-dim); }
+.prose .race-panel__sub { margin: 1.2rem 0 .6rem; color: var(--ink-2); font-size: .95rem; letter-spacing: .06em; text-transform: uppercase; }
+.race-lineage { padding: .8rem 0 .2rem; border-top: 1px solid var(--line-soft); }
+.race-lineage:target, .race-tabs__panel:target { outline: none; }
