@@ -13,6 +13,9 @@ vassals:
   - title: "Child of Flame"
     holder: "Unknown"
     tier: 1
+  - title: "Child of Ash"
+    holder: "Unknown"
+    tier: 1
 ---
 
 ## Story hooks
