@@ -26,10 +26,10 @@ bonds:
     relation: "Close Friend"
     type: Ally
   - name: "Ezra Fairfax"
-    relation: "Hesparos"
+    relation: "Hesperos"
     type: Ally
   - name: "Swobble"
-    relation: "Hesparos"
+    relation: "Hesperos"
     type: Ally
   - name: "Bo De Cni’Daria"
     relation: "Solari"
