@@ -1,11 +1,11 @@
 ---
-title: "Principality of Hesparos"
+title: "Principality of Hesperos"
 category: nations
-aliases: ["Hesparos"]
+aliases: ["Hesperos"]
 status: Public
 facts:
   Ruler: "Ezra Fairfax"
-  Capital: "Hesparos"
+  Capital: "Hesperos"
 ranks:
   - rank: "Warden"
     holders: "Ezra Fairfax"
